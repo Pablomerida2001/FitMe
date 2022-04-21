@@ -36,3 +36,9 @@ Este es el diseño provisional a modo de boceto de algunas de las principales p�
 <h1>Diagrama E/R</h1>
 
 ![image](https://user-images.githubusercontent.com/71279176/160837432-c471aa9a-5365-4a7c-82bc-facee322265d.png)
+
+<h1>Despliegue de la aplicación</h1>
+
+Para desplegar la aplicación se utilizara Amazon Web Services, alojando la aplicación y la base de datos en dos máquinas diferentes. 
+
+El dominio será uno gratuito o .es
