@@ -6604,6 +6604,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6624,9 +6630,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       meal: '',
       quantity: 0,
       foods: [],
-      food: [],
+      selectedFood: [],
       date: this.initialDate,
-      query: ''
+      query: '',
+      search: false
     };
   },
   mounted: function mounted() {
@@ -6667,10 +6674,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }).then(function (res) {
         _this.foods = res.data;
-        console.log(_this.foods);
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    selectFood: function selectFood(food) {
+      console.log(food);
+      this.query = food.name;
+      this.selectedFood = food;
+      this.search = false;
     }
   }
 });
@@ -12200,7 +12212,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    display: flex;\n    justify-content: center;\n    background-color: #000000da;\n}\n.modal {\n    text-align: center;\n    background-color: white;\n    height: 650px;\n    width: 500px;\n    margin: auto;\n    padding: 60px 0;\n    border-radius: 20px;\n    display: block;\n    position: relative\n}\n.close {\n    position: fixed;\n    top: 18%;\n    right: 32%;\n    color: black;\n}\nh6 {\n    font-weight: 500;\n    font-size: 28px;\n    margin: 20px 0;\n}\np {\n    font-size: 16px;\n    margin: 20px 0;\n}\nbutton {\n    background-color: green;\n    width: 150px;\n    height: 40px;\n    color: white;\n    font-size: 14px;\n    border-radius: 16px;\n    margin-top: 50px;\n}\n.quantityLabel{\n    margin-top: 5%;\n    position: relative;\n    left: -32%;\n    margin-bottom: 5px;\n}\n.input{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n}\n.select{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n    padding: 0.375rem 2.25rem 0.375rem 0.75rem;\n    -moz-padding-start: calc(0.75rem - 3px);\n    font-size: 0.9rem;\n    font-weight: 400;\n    line-height: 1.6;\n    color: #212529;\n    background-color: #f8fafc;\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e\");\n    background-repeat: no-repeat;\n    background-position: right 0.75rem center;\n    background-size: 16px 12px;\n    border: 1px solid #ced4da;\n    border-radius: 0.25rem;\n    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n}\n.label{\n    margin-top: 5%;\n    position: relative;\n    left: -36%;\n    margin-bottom: 5px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    display: flex;\n    justify-content: center;\n    background-color: #000000da;\n}\n.modal {\n    text-align: center;\n    background-color: white;\n    height: 650px;\n    width: 550px;\n    margin: auto;\n    padding: 60px 0;\n    border-radius: 20px;\n    display: block;\n    position: relative\n}\n.close {\n    position: fixed;\n    top: 18%;\n    right: 32%;\n    color: black;\n}\nh6 {\n    font-weight: 500;\n    font-size: 28px;\n    margin: 20px 0;\n}\np {\n    font-size: 16px;\n    margin: 20px 0;\n}\nbutton {\n    background-color: green;\n    width: 150px;\n    height: 40px;\n    color: white;\n    font-size: 14px;\n    border-radius: 16px;\n    margin-top: 50px;\n}\n.quantityLabel{\n    margin-top: 5%;\n    position: relative;\n    left: -32%;\n    margin-bottom: 5px;\n}\n.input{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n}\n.select{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n    padding: 0.375rem 2.25rem 0.375rem 0.75rem;\n    -moz-padding-start: calc(0.75rem - 3px);\n    font-size: 0.9rem;\n    font-weight: 400;\n    line-height: 1.6;\n    color: #212529;\n    background-color: #f8fafc;\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e\");\n    background-repeat: no-repeat;\n    background-position: right 0.75rem center;\n    background-size: 16px 12px;\n    border: 1px solid #ced4da;\n    border-radius: 0.25rem;\n    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n}\n.label{\n    margin-top: 5%;\n    position: relative;\n    left: -36%;\n    margin-bottom: 5px;\n}\n.foodSeparator{\n    width: 80%;\n    margin: 0 auto;\n}\n.foodName{\n    margin-top: 15px;\n}\n.foodDescription{\n    font-size: 13px;\n    margin-top: 5px;\n    margin-bottom: 10px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41780,6 +41792,9 @@ var render = function () {
           attrs: { id: "query", type: "text", placeholder: "Search..." },
           domProps: { value: _vm.query },
           on: {
+            focus: function ($event) {
+              _vm.search = true
+            },
             input: function ($event) {
               if ($event.target.composing) {
                 return
@@ -41787,6 +41802,41 @@ var render = function () {
               _vm.query = $event.target.value
             },
           },
+        }),
+        _vm._v(" "),
+        _vm._l(_vm.foods, function (food) {
+          return _vm.search
+            ? _c(
+                "span",
+                {
+                  on: {
+                    click: function ($event) {
+                      return _vm.selectFood(food)
+                    },
+                  },
+                },
+                [
+                  _c("h5", { staticClass: "foodName" }, [
+                    _vm._v(_vm._s(food.name)),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "foodDescription" }, [
+                    _vm._v(
+                      "Calories: " +
+                        _vm._s(food.calories) +
+                        " - Carbohydrates: " +
+                        _vm._s(food.carbohydrates) +
+                        " - Fats: " +
+                        _vm._s(food.fats) +
+                        " - Proteins: " +
+                        _vm._s(food.protein)
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("hr", { staticClass: "foodSeparator" }),
+                ]
+              )
+            : _vm._e()
         }),
         _vm._v(" "),
         _c(
@@ -41879,7 +41929,7 @@ var render = function () {
         _vm._v(" "),
         _c("button", { on: { click: _vm.add } }, [_vm._v("Save")]),
       ],
-      1
+      2
     ),
   ])
 }

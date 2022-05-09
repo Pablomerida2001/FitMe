@@ -5,7 +5,13 @@
         <a class="close">X</a>
         <h6>Add new food</h6>
         <label class="foodLabel" for="query">Food</label>
-        <input v-model="query" class="input" id="query" type="text" placeholder="Search..."/>
+        <input v-model="query" class="input" id="query" type="text" placeholder="Search..." @focus="search = true"/>
+        <span v-for="food in foods" v-if="search" @click="selectFood(food)">
+            <h5 class="foodName">{{food.name}}</h5>
+            <p class="foodDescription">Calories: {{food.calories}} - Carbohydrates: {{food.carbohydrates}} - Fats: {{food.fats}} - Proteins: {{food.protein}}</p>
+            <hr class="foodSeparator">
+        </span>
+
         <label class="quantityLabel" for="quantity">Quantity(gr)</label>
         <input v-model="quantity" class="input" id="quantity" type="number"/>
         <label class="label" for="selectMeal">Meal</label>
@@ -52,9 +58,10 @@
                 meal: '',
                 quantity: 0,
                 foods: [],
-                food: [],
+                selectedFood: [],
                 date: this.initialDate,
                 query: '',
+                search: false,
             }
         },
 
@@ -80,10 +87,16 @@
                     }
                 }).then(res => {
                         this.foods = res.data;
-                        console.log(this.foods)
                     }).catch(err => {
                     console.log(err)
                 });
+            },
+
+            selectFood(food){
+                console.log(food);
+                this.query = food.name;
+                this.selectedFood = food;
+                this.search = false;
             }
         }
     }
@@ -105,7 +118,7 @@
         text-align: center;
         background-color: white;
         height: 650px;
-        width: 500px;
+        width: 550px;
         margin: auto;
         padding: 60px 0;
         border-radius: 20px;
@@ -181,5 +194,20 @@
         position: relative;
         left: -36%;
         margin-bottom: 5px;
+    }
+
+    .foodSeparator{
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .foodName{
+        margin-top: 15px;
+    }
+
+    .foodDescription{
+        font-size: 13px;
+        margin-top: 5px;
+        margin-bottom: 10px;
     }
 </style>
