@@ -2,7 +2,7 @@
 <template>
   <div class="modal-overlay">
     <div class="modal">
-        <a class="close">X</a>
+        <a class="close" @click="close">X</a>
         <h6>Add new food</h6>
         <label class="foodLabel" for="query">Food</label>
         <input v-model="query" class="input" id="query" type="text" placeholder="Search..." @focus="search = true"/>
@@ -15,7 +15,7 @@
         <label class="quantityLabel" for="quantity">Quantity(gr)</label>
         <input v-model="quantity" class="input" id="quantity" type="number"/>
         <label class="label" for="selectMeal">Meal</label>
-        <select class="select" id="selectMeal" v-model="mealName">
+        <select class="select" id="selectMeal" v-model="meal">
             <option>Breakfast</option>
             <option>Lunch</option>
             <option>Dinner</option>
@@ -38,6 +38,7 @@
         props:[
             'initialDate',
             'mealName',
+            'userid'
         ],
 
         watch: {
@@ -55,7 +56,8 @@
 
         data: function(){
             return{
-                meal: '',
+                meal: this.mealName,
+                meals: ["Breakfast", "Lunch", "Dinner", "Snacks"],
                 quantity: 0,
                 foods: [],
                 selectedFood: [],
@@ -74,10 +76,15 @@
             },
 
             add: function(){
-                console.log(this.date);
-                console.log(this.mealName);
-                console.log(this.quantity);
-                console.log(this.food)
+                axios.post('api/foods/addConsumedFood', {
+                    food: this.selectedFood.id,
+                    user: String(this.userid),
+                    quantity: this.quantity,
+                    meal: this.meals.indexOf(this.meal) + 1,
+                    date: this.date,
+                });
+
+                this.$emit('eventname');
             },
 
             searchFoods(query) {
@@ -93,10 +100,13 @@
             },
 
             selectFood(food){
-                console.log(food);
                 this.query = food.name;
                 this.selectedFood = food;
                 this.search = false;
+            },
+
+            close: function(){
+                this.$emit('eventname');
             }
         }
     }
@@ -126,10 +136,14 @@
         position: relative
     }
     .close {
-        position: fixed;
-        top: 18%;
-        right: 32%;
+        position: relative;
+        top: -7%;
+        right: -44%;
         color: black;
+    }
+
+    .close:hover {
+        color: red;
     }
 
     h6 {

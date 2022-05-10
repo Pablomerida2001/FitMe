@@ -16,7 +16,7 @@
             </template>
             <tr>
                 <td class="link" @click="add">Add food</td>
-                <add-food v-show="showModal" :mealName="mealName" :initialDate="date"></add-food>
+                <add-food v-show="showModal" :mealName="mealName" :initialDate="date" @eventname="close" :userid="userid"></add-food>
             </tr>
             
         </table>
@@ -30,7 +30,8 @@
         props:[
             'mealName',
             'foods',
-            'date'
+            'date',
+            'userid'
         ],
 
         data: function(){
@@ -64,6 +65,11 @@
 
             add: function(){
                 this.showModal = true;
+            },
+
+            close: function(){
+                this.showModal = false;
+                this.$emit('update');
             }
         }
     }

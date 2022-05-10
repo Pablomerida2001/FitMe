@@ -2,7 +2,7 @@
     <div>
         <VueDatePicker v-model="date" format="DD-MM-YYYY" />
         <div v-for="meal in meals">
-            <meals :mealName="meal[0]" :foods="meal" :date="date"></meals>
+            <meals :mealName="meal[0]" :foods="meal" :date="date" :userid="userid" @update="loadFoods"></meals>
         </div>
     </div>
 </template>
