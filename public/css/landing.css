@@ -1,0 +1,29 @@
+.landing-container{
+    /*background-image: url("../img/landing/landing-page-foto1.jpg");*/
+    display: flex;
+}
+
+.landing-column{
+    background-image: url("../img/landing/landing-page-foto1.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-attachment: fixed;
+    background-position: right;
+
+    flex: 50%;
+    height: 500px;
+}
+
+.landing-content{
+    background-color:rgba(255, 255, 255, 0.92);
+    width: 30%;
+    margin-left: 5%;
+    height: 500px;
+    padding: 20px;
+}
+
+.landing-register-btn{
+    width: 60%;
+    font-size: 20px;
+}
