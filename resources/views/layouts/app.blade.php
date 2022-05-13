@@ -142,5 +142,33 @@
         color: red !important;
     }
 
+    /* LOGIN */
+
+    .login-container{
+        width: 45%;
+        flex: 0 0 auto;
+    }
+
+    .login-tittle{
+        margin: 10px auto 10px;
+    }
+
+    .login-input-container{
+        margin: 0 auto;
+        width: 75%
+    }
+
+    .login-button-container {
+        width: 80%;
+        display: flex;
+        margin: 0 auto;
+    }
+
+    .login-button{
+        width: 80%;
+        margin: 20px auto;
+        justify-self: center;
+    }
+
 </style>
 </html>
