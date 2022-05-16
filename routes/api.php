@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\ExerciseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,14 +20,32 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('web')->get('foods/getAllFoods', [FoodController::class, 'getAll']);
+Route::name('food.')->middleware('web')->prefix('foods')->group(function() {
 
-Route::middleware('web')->get('foods/searchFoods', [FoodController::class, 'search']);
+    Route::get('getAllFoods', [FoodController::class, 'getAll']);
 
-Route::middleware('web')->get('foods/consumedFoods', [FoodController::class, 'get']);
+    Route::get('searchFoods', [FoodController::class, 'search']);
 
-Route::middleware('web')->post('foods/addConsumedFood', [FoodController::class, 'add']);
+    Route::get('consumedFoods', [FoodController::class, 'get']);
 
-Route::middleware('web')->delete('foods/deleteConsumedFood', [FoodController::class, 'remove']);
+    Route::post('addConsumedFood', [FoodController::class, 'add']);
 
-Route::middleware('web')->post('foods/editConsumedFood', [FoodController::class, 'edit']);
+    Route::delete('deleteConsumedFood', [FoodController::class, 'remove']);
+
+    Route::post('editConsumedFood', [FoodController::class, 'edit']);
+});
+
+Route::name('exercise.')->middleware('web')->prefix('exercise')->group(function() {
+
+    Route::get('getAllExercises', [ExerciseController::class, 'getAll']);
+
+    Route::get('searchExercise', [ExerciseController::class, 'search']);
+
+    Route::get('workout', [ExerciseController::class, 'getWorkout']);
+
+    Route::post('addExercise', [ExerciseController::class, 'addToWorkout']);
+
+    Route::delete('removeExercise', [ExerciseController::class, 'removeFromWorkout']);
+
+    Route::post('editWorkout', [ExerciseController::class, 'edit']);
+});
