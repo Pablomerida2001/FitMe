@@ -1,6 +1,9 @@
 <template>
     <div>
-        <VueDatePicker v-model="date" format="DD-MM-YYYY" />
+        <span class="span-container">
+            <VueDatePicker v-model="date" format="DD-MM-YYYY" />
+            <h4>Total: {{totalCalories}}/{{goal}}kcal</h4>
+        </span>
         <div v-for="meal in meals">
             <meals :mealName="meal[0]" :foods="meal" :date="date" :userid="userid" @update="loadFoods"></meals>
         </div>
@@ -20,7 +23,8 @@
         data: function(){
             return{
                 foods: [],
-                totalCalories: [],
+                totalCalories: 0,
+                goal: 2000,//update this later
                 meal1: [name = "Breakfast"],
                 meal2: [name = "Lunch"],
                 meal3: [name = "Dinner"],
@@ -42,14 +46,6 @@
 
         mounted(){
             this.loadFoods();
-
-            /*axios.post('api/foods/addConsumedFood', {
-                food: 1,
-                user: String(this.userid),
-                quantity: 415,
-                meal: 4,
-                date: new Date().toISOString().slice(0, 10),
-            });*/
         },
 
         methods:{
@@ -68,10 +64,11 @@
                         date: this.date
                     }
                 }).then((response)=>{
+                    this.totalCalories = 0;
                     for(var i = 0; i < response.data.length; i++){
                         this.meals[response.data[i].pivot.meal-1].push(response.data[i])
+                        this.totalCalories += response.data[i].calories * (response.data[i].pivot.quantity / 100)
                     }
-
                 }).catch();
             }
         }
@@ -80,5 +77,10 @@
 <style>
     .vd-picker__controls{
         height: unset !important;
+    }
+
+    .span-container{
+        display: flex;
+        width: 90%;
     }
 </style>

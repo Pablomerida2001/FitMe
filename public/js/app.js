@@ -6719,6 +6719,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -6727,7 +6730,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       foods: [],
-      totalCalories: [],
+      totalCalories: 0,
+      goal: 2000,
+      //update this later
       meal1: [name = "Breakfast"],
       meal2: [name = "Lunch"],
       meal3: [name = "Dinner"],
@@ -6747,13 +6752,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.loadFoods();
-    /*axios.post('api/foods/addConsumedFood', {
-        food: 1,
-        user: String(this.userid),
-        quantity: 415,
-        meal: 4,
-        date: new Date().toISOString().slice(0, 10),
-    });*/
   },
   methods: {
     loadFoods: function loadFoods() {
@@ -6771,8 +6769,12 @@ __webpack_require__.r(__webpack_exports__);
           date: this.date
         }
       }).then(function (response) {
+        _this.totalCalories = 0;
+
         for (var i = 0; i < response.data.length; i++) {
           _this.meals[response.data[i].pivot.meal - 1].push(response.data[i]);
+
+          _this.totalCalories += response.data[i].calories * (response.data[i].pivot.quantity / 100);
         }
       })["catch"]();
     }
@@ -12247,7 +12249,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.vd-picker__controls{\n    height: unset !important;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.vd-picker__controls{\n    height: unset !important;\n}\n.span-container{\n    display: flex;\n    width: 90%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41972,16 +41974,33 @@ var render = function () {
   return _c(
     "div",
     [
-      _c("VueDatePicker", {
-        attrs: { format: "DD-MM-YYYY" },
-        model: {
-          value: _vm.date,
-          callback: function ($$v) {
-            _vm.date = $$v
-          },
-          expression: "date",
-        },
-      }),
+      _c(
+        "span",
+        { staticClass: "span-container" },
+        [
+          _c("VueDatePicker", {
+            attrs: { format: "DD-MM-YYYY" },
+            model: {
+              value: _vm.date,
+              callback: function ($$v) {
+                _vm.date = $$v
+              },
+              expression: "date",
+            },
+          }),
+          _vm._v(" "),
+          _c("h4", [
+            _vm._v(
+              "Total: " +
+                _vm._s(_vm.totalCalories) +
+                "/" +
+                _vm._s(_vm.goal) +
+                "kcal"
+            ),
+          ]),
+        ],
+        1
+      ),
       _vm._v(" "),
       _vm._l(_vm.meals, function (meal) {
         return _c(
