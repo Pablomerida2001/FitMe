@@ -23,9 +23,9 @@ import store from './store/index';
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('consumed-foods', require('./components/ConsumedFoods.vue').default);
-Vue.component('meals', require('./components/Meal.vue').default);
-Vue.component('add-food', require('./components/AddFood.vue').default);
+Vue.component('consumed-foods', require('./components/foods/ConsumedFoods.vue').default);
+Vue.component('meals', require('./components/foods/Meal.vue').default);
+Vue.component('add-food', require('./components/foods/AddFood.vue').default);
 
 
 /**
