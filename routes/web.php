@@ -25,6 +25,10 @@ Route::get('/myFoods', function(){
     return view('foods/MyFoods');
 })->middleware(['auth'])->name('myFoods');
 
+Route::get('/Workouts', function(){
+    return view('workouts');
+})->middleware(['auth'])->name('Workouts');
+
 require __DIR__.'/auth.php';
 
 Auth::routes();
