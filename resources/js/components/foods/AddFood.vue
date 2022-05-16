@@ -23,7 +23,7 @@
         </select>
         <label class="label" for="datePicker">Date</label>
         <VueDatePicker v-model="date" format="DD-MM-YYYY" class="input" id="datePicker"/>
-        <button @click="add">Save</button>
+        <button @click="add" class="save-btn">Save</button>
     </div>
     </div>
   </div>
@@ -157,7 +157,7 @@
         margin: 20px 0;
     }
 
-    button {
+    .save-btn {
         background-color: green;
         width: 150px;
         height: 40px;

@@ -6863,13 +6863,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['mealName', 'foods', 'date', 'userid'],
   data: function data() {
     return {
       calories: 0,
-      showModal: false
+      showModal: false,
+      meals: ["Breakfast", "Lunch", "Dinner", "Snacks"]
     };
   },
   watch: {
@@ -6920,6 +6924,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     close: function close() {
       this.showModal = false;
+      this.$emit('update');
+    },
+    deleteFood: function deleteFood(food) {
+      axios["delete"]('api/foods/deleteConsumedFood', {
+        data: {
+          food: food.id,
+          user: String(this.userid),
+          meal: String(this.meals.indexOf(this.mealName) + 1),
+          date: this.date
+        }
+      });
       this.$emit('update');
     }
   }
@@ -12225,7 +12240,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    display: flex;\n    justify-content: center;\n    background-color: #000000da;\n}\n.modal {\n    text-align: center;\n    background-color: white;\n    height: 650px;\n    width: 550px;\n    margin: auto;\n    padding: 60px 0;\n    border-radius: 20px;\n    display: block;\n    position: relative\n}\n.close {\n    position: relative;\n    top: -7%;\n    right: -44%;\n    color: black;\n}\n.close:hover {\n    color: red;\n}\nh6 {\n    font-weight: 500;\n    font-size: 28px;\n    margin: 20px 0;\n}\np {\n    font-size: 16px;\n    margin: 20px 0;\n}\nbutton {\n    background-color: green;\n    width: 150px;\n    height: 40px;\n    color: white;\n    font-size: 14px;\n    border-radius: 16px;\n    margin-top: 50px;\n}\n.quantityLabel{\n    margin-top: 5%;\n    position: relative;\n    left: -32%;\n    margin-bottom: 5px;\n}\n.input{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n}\n.select{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n    padding: 0.375rem 2.25rem 0.375rem 0.75rem;\n    -moz-padding-start: calc(0.75rem - 3px);\n    font-size: 0.9rem;\n    font-weight: 400;\n    line-height: 1.6;\n    color: #212529;\n    background-color: #f8fafc;\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e\");\n    background-repeat: no-repeat;\n    background-position: right 0.75rem center;\n    background-size: 16px 12px;\n    border: 1px solid #ced4da;\n    border-radius: 0.25rem;\n    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n}\n.label{\n    margin-top: 5%;\n    position: relative;\n    left: -36%;\n    margin-bottom: 5px;\n}\n.foodSeparator{\n    width: 80%;\n    margin: 0 auto;\n}\n.foodName{\n    margin-top: 15px;\n}\n.foodDescription{\n    font-size: 13px;\n    margin-top: 5px;\n    margin-bottom: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    display: flex;\n    justify-content: center;\n    background-color: #000000da;\n}\n.modal {\n    text-align: center;\n    background-color: white;\n    height: 650px;\n    width: 550px;\n    margin: auto;\n    padding: 60px 0;\n    border-radius: 20px;\n    display: block;\n    position: relative\n}\n.close {\n    position: relative;\n    top: -7%;\n    right: -44%;\n    color: black;\n}\n.close:hover {\n    color: red;\n}\nh6 {\n    font-weight: 500;\n    font-size: 28px;\n    margin: 20px 0;\n}\np {\n    font-size: 16px;\n    margin: 20px 0;\n}\n.save-btn {\n    background-color: green;\n    width: 150px;\n    height: 40px;\n    color: white;\n    font-size: 14px;\n    border-radius: 16px;\n    margin-top: 50px;\n}\n.quantityLabel{\n    margin-top: 5%;\n    position: relative;\n    left: -32%;\n    margin-bottom: 5px;\n}\n.input{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n}\n.select{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n    padding: 0.375rem 2.25rem 0.375rem 0.75rem;\n    -moz-padding-start: calc(0.75rem - 3px);\n    font-size: 0.9rem;\n    font-weight: 400;\n    line-height: 1.6;\n    color: #212529;\n    background-color: #f8fafc;\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e\");\n    background-repeat: no-repeat;\n    background-position: right 0.75rem center;\n    background-size: 16px 12px;\n    border: 1px solid #ced4da;\n    border-radius: 0.25rem;\n    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n}\n.label{\n    margin-top: 5%;\n    position: relative;\n    left: -36%;\n    margin-bottom: 5px;\n}\n.foodSeparator{\n    width: 80%;\n    margin: 0 auto;\n}\n.foodName{\n    margin-top: 15px;\n}\n.foodDescription{\n    font-size: 13px;\n    margin-top: 5px;\n    margin-bottom: 10px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12273,7 +12288,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ntable{\n    width: 90%;\n    margin-top:5%\n}\n#firstColumn{\n    width: 80%;\n    background-color: grey;\n    color: white;\n    font-weight: bold\n}\n#secondColumn{\n    width: auto;\n    background-color: grey;\n    color: white;\n    font-weight: bold\n}\ntr:nth-of-type(even) {\n  background-color:#ccc;\n}\n.link{\n    color: blue;\n    font-weight: normal;\n    margin-top: 20px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ntable{\n    width: 90%;\n    margin-top:5%\n}\n#firstColumn{\n    width: 75%;\n    background-color: grey;\n    color: white;\n    font-weight: bold\n}\n#secondColumn{\n    width: 15%;\n    background-color: grey;\n    color: white;\n    font-weight: bold\n}\n#thirdColumn{\n    width:10%;\n    background-color: grey;\n    color: white;\n    font-weight: bold\n}\n.row-border-bottom {\n    border-bottom: 1px solid black;\n}\n.link{\n    color: blue;\n    font-weight: normal;\n    margin-top: 20px;\n}\n.table-btn{\n    position: relative;\n    top: 10px;\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    display: inline-block;\n    font-weight: 400;\n    line-height: 1.6;\n    border: 1px solid transparent;\n    padding: 0.375rem 0.75rem;\n    font-size: 0.9rem;\n    border-radius: 0.25rem;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41990,7 +42005,9 @@ var render = function () {
           },
         }),
         _vm._v(" "),
-        _c("button", { on: { click: _vm.add } }, [_vm._v("Save")]),
+        _c("button", { staticClass: "save-btn", on: { click: _vm.add } }, [
+          _vm._v("Save"),
+        ]),
       ],
       2
     ),
@@ -42106,6 +42123,8 @@ var render = function () {
           _vm._v(_vm._s(_vm.calories) + " Kcal"),
         ]),
         _vm._v(" "),
+        _c("th", { attrs: { id: "thirdColumn" } }),
+        _vm._v(" "),
         _vm._l(_vm.foods, function (food, index) {
           return index > 0
             ? [
@@ -42113,9 +42132,24 @@ var render = function () {
                   _c("td", [_vm._v(_vm._s(food.name))]),
                   _vm._v(" "),
                   _c("td"),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "table-btn",
+                        on: {
+                          click: function ($event) {
+                            return _vm.deleteFood(food)
+                          },
+                        },
+                      },
+                      [_c("i", { staticClass: "bi bi-trash" })]
+                    ),
+                  ]),
                 ]),
                 _vm._v(" "),
-                _c("tr", [
+                _c("tr", { staticClass: "row-border-bottom" }, [
                   _c("td", [_vm._v(_vm._s(food.pivot.quantity) + "gr")]),
                   _vm._v(" "),
                   _c("td", [
@@ -42124,6 +42158,10 @@ var render = function () {
                         " Kcal"
                     ),
                   ]),
+                ]),
+                _vm._v(" "),
+                _c("tr", { staticStyle: { visibility: "hidden" } }, [
+                  _c("td", [_vm._v(".")]),
                 ]),
               ]
             : _vm._e()

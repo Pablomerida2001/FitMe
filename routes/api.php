@@ -26,3 +26,7 @@ Route::middleware('web')->get('foods/searchFoods', [FoodController::class, 'sear
 Route::middleware('web')->get('foods/consumedFoods', [FoodController::class, 'get']);
 
 Route::middleware('web')->post('foods/addConsumedFood', [FoodController::class, 'add']);
+
+Route::middleware('web')->delete('foods/deleteConsumedFood', [FoodController::class, 'remove']);
+
+Route::middleware('web')->post('foods/editConsumedFood', [FoodController::class, 'edit']);
