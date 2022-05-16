@@ -34,4 +34,12 @@ class FoodController extends Controller
     public function add(Request $req){
         Food::find($req->food)->consumedFoods()->attach($req->user, ["quantity" => $req->quantity, "meal" => $req->meal,  "date" => $req->date]);
     }
+
+    public function remove(Request $req){
+        Food::find($req->food)->consumedFoods()->wherePivot('date','=',$req->date)->wherePivot('meal','=',$req->meal)->detach($req->user);
+    }
+
+    public function edit(Request $req){
+        Food::find($req->food)->consumedFoods()->updateExistingPivot($req->user, ["quantity" => $req->quantity, "meal" => $req->meal,  "date" => $req->date]);
+    }
 }

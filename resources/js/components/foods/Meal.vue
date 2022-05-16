@@ -4,15 +4,18 @@
         <table>
             <th id="firstColumn">{{mealName}}</th>
             <th id="secondColumn">{{calories}}&nbspKcal</th>
+            <th id="thirdColumn"></th>
             <template v-for="(food, index) in foods" v-if="index > 0">
                 <tr>
                     <td>{{food.name}}</td>
                     <td></td>
+                    <td><button class="table-btn" @click="deleteFood(food)"><i class="bi bi-trash"></i></button></td>
                 </tr>
-                <tr>
+                <tr class="row-border-bottom">
                     <td>{{food.pivot.quantity}}gr</td>
                     <td>{{food.calories * (food.pivot.quantity / 100)}}&nbspKcal</td>
                 </tr>
+                <tr style="visibility: hidden"><td>.</td></tr>
             </template>
             <tr>
                 <td class="link" @click="add">Add food</td>
@@ -38,6 +41,7 @@
             return{
                 calories: 0,
                 showModal: false,
+                meals: ["Breakfast", "Lunch", "Dinner", "Snacks"],
             }
         },
 
@@ -70,6 +74,17 @@
             close: function(){
                 this.showModal = false;
                 this.$emit('update');
+            },
+            
+            deleteFood: function(food){
+                axios.delete('api/foods/deleteConsumedFood', {data: {
+                    food: food.id,
+                    user: String(this.userid),
+                    meal: String(this.meals.indexOf(this.mealName) + 1),
+                    date: this.date,
+                }});
+
+                this.$emit('update');
             }
         }
     }
@@ -82,26 +97,48 @@
     }
 
     #firstColumn{
-        width: 80%;
+        width: 75%;
         background-color: grey;
         color: white;
         font-weight: bold
     }
 
     #secondColumn{
-        width: auto;
+        width: 15%;
         background-color: grey;
         color: white;
         font-weight: bold
     }
 
-    tr:nth-of-type(even) {
-      background-color:#ccc;
+    #thirdColumn{
+        width:10%;
+        background-color: grey;
+        color: white;
+        font-weight: bold
+    }
+
+    .row-border-bottom {
+        border-bottom: 1px solid black;
     }
 
     .link{
         color: blue;
         font-weight: normal;
         margin-top: 20px;
+    }
+
+    .table-btn{
+        position: relative;
+        top: 10px;
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+        display: inline-block;
+        font-weight: 400;
+        line-height: 1.6;
+        border: 1px solid transparent;
+        padding: 0.375rem 0.75rem;
+        font-size: 0.9rem;
+        border-radius: 0.25rem;
     }
 </style>
