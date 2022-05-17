@@ -25,5 +25,9 @@ return [
     'quantity' => 'Cantidad',
     'meal' => 'Comida',
     'date' => 'Fecha',
-    'save' => 'Guardar'
+    'save' => 'Guardar',
+    'calories' => 'Calorias',
+    'carbs' => 'Carbohidratos',
+    'fats' => 'Grasas',
+    'protein' => 'Proteinas'
 ];

@@ -6649,7 +6649,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['initialDate', 'mealName', 'userid'],
+  props: ['initialDate', 'mealName', 'userid', 'translations'],
   watch: {
     initialDate: function initialDate(newDate, oldDate) {
       this.date = this.initialDate;
@@ -6663,7 +6663,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       meal: this.mealName,
-      meals: ["Breakfast", "Lunch", "Dinner", "Snacks"],
+      meals: [this.translations["breakfast"], this.translations["Lunch"], this.translations["Dinner"], this.translations["Snacks"]],
       quantity: 0,
       foods: [],
       selectedFood: [],
@@ -6761,17 +6761,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['userid'],
+  props: ['userid', 'translations'],
   data: function data() {
     return {
       foods: [],
       totalCalories: 0,
       goal: 2000,
       //update this later
-      meal1: [name = "Breakfast"],
-      meal2: [name = "Lunch"],
-      meal3: [name = "Dinner"],
-      meal4: [name = "Snacks"],
+      meal1: [name = this.translations["breakfast"]],
+      meal2: [name = this.translations["lunch"]],
+      meal3: [name = this.translations["dinner"]],
+      meal4: [name = this.translations["snacks"]],
       meals: [],
       date: new Date().toISOString().slice(0, 10)
     };
@@ -6868,12 +6868,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['mealName', 'foods', 'date', 'userid'],
+  props: ['mealName', 'foods', 'date', 'userid', 'translations'],
   data: function data() {
     return {
       calories: 0,
       showModal: false,
-      meals: ["Breakfast", "Lunch", "Dinner", "Snacks"]
+      meals: [this.translations["breakfast"], this.translations["Lunch"], this.translations["Dinner"], this.translations["Snacks"]]
     };
   },
   watch: {
@@ -41851,10 +41851,10 @@ var render = function () {
           _vm._v("X"),
         ]),
         _vm._v(" "),
-        _c("h6", [_vm._v("Add new food")]),
+        _c("h6", [_vm._v(_vm._s(_vm.translations["add new"]))]),
         _vm._v(" "),
         _c("label", { staticClass: "foodLabel", attrs: { for: "query" } }, [
-          _vm._v("Food"),
+          _vm._v(_vm._s(_vm.translations["food"])),
         ]),
         _vm._v(" "),
         _c("input", {
@@ -41900,13 +41900,20 @@ var render = function () {
                   _vm._v(" "),
                   _c("p", { staticClass: "foodDescription" }, [
                     _vm._v(
-                      "Calories: " +
+                      _vm._s(_vm.translations["calories"]) +
+                        ": " +
                         _vm._s(food.calories) +
-                        " - Carbohydrates: " +
+                        " - " +
+                        _vm._s(_vm.translations["carbs"]) +
+                        ": " +
                         _vm._s(food.carbohydrates) +
-                        " - Fats: " +
+                        " - " +
+                        _vm._s(_vm.translations["fats"]) +
+                        ": " +
                         _vm._s(food.fats) +
-                        " - Proteins: " +
+                        " - " +
+                        _vm._s(_vm.translations["protein"]) +
+                        ": " +
                         _vm._s(food.protein)
                     ),
                   ]),
@@ -41920,7 +41927,7 @@ var render = function () {
         _c(
           "label",
           { staticClass: "quantityLabel", attrs: { for: "quantity" } },
-          [_vm._v("Quantity(gr)")]
+          [_vm._v(_vm._s(_vm.translations["quantity"]) + "(gr)")]
         ),
         _vm._v(" "),
         _c("input", {
@@ -41946,7 +41953,7 @@ var render = function () {
         }),
         _vm._v(" "),
         _c("label", { staticClass: "label", attrs: { for: "selectMeal" } }, [
-          _vm._v("Meal"),
+          _vm._v(_vm._s(_vm.translations["meal"])),
         ]),
         _vm._v(" "),
         _c(
@@ -41979,18 +41986,18 @@ var render = function () {
             },
           },
           [
-            _c("option", [_vm._v("Breakfast")]),
+            _c("option", [_vm._v(_vm._s(_vm.translations["breakfast"]))]),
             _vm._v(" "),
-            _c("option", [_vm._v("Lunch")]),
+            _c("option", [_vm._v(_vm._s(_vm.translations["lunch"]))]),
             _vm._v(" "),
-            _c("option", [_vm._v("Dinner")]),
+            _c("option", [_vm._v(_vm._s(_vm.translations["dinner"]))]),
             _vm._v(" "),
-            _c("option", [_vm._v("Snacks")]),
+            _c("option", [_vm._v(_vm._s(_vm.translations["snacks"]))]),
           ]
         ),
         _vm._v(" "),
         _c("label", { staticClass: "label", attrs: { for: "datePicker" } }, [
-          _vm._v("Date"),
+          _vm._v(_vm._s(_vm.translations["date"])),
         ]),
         _vm._v(" "),
         _c("VueDatePicker", {
@@ -42006,7 +42013,7 @@ var render = function () {
         }),
         _vm._v(" "),
         _c("button", { staticClass: "save-btn", on: { click: _vm.add } }, [
-          _vm._v("Save"),
+          _vm._v(_vm._s(_vm.translations["add"])),
         ]),
       ],
       2
@@ -42056,7 +42063,8 @@ var render = function () {
           _vm._v(" "),
           _c("h4", [
             _vm._v(
-              "Total: " +
+              _vm._s(_vm.translations["total"]) +
+                ": " +
                 _vm._s(_vm.totalCalories) +
                 "/" +
                 _vm._s(_vm.goal) +
@@ -42077,6 +42085,7 @@ var render = function () {
                 foods: meal,
                 date: _vm.date,
                 userid: _vm.userid,
+                translations: _vm.translations,
               },
               on: { update: _vm.loadFoods },
             }),
@@ -42171,7 +42180,7 @@ var render = function () {
           "tr",
           [
             _c("td", { staticClass: "link", on: { click: _vm.add } }, [
-              _vm._v("Add food"),
+              _vm._v(_vm._s(_vm.translations["add"])),
             ]),
             _vm._v(" "),
             _c("add-food", {
@@ -42187,6 +42196,7 @@ var render = function () {
                 mealName: _vm.mealName,
                 initialDate: _vm.date,
                 userid: _vm.userid,
+                translations: _vm.translations,
               },
               on: { eventname: _vm.close },
             }),

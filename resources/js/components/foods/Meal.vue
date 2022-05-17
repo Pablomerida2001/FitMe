@@ -18,8 +18,8 @@
                 <tr style="visibility: hidden"><td>.</td></tr>
             </template>
             <tr>
-                <td class="link" @click="add">Add food</td>
-                <add-food v-show="showModal" :mealName="mealName" :initialDate="date" @eventname="close" :userid="userid"></add-food>
+                <td class="link" @click="add">{{translations["add"]}}</td>
+                <add-food v-show="showModal" :mealName="mealName" :initialDate="date" @eventname="close" :userid="userid" :translations="translations"></add-food>
             </tr>
             
         </table>
@@ -34,14 +34,15 @@
             'mealName',
             'foods',
             'date',
-            'userid'
+            'userid',
+            'translations'
         ],
 
         data: function(){
             return{
                 calories: 0,
                 showModal: false,
-                meals: ["Breakfast", "Lunch", "Dinner", "Snacks"],
+                meals: [this.translations["breakfast"], this.translations["Lunch"], this.translations["Dinner"], this.translations["Snacks"]],
             }
         },
 

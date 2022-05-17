@@ -25,5 +25,9 @@ return [
     'quantity' => 'Quantity',
     'meal' => 'Meal',
     'date' => 'Date',
-    'save' => 'Save'
+    'save' => 'Save',
+    'calories' => 'Calories',
+    'carbs' => 'Carbohydrates',
+    'fats' => 'Fats',
+    'protein' => 'Proteins'
 ];

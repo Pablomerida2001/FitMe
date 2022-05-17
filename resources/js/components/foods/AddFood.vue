@@ -3,27 +3,27 @@
   <div class="modal-overlay">
     <div class="modal">
         <a class="close" @click="close">X</a>
-        <h6>Add new food</h6>
-        <label class="foodLabel" for="query">Food</label>
+        <h6>{{translations["add new"]}}</h6>
+        <label class="foodLabel" for="query">{{translations["food"]}}</label>
         <input v-model="query" class="input" id="query" type="text" placeholder="Search..." @focus="search = true"/>
         <span v-for="food in foods" v-if="search" @click="selectFood(food)">
             <h5 class="foodName">{{food.name}}</h5>
-            <p class="foodDescription">Calories: {{food.calories}} - Carbohydrates: {{food.carbohydrates}} - Fats: {{food.fats}} - Proteins: {{food.protein}}</p>
+            <p class="foodDescription">{{translations["calories"]}}: {{food.calories}} - {{translations["carbs"]}}: {{food.carbohydrates}} - {{translations["fats"]}}: {{food.fats}} - {{translations["protein"]}}: {{food.protein}}</p>
             <hr class="foodSeparator">
         </span>
 
-        <label class="quantityLabel" for="quantity">Quantity(gr)</label>
+        <label class="quantityLabel" for="quantity">{{translations["quantity"]}}(gr)</label>
         <input v-model="quantity" class="input" id="quantity" type="number"/>
-        <label class="label" for="selectMeal">Meal</label>
+        <label class="label" for="selectMeal">{{translations["meal"]}}</label>
         <select class="select" id="selectMeal" v-model="meal">
-            <option>Breakfast</option>
-            <option>Lunch</option>
-            <option>Dinner</option>
-            <option>Snacks</option>
+            <option>{{translations["breakfast"]}}</option>
+            <option>{{translations["lunch"]}}</option>
+            <option>{{translations["dinner"]}}</option>
+            <option>{{translations["snacks"]}}</option>
         </select>
-        <label class="label" for="datePicker">Date</label>
+        <label class="label" for="datePicker">{{translations["date"]}}</label>
         <VueDatePicker v-model="date" format="DD-MM-YYYY" class="input" id="datePicker"/>
-        <button @click="add" class="save-btn">Save</button>
+        <button @click="add" class="save-btn">{{translations["add"]}}</button>
     </div>
     </div>
   </div>
@@ -38,7 +38,8 @@
         props:[
             'initialDate',
             'mealName',
-            'userid'
+            'userid',
+            'translations'
         ],
 
         watch: {
@@ -57,7 +58,7 @@
         data: function(){
             return{
                 meal: this.mealName,
-                meals: ["Breakfast", "Lunch", "Dinner", "Snacks"],
+                meals: [this.translations["breakfast"], this.translations["Lunch"], this.translations["Dinner"], this.translations["Snacks"]],
                 quantity: 0,
                 foods: [],
                 selectedFood: [],
