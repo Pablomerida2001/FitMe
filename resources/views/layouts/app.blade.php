@@ -31,18 +31,18 @@
                 </a>
                 <div class="navLinks">
                     @yield('header')
-                    <a href="#">Acerca de</a>
+                    <a href="#">{{ __('translations.about') }}</a>
                 </div>
 
                 <div class="userLinks">
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
-                            <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a href="{{ route('login') }}">{{ __('translations.login') }}</a>
                         @endif
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a href="{{ route('register') }}">{{ __('translations.register') }}</a>
                         @endif
 
                     @else
@@ -52,10 +52,10 @@
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">
-                                Profile
+                                {{ __('translations.profile') }}
                             </a>
                             <a class="dropdown-item red" onclick="event.preventDefault();document.getElementById('logout-form').submit();" href="#">
-                                {{ __('Logout') }}
+                                {{ __('translations.logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
