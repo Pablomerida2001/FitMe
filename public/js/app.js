@@ -6967,7 +6967,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['userid'],
+  props: ['userid', 'translations'],
   data: function data() {
     return {
       date: new Date().toISOString().slice(0, 10)
@@ -42423,7 +42423,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h3", [_vm._v("Workout")]),
+    _c("h3", [_vm._v(_vm._s(_vm.translations["tittle"]))]),
     _vm._v(" "),
     _c(
       "span",

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Workout</h3>
+        <h3>{{translations['tittle']}}</h3>
         <span class="span-container">
             <VueDatePicker v-model="date" format="DD-MM-YYYY" />
         </span>
@@ -14,6 +14,7 @@
     export default{
         props:[
             'userid',
+            'translations'
         ],
 
         data: function(){

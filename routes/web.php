@@ -33,7 +33,7 @@ Route::get('set-locale/{locale}', function ($locale) {
 
 Route::get('/Workouts', function(){
     return view('workouts');
-})->middleware(['auth'])->name('Workouts');
+})->middleware(['auth', 'checkLocale'])->name('Workouts');
 
 require __DIR__.'/auth.php';
 
