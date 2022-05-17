@@ -15,15 +15,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('landing');
-})->middleware(['guest'])->name('landing');
+})->middleware(['guest', 'checkLocale'])->name('landing');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'checkLocale'])->name('dashboard');
 
 Route::get('/myFoods', function(){
     return view('foods/MyFoods');
-})->middleware(['auth'])->name('myFoods');
+})->middleware(['auth', 'checkLocale'])->name('myFoods');
+
+Route::get('set-locale/{locale}', function ($locale) {
+    App::setLocale($locale);
+    session()->put('locale', $locale);
+    return redirect()->back();
+})->middleware('checkLocale')->name('locale.setting');
 
 Route::get('/Workouts', function(){
     return view('workouts');

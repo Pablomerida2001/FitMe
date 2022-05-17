@@ -20,6 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/landing.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.4.3/css/flag-icons.min.css" integrity="sha512-uvXdJud8WaOlQFjlz9B15Yy2Au/bMAvz79F7Xa6OakCl2jvQPdHD0hb3dEqZRdSwG4/sknePXlE7GiarwA/9Wg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 <body>
@@ -31,28 +32,44 @@
                 </a>
                 <div class="navLinks">
                     @yield('header')
-                    <a href="#">Acerca de</a>
+                    <a href="#">{{ __('translations.about') }}</a>
                 </div>
 
                 <div class="userLinks">
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
-                            <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a href="{{ route('login') }}">{{ __('translations.login') }}</a>
                         @endif
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a href="{{ route('register') }}">{{ __('translations.register') }}</a>
                         @endif
 
                     @else
+                        <a class="toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ str_replace('_', '-', app()->getLocale()) }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('locale.setting', 'en') }}">
+                                <span class="fi fi-gb"></span>  EN
+                            </a>
+                            <a class="dropdown-item" href="{{ route('locale.setting', 'es') }}">
+                                <span class="fi fi-es"></span>  ES
+                            </a>
+                        </div>
+                          
                         <a class="toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item red" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                            <a class="dropdown-item" href="#">
+                                {{ __('translations.profile') }}
+                            </a>
+                            <a class="dropdown-item red" onclick="event.preventDefault();document.getElementById('logout-form').submit();" href="#">
+                                {{ __('translations.logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

@@ -2,10 +2,10 @@
     <div>
         <span class="span-container">
             <VueDatePicker v-model="date" format="DD-MM-YYYY" />
-            <h4>Total: {{totalCalories}}/{{goal}}kcal</h4>
+            <h4>{{translations["total"]}}: {{totalCalories}}/{{goal}}kcal</h4>
         </span>
         <div v-for="meal in meals">
-            <meals :mealName="meal[0]" :foods="meal" :date="date" :userid="userid" @update="loadFoods"></meals>
+            <meals :mealName="meal[0]" :foods="meal" :date="date" :userid="userid" :translations="translations" @update="loadFoods"></meals>
         </div>
     </div>
 </template>
@@ -18,6 +18,7 @@
     export default{
         props:[
             'userid',
+            'translations'
         ],
 
         data: function(){
@@ -25,10 +26,10 @@
                 foods: [],
                 totalCalories: 0,
                 goal: 2000,//update this later
-                meal1: [name = "Breakfast"],
-                meal2: [name = "Lunch"],
-                meal3: [name = "Dinner"],
-                meal4: [name = "Snacks"],
+                meal1: [name = this.translations["breakfast"]],
+                meal2: [name = this.translations["lunch"]],
+                meal3: [name = this.translations["dinner"]],
+                meal4: [name = this.translations["snacks"]],
                 meals: [],
                 date: new Date().toISOString().slice(0, 10),
             }

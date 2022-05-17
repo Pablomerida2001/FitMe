@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Welcome back {{auth()->user()->name}}!</h1>
+        <h1>{{__('translations.welcome')}}, {{auth()->user()->name}}!</h1>
     </div>
 @endsection
 
