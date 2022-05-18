@@ -10,5 +10,6 @@ return [
     'search' => 'Buscar...',
     'add new' => 'Añadir nuevo Ejercicio',
     'exercise' => 'Ejercicio',
-    'add' => 'Añadir'
+    'add' => 'Añadir',
+    'emptyWorkout' => 'No hay ningun entrenamiento registrado hoy.',
 ];

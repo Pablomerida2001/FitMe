@@ -10,5 +10,6 @@ return [
     'search' => 'Search...',
     'add new' => 'Add new Exercise',
     'exercise' => 'Exercise',
-    'add' => 'Add'
+    'add' => 'Add',
+    'emptyWorkout' => 'There isnt any workout registered today.',
 ];

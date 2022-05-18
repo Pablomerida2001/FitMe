@@ -6,7 +6,7 @@
         <h6>{{translations["add new"]}}</h6>
         <label class="foodLabel" for="query">{{translations["food"]}}</label>
         <input v-model="query" class="input" id="query" type="text" placeholder="Search..." @focus="search = true"/>
-        <span v-for="food in foods" v-if="search" @click="selectFood(food)">
+        <span v-for="food in foods" v-if="search" @click="selectFood(food)" style="cursor: pointer">
             <h5 class="foodName">{{food.name}}</h5>
             <p class="foodDescription">{{translations["calories"]}}: {{food.calories}} - {{translations["carbs"]}}: {{food.carbohydrates}} - {{translations["fats"]}}: {{food.fats}} - {{translations["protein"]}}: {{food.protein}}</p>
             <hr class="foodSeparator">

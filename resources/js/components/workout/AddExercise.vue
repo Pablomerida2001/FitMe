@@ -6,7 +6,7 @@
         <h6>{{translations["add new"]}}</h6>
         <label class="label" style="left: -35%" for="query">{{translations["exercise"]}}</label>
         <input v-model="query" class="input" id="query" type="text" placeholder="Search..." @focus="search = true"/>
-        <span v-for="exercise in exercises" v-if="search" @click="selectExercise(exercise)">
+        <span v-for="exercise in exercises" v-if="search" @click="selectExercise(exercise)" style="cursor: pointer">
             <h5 class="exerciseName">{{exercise.name}}</h5>
             <hr class="Separator">
         </span>
