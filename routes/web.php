@@ -25,6 +25,10 @@ Route::get('/myFoods', function(){
     return view('foods/MyFoods');
 })->middleware(['auth', 'checkLocale'])->name('myFoods');
 
+Route::get('/profile', function(){
+    return view('profile');
+})->middleware(['auth', 'checkLocale'])->name('profile');
+
 Route::get('set-locale/{locale}', function ($locale) {
     App::setLocale($locale);
     session()->put('locale', $locale);
