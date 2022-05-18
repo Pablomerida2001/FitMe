@@ -6,7 +6,7 @@ return [
     'reps' => 'Repeticiones',
     'weight' => 'Peso',
     'save' => 'Guardar',
-    'date' => 'Fecga',
+    'date' => 'Fecha',
     'search' => 'Buscar...',
     'add new' => 'Añadir nuevo Ejercicio',
     'exercise' => 'Ejercicio',

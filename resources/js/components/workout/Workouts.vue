@@ -3,7 +3,7 @@
         <h3>{{translations['tittle']}}</h3>
         <span class="span-container">
             <VueDatePicker v-model="date" format="DD-MM-YYYY" />
-            <btn class="btn btn-primary addBtn" @click="add">{{translations["add"]}}</btn>
+            <button class="btn btn-primary addBtn" @click="add">{{translations["add"]}}</button>
         </span>
         <div v-for="item in exercises">
             <exercise :userid="userid" :translations="translations" :Exercise="item"></exercise>

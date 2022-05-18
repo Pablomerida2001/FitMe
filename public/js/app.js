@@ -6946,6 +6946,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6985,7 +6994,7 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.$emit('eventname');
     },
-    searchFoods: function searchFoods(query) {
+    searchExercise: function searchExercise(query) {
       var _this = this;
 
       axios.get("/api/exercise/searchExercise", {
@@ -12534,7 +12543,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    display: flex;\n    justify-content: center;\n    background-color: #000000da;\n}\n.modal {\n    text-align: center;\n    background-color: white;\n    height: 650px;\n    width: 550px;\n    margin: auto;\n    padding: 60px 0;\n    border-radius: 20px;\n    display: block;\n    position: relative\n}\n.close {\n    position: relative;\n    top: -7%;\n    right: -44%;\n    color: black;\n    cursor: pointer;\n}\n.close:hover {\n    color: red;\n}\nh6 {\n    font-weight: 500;\n    font-size: 28px;\n    margin: 20px 0;\n}\np {\n    font-size: 16px;\n    margin: 20px 0;\n}\n.save-btn {\n    background-color: green;\n    width: 150px;\n    height: 40px;\n    color: white;\n    font-size: 14px;\n    border-radius: 16px;\n    margin-top: 50px;\n}\n.quantityLabel{\n    margin-top: 5%;\n    position: relative;\n    left: -32%;\n    margin-bottom: 5px;\n}\n.input{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n}\n.select{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n    padding: 0.375rem 2.25rem 0.375rem 0.75rem;\n    -moz-padding-start: calc(0.75rem - 3px);\n    font-size: 0.9rem;\n    font-weight: 400;\n    line-height: 1.6;\n    color: #212529;\n    background-color: #f8fafc;\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e\");\n    background-repeat: no-repeat;\n    background-position: right 0.75rem center;\n    background-size: 16px 12px;\n    border: 1px solid #ced4da;\n    border-radius: 0.25rem;\n    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n}\n.label{\n    margin-top: 5%;\n    position: relative;\n    left: -36%;\n    margin-bottom: 5px;\n}\n.Separator{\n    width: 80%;\n    margin: 0 auto;\n}\n.exerciseName{\n    margin-top: 15px;\n}\n.Description{\n    font-size: 13px;\n    margin-top: 5px;\n    margin-bottom: 10px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.modal-overlay {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    display: flex;\n    justify-content: center;\n    background-color: #000000da;\n}\n.modal {\n    text-align: center;\n    background-color: white;\n    height: 650px;\n    width: 550px;\n    margin: auto;\n    padding: 60px 0;\n    border-radius: 20px;\n    display: block;\n    position: relative\n}\n.close {\n    position: relative;\n    top: -7%;\n    right: -44%;\n    color: black;\n    cursor: pointer;\n}\n.close:hover {\n    color: red;\n}\nh6 {\n    font-weight: 500;\n    font-size: 28px;\n    margin: 20px 0;\n}\np {\n    font-size: 16px;\n    margin: 20px 0;\n}\n.save-btn {\n    background-color: green;\n    width: 150px;\n    height: 40px;\n    color: white;\n    font-size: 14px;\n    border-radius: 16px;\n    margin-top: 50px;\n}\n.setsLabel{\n    margin-top: 5%;\n    position: relative;\n    left: -32%;\n    margin-bottom: 5px;\n}\n.input{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n}\n.select{\n    margin: 0 auto;\n    display: block;\n    width: 80%;\n    padding: 0.375rem 2.25rem 0.375rem 0.75rem;\n    -moz-padding-start: calc(0.75rem - 3px);\n    font-size: 0.9rem;\n    font-weight: 400;\n    line-height: 1.6;\n    color: #212529;\n    background-color: #f8fafc;\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e\");\n    background-repeat: no-repeat;\n    background-position: right 0.75rem center;\n    background-size: 16px 12px;\n    border: 1px solid #ced4da;\n    border-radius: 0.25rem;\n    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    appearance: none;\n}\n.label{\n    margin-top: 5%;\n    position: relative;\n    left: -36%;\n    margin-bottom: 5px;\n}\n.Separator{\n    width: 80%;\n    margin: 0 auto;\n}\n.exerciseName{\n    margin-top: 15px;\n}\n.Description{\n    font-size: 13px;\n    margin-top: 5px;\n    margin-bottom: 10px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -42887,9 +42896,15 @@ var render = function () {
         _vm._v(" "),
         _c("h6", [_vm._v(_vm._s(_vm.translations["add new"]))]),
         _vm._v(" "),
-        _c("label", { staticClass: "exerciseLabel", attrs: { for: "query" } }, [
-          _vm._v(_vm._s(_vm.translations["exercise"])),
-        ]),
+        _c(
+          "label",
+          {
+            staticClass: "label",
+            staticStyle: { left: "-35%" },
+            attrs: { for: "query" },
+          },
+          [_vm._v(_vm._s(_vm.translations["exercise"]))]
+        ),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -42936,6 +42951,96 @@ var render = function () {
                 ]
               )
             : _vm._e()
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          {
+            staticClass: "label",
+            staticStyle: { left: "-37%" },
+            attrs: { for: "sets" },
+          },
+          [_vm._v(_vm._s(_vm.translations["sets"]))]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.sets,
+              expression: "sets",
+            },
+          ],
+          staticClass: "input",
+          attrs: { id: "sets", type: "number" },
+          domProps: { value: _vm.sets },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.sets = $event.target.value
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c(
+          "label",
+          {
+            staticClass: "label",
+            staticStyle: { left: "-33%" },
+            attrs: { for: "reps" },
+          },
+          [_vm._v(_vm._s(_vm.translations["reps"]))]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.reps,
+              expression: "reps",
+            },
+          ],
+          staticClass: "input",
+          attrs: { id: "reps", type: "number" },
+          domProps: { value: _vm.reps },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.reps = $event.target.value
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("label", { staticClass: "label", attrs: { for: "weight" } }, [
+          _vm._v(_vm._s(_vm.translations["weight"])),
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.weight,
+              expression: "weight",
+            },
+          ],
+          staticClass: "input",
+          attrs: { id: "weight", type: "number" },
+          domProps: { value: _vm.weight },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.weight = $event.target.value
+            },
+          },
         }),
         _vm._v(" "),
         _c("label", { staticClass: "label", attrs: { for: "datePicker" } }, [
@@ -43057,7 +43162,7 @@ var render = function () {
           }),
           _vm._v(" "),
           _c(
-            "btn",
+            "button",
             { staticClass: "btn btn-primary addBtn", on: { click: _vm.add } },
             [_vm._v(_vm._s(_vm.translations["add"]))]
           ),

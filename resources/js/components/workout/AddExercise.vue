@@ -4,12 +4,21 @@
     <div class="modal">
         <a class="close" @click="close">X</a>
         <h6>{{translations["add new"]}}</h6>
-        <label class="exerciseLabel" for="query">{{translations["exercise"]}}</label>
+        <label class="label" style="left: -35%" for="query">{{translations["exercise"]}}</label>
         <input v-model="query" class="input" id="query" type="text" placeholder="Search..." @focus="search = true"/>
         <span v-for="exercise in exercises" v-if="search" @click="selectExercise(exercise)">
             <h5 class="exerciseName">{{exercise.name}}</h5>
             <hr class="Separator">
         </span>
+
+        <label class="label" style="left: -37%"for="sets">{{translations["sets"]}}</label>
+        <input v-model="sets" class="input" id="sets" type="number"/>
+
+        <label class="label" style="left: -33%" for="reps">{{translations["reps"]}}</label>
+        <input v-model="reps" class="input" id="reps" type="number"/>
+
+        <label class="label" for="weight">{{translations["weight"]}}</label>
+        <input v-model="weight" class="input" id="weight" type="number"/>
 
         <label class="label" for="datePicker">{{translations["date"]}}</label>
         <VueDatePicker v-model="date" format="DD-MM-YYYY" class="input" id="datePicker"/>
@@ -71,7 +80,7 @@
                 this.$emit('eventname');
             },
 
-            searchFoods(query) {
+            searchExercise(query) {
                 axios.get(`/api/exercise/searchExercise`, {
                     params: {
                         query: this.query
@@ -152,7 +161,7 @@
         margin-top: 50px;
     }
 
-    .quantityLabel{
+    .setsLabel{
         margin-top: 5%;
         position: relative;
         left: -32%;

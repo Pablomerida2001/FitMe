@@ -15,8 +15,8 @@ class ExerciseController extends Controller{
     public function search(Request $request) {
             $query = $request->query('query');
             
-            $exercises = Exercise::where('name', 'like', '%' . $query . '%') ->get()
-                ->orWhere('description', 'like', '%' . $query . '%');
+            $exercises = Exercise::where('name', 'like', '%' . $query . '%')
+                ->orWhere('description', 'like', '%' . $query . '%')->get();
     
             return $exercises;
     }
