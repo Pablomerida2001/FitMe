@@ -58,7 +58,6 @@
                     }
                 }).then((response)=>{
                     this.exercises = response.data;
-                    console.log(response.data)
                 }).catch();
             },
 

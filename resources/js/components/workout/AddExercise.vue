@@ -14,12 +14,6 @@
         <label class="label" style="left: -37%"for="sets">{{translations["sets"]}}</label>
         <input v-model="sets" class="input" id="sets" type="number"/>
 
-        <label class="label" style="left: -33%" for="reps">{{translations["reps"]}}</label>
-        <input v-model="reps" class="input" id="reps" type="number"/>
-
-        <label class="label" for="weight">{{translations["weight"]}}</label>
-        <input v-model="weight" class="input" id="weight" type="number"/>
-
         <label class="label" for="datePicker">{{translations["date"]}}</label>
         <VueDatePicker v-model="date" format="DD-MM-YYYY" class="input" id="datePicker"/>
         <button @click="add" class="save-btn">{{translations["add"]}}</button>
@@ -72,8 +66,6 @@
                     exercise: this.selectedExercise.id,
                     user: String(this.userid),
                     sets: this.sets,
-                    reps: this.reps,
-                    weight: this.weight,
                     date: this.date,
                 });
 
