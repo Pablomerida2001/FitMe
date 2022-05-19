@@ -1,7 +1,7 @@
 <template>
     <div class="profile-container">
         <div class="user-info">
-            <h2>{{userid}}</h2>
+            <h2>{{user.name}}</h2>
         </div>
         
     </div>
@@ -10,7 +10,7 @@
 <script>
     export default{
         props:[
-            'userid',
+            'user',
         ],
         data: function(){
             return{

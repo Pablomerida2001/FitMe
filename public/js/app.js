@@ -6963,7 +6963,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['userid'],
+  props: ['user'],
   data: function data() {
     return {
       date: new Date().toISOString().slice(0, 10)
@@ -42412,7 +42412,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "profile-container" }, [
     _c("div", { staticClass: "user-info" }, [
-      _c("h2", [_vm._v(_vm._s(_vm.userid))]),
+      _c("h2", [_vm._v(_vm._s(_vm.user.name))]),
     ]),
   ])
 }
