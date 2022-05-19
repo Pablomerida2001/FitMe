@@ -7041,6 +7041,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['Exercise', 'date', 'userid', 'translations'],
   data: function data() {
@@ -7079,23 +7085,23 @@ __webpack_require__.r(__webpack_exports__);
         _this.sets = response.data;
       })["catch"]();
     },
-    add: function add() {
-      this.showModal = true;
-    },
-    close: function close() {
-      this.showModal = false;
-      this.$emit('update');
-    },
-    deleteFood: function deleteFood(food) {
-      axios["delete"]('api/foods/deleteConsumedFood', {
+    deleteExercise: function deleteExercise(food) {
+      axios["delete"]('api/foods/removeExercise', {
         data: {
-          food: food.id,
+          exercise: Exercise.id,
           user: String(this.userid),
-          meal: String(this.meals.indexOf(this.mealName) + 1),
           date: this.date
         }
       });
       this.$emit('update');
+    },
+    save: function save(index) {
+      console.log(this.sets[index]);
+      axios.post('api/exercise/updateSet', {
+        set: this.sets[index].id,
+        reps: this.sets[index].reps,
+        weight: this.sets[index].weight
+      });
     }
   }
 });
@@ -12582,7 +12588,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.collapsible {\n    background-color: #a6a2a2;\n    color: white;\n    cursor: pointer;\n    padding: 18px;\n    width: 100%;\n    border: none;\n    text-align: left;\n    outline: none;\n    font-size: 15px;\n    margin-top: 20px\n}\n.active, .collapsible:hover {\n    background-color: #919090;\n}\n.collapsible:after {\n    content: '\\002B';\n    color: white;\n    font-weight: bold;\n    float: right;\n    margin-left: 5px;\n}\n.active:after {\n    content: \"\\2212\";\n}\n.content {\n    padding: 0 18px;\n    max-height: 0;\n    overflow: hidden;\n    transition: max-height 0.2s ease-out;\n    background-color: #f1f1f1;\n}\n.text-btn{\n    display: inline;\n    float: right;\n    right: 15%;\n    position: relative;\n    margin: 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.collapsible {\n    background-color: #a6a2a2;\n    color: white;\n    cursor: pointer;\n    padding: 18px;\n    width: 100%;\n    border: none;\n    text-align: left;\n    outline: none;\n    font-size: 15px;\n    margin-top: 20px\n}\n.active, .collapsible:hover {\n    background-color: #919090;\n}\n.collapsible:after {\n    content: '\\002B';\n    color: white;\n    font-weight: bold;\n    float: right;\n    margin-left: 5px;\n}\n.active:after {\n    content: \"\\2212\";\n}\n.content {\n    padding: 0 18px;\n    max-height: 0;\n    overflow: hidden;\n    transition: max-height 0.2s ease-out;\n    background-color: #f1f1f1;\n    display: flex;\n    flex-direction: column;\n}\n.text-btn{\n    display: inline;\n    float: right;\n    right: 15%;\n    position: relative;\n    margin: 0;\n}\n.set-content{\n    display: block;\n    padding: 20px;\n    margin: 0 auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43117,23 +43123,82 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _vm._m(0),
+    _c(
+      "div",
+      { staticClass: "content" },
+      _vm._l(_vm.sets, function (set, index) {
+        return _c("div", { staticClass: "set-content" }, [
+          _c("label", { attrs: { for: "repsInput" } }, [
+            _vm._v(_vm._s(_vm.translations["reps"])),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: set.reps,
+                expression: "set.reps",
+              },
+            ],
+            staticStyle: { "margin-right": "50px" },
+            attrs: { id: "repsInput", type: "number" },
+            domProps: { value: set.reps },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(set, "reps", $event.target.value)
+              },
+            },
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "weightInput" } }, [
+            _vm._v(_vm._s(_vm.translations["weight"])),
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: set.weight,
+                expression: "set.weight",
+              },
+            ],
+            staticStyle: { "margin-right": "50px" },
+            attrs: { id: "weightInput", type: "number" },
+            domProps: { value: set.weight },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(set, "weight", $event.target.value)
+              },
+            },
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary addBtn",
+              on: {
+                click: function ($event) {
+                  return _vm.save(index)
+                },
+              },
+            },
+            [_vm._v(_vm._s(_vm.translations["save"]))]
+          ),
+        ])
+      }),
+      0
+    ),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content" }, [
-      _c("p", [
-        _vm._v(
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        ),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

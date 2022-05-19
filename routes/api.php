@@ -50,5 +50,7 @@ Route::name('exercise.')->middleware('web')->prefix('exercise')->group(function(
 
     Route::post('editWorkout', [ExerciseController::class, 'edit']);
 
+    Route::post('updateSet', [SetController::class, 'updateSet']);
+
     Route::get('getExerciseSets', [SetController::class, 'getSets']);
 });

@@ -10,4 +10,6 @@ class Set extends Model
     use HasFactory;
     protected $table = "sets";
     public $timestamps = false;
+
+    protected $fillable = ['reps', 'weight'];
 }

@@ -3,7 +3,13 @@
     <div>
         <button class="collapsible">{{Exercise.name}} <p class="text-btn">{{sets.length}} {{translations['sets']}}</p></button>
         <div class="content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <div class="set-content" v-for="(set, index) in sets">
+                <label for="repsInput">{{translations["reps"]}}</label>
+                <input v-model="set.reps" id="repsInput" style="margin-right: 50px" type="number"/>
+                <label for="weightInput">{{translations["weight"]}}</label>
+                <input v-model="set.weight" id="weightInput" style="margin-right: 50px" type="number"/>
+                <button class="btn btn-primary addBtn" @click="save(index)">{{translations["save"]}}</button>
+            </div>
         </div>
     </div>
 </template>
@@ -35,12 +41,12 @@
 
             for (i = 0; i < coll.length; i++) {
                 coll[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    var content = this.nextElementSibling;
-                    if (content.style.maxHeight){
-                    content.style.maxHeight = null;
+                        this.classList.toggle("active");
+                        var content = this.nextElementSibling;
+                        if (content.style.maxHeight){
+                        content.style.maxHeight = null;
                     } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
+                        content.style.maxHeight = content.scrollHeight + "px";
                     } 
                 });
             }
@@ -48,33 +54,33 @@
 
         methods:{
             load: function(){
-                 axios.get('api/exercise/getExerciseSets', {
+                axios.get('api/exercise/getExerciseSets', {
                     params: {
                         workoutId: this.Exercise.pivot.id,
                     }
-                    }).then((response)=>{
-                        this.sets = response.data;
-                    }).catch();
+                }).then((response)=>{
+                    this.sets = response.data;
+                }).catch();
             },
 
-            add: function(){
-                this.showModal = true;
-            },
-
-            close: function(){
-                this.showModal = false;
-                this.$emit('update');
-            },
-            
-            deleteFood: function(food){
-                axios.delete('api/foods/deleteConsumedFood', {data: {
-                    food: food.id,
+            deleteExercise: function(food){
+                axios.delete('api/foods/removeExercise', {data: {
+                    exercise: Exercise.id,
                     user: String(this.userid),
-                    meal: String(this.meals.indexOf(this.mealName) + 1),
                     date: this.date,
                 }});
 
                 this.$emit('update');
+            },
+
+            save: function(index){
+
+                console.log(this.sets[index])
+                axios.post('api/exercise/updateSet', {
+                    set: this.sets[index].id,
+                    reps: this.sets[index].reps,
+                    weight: this.sets[index].weight,
+                });
             }
         }
     }
@@ -116,6 +122,8 @@
         overflow: hidden;
         transition: max-height 0.2s ease-out;
         background-color: #f1f1f1;
+        display: flex;
+        flex-direction: column;
     }
 
     .text-btn{
@@ -124,5 +132,11 @@
         right: 15%;
         position: relative;
         margin: 0;
+    }
+
+    .set-content{
+        display: block;
+        padding: 20px;
+        margin: 0 auto;
     }
 </style>
