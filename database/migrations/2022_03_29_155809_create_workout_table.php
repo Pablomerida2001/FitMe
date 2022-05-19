@@ -17,15 +17,14 @@ class CreateWorkoutTable extends Migration
             $table->id();
             $table->unsignedBigInteger('exerciseId');
             $table->unsignedBigInteger('userId');
-            $table->integer('sets');
-            $table->integer('reps');
-            $table->double('weight');
+            $table->unsignedBigInteger('set');
             $table->date('date');
         });
 
         Schema::table('workout', function (Blueprint $table) {
             $table->foreign('exerciseId')->references('id')->on('exercises')->onDelete('cascade');
             $table->foreign('userId')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('set')->references('id')->on('sets')->onDelete('cascade');
         });
     }
 
