@@ -17,6 +17,11 @@ class CreateSetsTable extends Migration
             $table->id();
             $table->integer('reps');
             $table->double('weight');
+            $table->unsignedBigInteger('workoutId');
+        });
+
+        Schema::table('sets', function (Blueprint $table) {
+            $table->foreign('workoutId')->references('id')->on('workout')->onDelete('cascade');
         });
     }
 

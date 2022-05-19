@@ -49,6 +49,6 @@ class User extends Authenticatable
     }
 
     public function workout(){
-        return $this->belongsToMany('App\Models\Exercise', 'workout', 'userId', 'exerciseId')->withPivot(["sets", "reps", "weight", "date"]);
+        return $this->belongsToMany('App\Models\Exercise', 'workout', 'userId', 'exerciseId')->withPivot(["id", "date"]);
     }
 }

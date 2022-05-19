@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\SetController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -48,4 +49,6 @@ Route::name('exercise.')->middleware('web')->prefix('exercise')->group(function(
     Route::delete('removeExercise', [ExerciseController::class, 'removeFromWorkout']);
 
     Route::post('editWorkout', [ExerciseController::class, 'edit']);
+
+    Route::get('getExerciseSets', [SetController::class, 'getSets']);
 });

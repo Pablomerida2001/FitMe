@@ -36,5 +36,5 @@ class ExerciseController extends Controller{
     public function edit(Request $req){
         Exercise::find($req->exercise)->workout()->updateExistingPivot($req->user, ["sets" => $req->sets, "reps" => $req->reps, "weight"  => $req->weight, "date" => $req->date]);
     }
-
+    
 }

@@ -7044,10 +7044,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['Exercise', 'date', 'userid', 'translations'],
   data: function data() {
-    return {};
+    return {
+      sets: []
+    };
   },
   watch: {},
   mounted: function mounted() {
+    this.load();
     var coll = document.getElementsByClassName("collapsible");
     var i;
 
@@ -7065,6 +7068,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    load: function load() {
+      var _this = this;
+
+      axios.get('api/exercise/getExerciseSets', {
+        params: {
+          workoutId: this.Exercise.pivot.id
+        }
+      }).then(function (response) {
+        _this.sets = response.data;
+      })["catch"]();
+    },
     add: function add() {
       this.showModal = true;
     },
@@ -43098,9 +43112,7 @@ var render = function () {
       _vm._v(_vm._s(_vm.Exercise.name) + " "),
       _c("p", { staticClass: "text-btn" }, [
         _vm._v(
-          _vm._s(_vm.Exercise.pivot.sets) +
-            " " +
-            _vm._s(_vm.translations["sets"])
+          _vm._s(_vm.sets.length) + " " + _vm._s(_vm.translations["sets"])
         ),
       ]),
     ]),

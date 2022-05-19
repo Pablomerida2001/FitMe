@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <button class="collapsible">{{Exercise.name}} <p class="text-btn">{{Exercise.pivot.sets}} {{translations['sets']}}</p></button>
+        <button class="collapsible">{{Exercise.name}} <p class="text-btn">{{sets.length}} {{translations['sets']}}</p></button>
         <div class="content">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         </div>
@@ -19,6 +19,7 @@
 
         data: function(){
             return{
+                sets: [],
             }
         },
 
@@ -27,6 +28,8 @@
         },
 
         mounted(){
+            this.load();
+
             var coll = document.getElementsByClassName("collapsible");
             var i;
 
@@ -44,6 +47,16 @@
         },
 
         methods:{
+            load: function(){
+                 axios.get('api/exercise/getExerciseSets', {
+                    params: {
+                        workoutId: this.Exercise.pivot.id,
+                    }
+                    }).then((response)=>{
+                        this.sets = response.data;
+                    }).catch();
+            },
+
             add: function(){
                 this.showModal = true;
             },
