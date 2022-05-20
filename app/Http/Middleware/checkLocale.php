@@ -17,9 +17,12 @@ class checkLocale
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->lang != null) {
+        if(Auth::user() != null) {
             app()->setLocale(Auth::user()->lang);
             app()->setLocale(Auth::user()->lang);
+        }else if(session()->has('locale')) {
+            app()->setLocale(session('locale'));
+            app()->setLocale(config('app.locale'));
         }
 
         return $next($request);
