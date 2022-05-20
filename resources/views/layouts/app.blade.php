@@ -32,7 +32,6 @@
                 </a>
                 <div class="navLinks">
                     @yield('header')
-                    <a href="#">{{ __('translations.about') }}</a>
                 </div>
 
                 <div class="userLinks">
