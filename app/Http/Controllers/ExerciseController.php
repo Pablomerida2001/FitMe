@@ -46,4 +46,16 @@ class ExerciseController extends Controller{
         Exercise::find($req->exercise)->workout()->updateExistingPivot($req->user, ["sets" => $req->sets, "reps" => $req->reps, "weight"  => $req->weight, "date" => $req->date]);
     }
     
+    public function create(Request $req){
+        $exercise = new Exercise(['id' => null, 'name' => $req->name, 'description' => $req->description]);
+        $exercise->save();
+    }
+
+    public function delete(Request $req){
+        Exercise::find($req->exercise)->delete();
+    }
+
+    public function modify(Request $req){
+        Exercise::find($req->exercise)->update(['name' => $req->name, 'description' => $req->description]);
+    }
 }

@@ -12,4 +12,5 @@ return [
     'exercise' => 'Exercise',
     'add' => 'Add',
     'emptyWorkout' => 'There isnt any workout registered today.',
+    'manage' => 'Manage Exercises',
 ];

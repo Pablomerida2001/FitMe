@@ -39,6 +39,14 @@ Route::get('/Workouts', function(){
     return view('workouts');
 })->middleware(['auth', 'checkLocale'])->name('Workouts');
 
+Route::get('/manageFoods', function(){
+    return view('manageFoods');
+})->middleware(['auth', 'checkLocale'])->name('manageFoods');//add later a middleware to check the users role
+
+Route::get('/manageExercises', function(){
+    return view('manageExercises');
+})->middleware(['auth', 'checkLocale'])->name('manageExercises');//add later a middleware to check the users role
+
 require __DIR__.'/auth.php';
 
 Auth::routes();

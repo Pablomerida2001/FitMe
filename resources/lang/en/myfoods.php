@@ -29,5 +29,6 @@ return [
     'calories' => 'Calories',
     'carbs' => 'Carbohydrates',
     'fats' => 'Fats',
-    'protein' => 'Proteins'
+    'protein' => 'Proteins',
+    'manage' => 'Manage Foods',
 ];
