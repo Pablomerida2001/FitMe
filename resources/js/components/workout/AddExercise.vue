@@ -4,23 +4,16 @@
     <div class="modal">
         <a class="close" @click="close">X</a>
         <h6>{{translations["add new"]}}</h6>
-        <label class="foodLabel" for="query">{{translations["food"]}}</label>
+        <label class="label" style="left: -35%" for="query">{{translations["exercise"]}}</label>
         <input v-model="query" class="input" id="query" type="text" placeholder="Search..." @focus="search = true"/>
-        <span v-for="food in foods" v-if="search" @click="selectFood(food)" style="cursor: pointer">
-            <h5 class="foodName">{{food.name}}</h5>
-            <p class="foodDescription">{{translations["calories"]}}: {{food.calories}} - {{translations["carbs"]}}: {{food.carbohydrates}} - {{translations["fats"]}}: {{food.fats}} - {{translations["protein"]}}: {{food.protein}}</p>
-            <hr class="foodSeparator">
+        <span v-for="exercise in exercises" v-if="search" @click="selectExercise(exercise)" style="cursor: pointer">
+            <h5 class="exerciseName">{{exercise.name}}</h5>
+            <hr class="Separator">
         </span>
 
-        <label class="quantityLabel" for="quantity">{{translations["quantity"]}}(gr)</label>
-        <input v-model="quantity" class="input" id="quantity" type="number"/>
-        <label class="label" for="selectMeal">{{translations["meal"]}}</label>
-        <select class="select" id="selectMeal" v-model="meal">
-            <option>{{translations["breakfast"]}}</option>
-            <option>{{translations["lunch"]}}</option>
-            <option>{{translations["dinner"]}}</option>
-            <option>{{translations["snacks"]}}</option>
-        </select>
+        <label class="label" style="left: -37%"for="sets">{{translations["sets"]}}</label>
+        <input v-model="sets" class="input" id="sets" type="number"/>
+
         <label class="label" for="datePicker">{{translations["date"]}}</label>
         <VueDatePicker v-model="date" format="DD-MM-YYYY" class="input" id="datePicker"/>
         <button @click="add" class="save-btn">{{translations["add"]}}</button>
@@ -37,7 +30,6 @@
     export default{
         props:[
             'initialDate',
-            'mealName',
             'userid',
             'translations'
         ],
@@ -49,7 +41,7 @@
 
             query: {
                 handler: _.debounce(function () {
-                    this.searchFoods(query)
+                    this.searchExercise(query)
                 }, 100)
 
             }
@@ -57,11 +49,11 @@
 
         data: function(){
             return{
-                meal: this.mealName,
-                meals: [this.translations["breakfast"], this.translations["Lunch"], this.translations["Dinner"], this.translations["Snacks"]],
-                quantity: 0,
-                foods: [],
-                selectedFood: [],
+                exercises: [],
+                selectedExercise: [],
+                reps: 0,
+                sets: 0,
+                weight: 0,
                 date: this.initialDate,
                 query: '',
                 search: false,
@@ -70,32 +62,31 @@
 
         methods:{
             add: function(){
-                axios.post('api/foods/addConsumedFood', {
-                    food: this.selectedFood.id,
+                axios.post('api/exercise/addExercise', {
+                    exercise: this.selectedExercise.id,
                     user: String(this.userid),
-                    quantity: this.quantity,
-                    meal: this.meals.indexOf(this.meal) + 1,
+                    sets: this.sets,
                     date: this.date,
                 });
 
                 this.$emit('eventname');
             },
 
-            searchFoods(query) {
-                axios.get(`/api/foods/searchFoods`, {
+            searchExercise(query) {
+                axios.get(`/api/exercise/searchExercise`, {
                     params: {
                         query: this.query
                     }
                 }).then(res => {
-                        this.foods = res.data;
+                        this.exercises = res.data;
                     }).catch(err => {
                     console.log(err)
                 });
             },
 
-            selectFood(food){
-                this.query = food.name;
-                this.selectedFood = food;
+            selectExercise(exercise){
+                this.query = exercise.name;
+                this.selectedExercise = exercise;
                 this.search = false;
             },
 
@@ -162,7 +153,7 @@
         margin-top: 50px;
     }
 
-    .quantityLabel{
+    .setsLabel{
         margin-top: 5%;
         position: relative;
         left: -32%;
@@ -205,16 +196,16 @@
         margin-bottom: 5px;
     }
 
-    .foodSeparator{
+    .Separator{
         width: 80%;
         margin: 0 auto;
     }
 
-    .foodName{
+    .exerciseName{
         margin-top: 15px;
     }
 
-    .foodDescription{
+    .Description{
         font-size: 13px;
         margin-top: 5px;
         margin-bottom: 10px;

@@ -17,9 +17,6 @@ class CreateWorkoutTable extends Migration
             $table->id();
             $table->unsignedBigInteger('exerciseId');
             $table->unsignedBigInteger('userId');
-            $table->integer('sets');
-            $table->integer('reps');
-            $table->double('weight');
             $table->date('date');
         });
 

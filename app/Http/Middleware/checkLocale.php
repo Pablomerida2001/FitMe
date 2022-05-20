@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class checkLocale
 {
@@ -16,7 +17,10 @@ class checkLocale
      */
     public function handle($request, Closure $next)
     {
-        if(session()->has('locale')) {
+        if(Auth::user() != null) {
+            app()->setLocale(Auth::user()->lang);
+            app()->setLocale(Auth::user()->lang);
+        }else if(session()->has('locale')) {
             app()->setLocale(session('locale'));
             app()->setLocale(config('app.locale'));
         }

@@ -12,6 +12,6 @@ class Exercise extends Model
     public $timestamps = false;
 
     public function workout(){
-        return $this->belongsToMany('App\Models\User', 'workout', 'exerciseId', 'userId')->withPivot(["id", "sets", "reps", "weight", "date"]);
+        return $this->belongsToMany('App\Models\User', 'workout', 'exerciseId', 'userId')->withPivot(["id", "date"]);
     }
 }
