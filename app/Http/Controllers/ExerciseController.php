@@ -39,7 +39,7 @@ class ExerciseController extends Controller{
     }
 
     public function removeFromWorkout(Request $req){
-        Exercise::find($req->exercise)->workout()->wherePivot('date','=',$req->date)->detach($req->user);
+        Exercise::find($req->exercise)->workout()->wherePivot('id', '=', $req->workoutId)->detach($req->user);
     }
 
     public function edit(Request $req){

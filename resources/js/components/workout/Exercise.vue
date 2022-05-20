@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <button class="collapsible">{{Exercise.name}} <p class="text-btn">{{sets.length}} {{translations['sets']}}</p></button>
+        <button class="collapsible">{{Exercise.name}} <button class="delete-btn top-btn" @click="deleteExercise()"><i class="bi bi-trash"></i></button> <p class="text-btn">{{sets.length}} {{translations['sets']}}</p></button>
         <div class="content">
             <div class="set-content" v-for="(set, index) in sets">
                 <label for="repsInput">{{translations["reps"]}}</label>
@@ -9,7 +9,9 @@
                 <label for="weightInput">{{translations["weight"]}}</label>
                 <input v-model="set.weight" id="weightInput" style="margin-right: 50px" type="number"/>
                 <button class="btn btn-primary addBtn" @click="save(index)">{{translations["save"]}}</button>
+                <button class="delete-btn" @click="deleteSet(set)"><i class="bi bi-trash"></i></button>
             </div>
+            <button class="btn btn-primary" @click="addSet">{{translations['add']}}</button>
         </div>
     </div>
 </template>
@@ -30,11 +32,29 @@
         },
 
         watch: {
-            
+            Exercise() {
+                this.load();
+            }
         },
 
         mounted(){
             this.load();
+
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    
+                    if (content.style.maxHeight){
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    } 
+                });
+            }
         },
 
         methods:{
@@ -45,45 +65,53 @@
                     }
                 }).then((response)=>{
                     this.sets = response.data;
-                    console.log(this.sets)
-                }).catch();
 
+                    var coll = document.getElementsByClassName("collapsible");
+                    var i;
 
-                var coll = document.getElementsByClassName("collapsible");
-                var i;
-
-                for (i = 0; i < coll.length; i++) {
-                    coll[i].addEventListener("click", function() {
-                        this.classList.toggle("active");
-                        var content = this.nextElementSibling;
+                    for (i = 0; i < coll.length; i++) {
+                        var content = coll[i].nextElementSibling;
                         
                         if (content.style.maxHeight){
-                            content.style.maxHeight = null;
-                        } else {
                             content.style.maxHeight = content.scrollHeight + "px";
-                        } 
-                    });
-                }
+                        }
+                    }
+                }).catch();                
             },
 
-            deleteExercise: function(food){
-                axios.delete('api/foods/removeExercise', {data: {
-                    exercise: Exercise.id,
+            deleteExercise: function(){
+                axios.delete('api/exercise/removeExercise', {data: {
+                    exercise: this.Exercise.id,
                     user: String(this.userid),
                     date: this.date,
+                    workoutId: this.Exercise.pivot.id,
+                }});
+
+                this.$emit('update');
+            },
+
+            deleteSet: function(set){
+                axios.delete('api/exercise/deleteSet', {data: {
+                    set: set.id,
                 }});
 
                 this.$emit('update');
             },
 
             save: function(index){
-
-                console.log(this.sets[index])
                 axios.post('api/exercise/updateSet', {
                     set: this.sets[index].id,
                     reps: this.sets[index].reps,
                     weight: this.sets[index].weight,
                 });
+            },
+
+            addSet: function(){
+                axios.post('api/exercise/addSet', {
+                    workout: this.Exercise.pivot.id,
+                });
+
+                this.$emit('update');
             }
         }
     }
@@ -141,5 +169,26 @@
         display: block;
         padding: 20px;
         margin: 0 auto;
+    }
+
+    .delete-btn{
+        color: #fff;
+        background-color: #dc3545;
+        border-color: #dc3545;
+        display: inline-block;
+        font-weight: 400;
+        line-height: 1.6;
+        border: 1px solid transparent;
+        padding: 0.375rem 0.75rem;
+        font-size: 0.9rem;
+        border-radius: 0.25rem;
+        margin-left: 20px
+    }
+
+    .top-btn{
+        float: right;
+        margin: 0;
+        right: 27%;
+        position: absolute;
     }
 </style>

@@ -6,7 +6,7 @@
             <button class="btn btn-primary addBtn" @click="add">{{translations["add"]}}</button>
         </span>
         <div v-for="item in exercises">
-            <exercise :userid="userid" :translations="translations" :Exercise="item"></exercise>
+            <exercise :userid="userid" :translations="translations" :Exercise="item" @update="load"></exercise>
         </div>
         <span v-if="exercises.length == 0" class="empty"><h4 style="display: inline">{{translations['emptyWorkout']}}</h4> &nbsp <a @click="add" class="link">{{translations["add new"]}}</a></span>
         <add-exercise v-show="showModal" :initialDate="date" @eventname="close" :userid="userid" :translations="translations"></add-exercise>

@@ -7039,6 +7039,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['Exercise', 'date', 'userid', 'translations'],
   data: function data() {
@@ -7046,9 +7048,28 @@ __webpack_require__.r(__webpack_exports__);
       sets: []
     };
   },
-  watch: {},
+  watch: {
+    Exercise: function Exercise() {
+      this.load();
+    }
+  },
   mounted: function mounted() {
     this.load();
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+      });
+    }
   },
   methods: {
     load: function load() {
@@ -7060,41 +7081,49 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         _this.sets = response.data;
-        console.log(_this.sets);
-      })["catch"]();
-      var coll = document.getElementsByClassName("collapsible");
-      var i;
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
 
-      for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function () {
-          this.classList.toggle("active");
-          var content = this.nextElementSibling;
+        for (i = 0; i < coll.length; i++) {
+          var content = coll[i].nextElementSibling;
 
           if (content.style.maxHeight) {
-            content.style.maxHeight = null;
-          } else {
             content.style.maxHeight = content.scrollHeight + "px";
           }
-        });
-      }
+        }
+      })["catch"]();
     },
-    deleteExercise: function deleteExercise(food) {
-      axios["delete"]('api/foods/removeExercise', {
+    deleteExercise: function deleteExercise() {
+      axios["delete"]('api/exercise/removeExercise', {
         data: {
-          exercise: Exercise.id,
+          exercise: this.Exercise.id,
           user: String(this.userid),
-          date: this.date
+          date: this.date,
+          workoutId: this.Exercise.pivot.id
+        }
+      });
+      this.$emit('update');
+    },
+    deleteSet: function deleteSet(set) {
+      axios["delete"]('api/exercise/deleteSet', {
+        data: {
+          set: set.id
         }
       });
       this.$emit('update');
     },
     save: function save(index) {
-      console.log(this.sets[index]);
       axios.post('api/exercise/updateSet', {
         set: this.sets[index].id,
         reps: this.sets[index].reps,
         weight: this.sets[index].weight
       });
+    },
+    addSet: function addSet() {
+      axios.post('api/exercise/addSet', {
+        workout: this.Exercise.pivot.id
+      });
+      this.$emit('update');
     }
   }
 });
@@ -12568,7 +12597,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.collapsible {\n    background-color: #a6a2a2;\n    color: white;\n    cursor: pointer;\n    padding: 18px;\n    width: 100%;\n    border: none;\n    text-align: left;\n    outline: none;\n    font-size: 15px;\n    margin-top: 20px\n}\n.active, .collapsible:hover {\n    background-color: #919090;\n}\n.collapsible:after {\n    content: '\\002B';\n    color: white;\n    font-weight: bold;\n    float: right;\n    margin-left: 5px;\n}\n.active:after {\n    content: \"\\2212\";\n}\n.content {\n    padding: 0 18px;\n    max-height: 0;\n    overflow: hidden;\n    transition: max-height 0.2s ease-out;\n    background-color: #f1f1f1;\n    display: flex;\n    flex-direction: column;\n}\n.text-btn{\n    display: inline;\n    float: right;\n    right: 15%;\n    position: relative;\n    margin: 0;\n}\n.set-content{\n    display: block;\n    padding: 20px;\n    margin: 0 auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.collapsible {\n    background-color: #a6a2a2;\n    color: white;\n    cursor: pointer;\n    padding: 18px;\n    width: 100%;\n    border: none;\n    text-align: left;\n    outline: none;\n    font-size: 15px;\n    margin-top: 20px\n}\n.active, .collapsible:hover {\n    background-color: #919090;\n}\n.collapsible:after {\n    content: '\\002B';\n    color: white;\n    font-weight: bold;\n    float: right;\n    margin-left: 5px;\n}\n.active:after {\n    content: \"\\2212\";\n}\n.content {\n    padding: 0 18px;\n    max-height: 0;\n    overflow: hidden;\n    transition: max-height 0.2s ease-out;\n    background-color: #f1f1f1;\n    display: flex;\n    flex-direction: column;\n}\n.text-btn{\n    display: inline;\n    float: right;\n    right: 15%;\n    position: relative;\n    margin: 0;\n}\n.set-content{\n    display: block;\n    padding: 20px;\n    margin: 0 auto;\n}\n.delete-btn{\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    display: inline-block;\n    font-weight: 400;\n    line-height: 1.6;\n    border: 1px solid transparent;\n    padding: 0.375rem 0.75rem;\n    font-size: 0.9rem;\n    border-radius: 0.25rem;\n    margin-left: 20px\n}\n.top-btn{\n    float: right;\n    margin: 0;\n    right: 27%;\n    position: absolute;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -32557,6 +32586,19 @@ var render = function () {
   return _c("div", [
     _c("button", { staticClass: "collapsible" }, [
       _vm._v(_vm._s(_vm.Exercise.name) + " "),
+      _c(
+        "button",
+        {
+          staticClass: "delete-btn top-btn",
+          on: {
+            click: function ($event) {
+              return _vm.deleteExercise()
+            },
+          },
+        },
+        [_c("i", { staticClass: "bi bi-trash" })]
+      ),
+      _vm._v(" "),
       _c("p", { staticClass: "text-btn" }, [
         _vm._v(
           _vm._s(_vm.sets.length) + " " + _vm._s(_vm.translations["sets"])
@@ -32567,75 +32609,96 @@ var render = function () {
     _c(
       "div",
       { staticClass: "content" },
-      _vm._l(_vm.sets, function (set, index) {
-        return _c("div", { staticClass: "set-content" }, [
-          _c("label", { attrs: { for: "repsInput" } }, [
-            _vm._v(_vm._s(_vm.translations["reps"])),
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: set.reps,
-                expression: "set.reps",
-              },
-            ],
-            staticStyle: { "margin-right": "50px" },
-            attrs: { id: "repsInput", type: "number" },
-            domProps: { value: set.reps },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(set, "reps", $event.target.value)
-              },
-            },
-          }),
-          _vm._v(" "),
-          _c("label", { attrs: { for: "weightInput" } }, [
-            _vm._v(_vm._s(_vm.translations["weight"])),
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: set.weight,
-                expression: "set.weight",
-              },
-            ],
-            staticStyle: { "margin-right": "50px" },
-            attrs: { id: "weightInput", type: "number" },
-            domProps: { value: set.weight },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(set, "weight", $event.target.value)
-              },
-            },
-          }),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary addBtn",
+      [
+        _vm._l(_vm.sets, function (set, index) {
+          return _c("div", { staticClass: "set-content" }, [
+            _c("label", { attrs: { for: "repsInput" } }, [
+              _vm._v(_vm._s(_vm.translations["reps"])),
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: set.reps,
+                  expression: "set.reps",
+                },
+              ],
+              staticStyle: { "margin-right": "50px" },
+              attrs: { id: "repsInput", type: "number" },
+              domProps: { value: set.reps },
               on: {
-                click: function ($event) {
-                  return _vm.save(index)
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(set, "reps", $event.target.value)
                 },
               },
-            },
-            [_vm._v(_vm._s(_vm.translations["save"]))]
-          ),
-        ])
-      }),
-      0
+            }),
+            _vm._v(" "),
+            _c("label", { attrs: { for: "weightInput" } }, [
+              _vm._v(_vm._s(_vm.translations["weight"])),
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: set.weight,
+                  expression: "set.weight",
+                },
+              ],
+              staticStyle: { "margin-right": "50px" },
+              attrs: { id: "weightInput", type: "number" },
+              domProps: { value: set.weight },
+              on: {
+                input: function ($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(set, "weight", $event.target.value)
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary addBtn",
+                on: {
+                  click: function ($event) {
+                    return _vm.save(index)
+                  },
+                },
+              },
+              [_vm._v(_vm._s(_vm.translations["save"]))]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "delete-btn",
+                on: {
+                  click: function ($event) {
+                    return _vm.deleteSet(set)
+                  },
+                },
+              },
+              [_c("i", { staticClass: "bi bi-trash" })]
+            ),
+          ])
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", on: { click: _vm.addSet } },
+          [_vm._v(_vm._s(_vm.translations["add"]))]
+        ),
+      ],
+      2
     ),
   ])
 }
@@ -32701,6 +32764,7 @@ var render = function () {
                 translations: _vm.translations,
                 Exercise: item,
               },
+              on: { update: _vm.load },
             }),
           ],
           1
