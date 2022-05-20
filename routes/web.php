@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,9 @@ Route::get('/myFoods', function(){
 Route::get('set-locale/{locale}', function ($locale) {
     App::setLocale($locale);
     session()->put('locale', $locale);
+    $user = App\Models\User::find(Auth::user()->id);
+    $user->lang = $locale;
+    $user->save();
     return redirect()->back();
 })->middleware('checkLocale')->name('locale.setting');
 

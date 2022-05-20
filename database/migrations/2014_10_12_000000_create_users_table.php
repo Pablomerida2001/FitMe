@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('role')->default(0);
             $table->integer('calories')->nullable();
+            $table->string('lang')->default('EN');
             $table->rememberToken();
         });
     }
