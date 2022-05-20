@@ -31,4 +31,6 @@ return [
     'fats' => 'Grasas',
     'protein' => 'Proteinas',
     'manage' => 'Administrar Comidas',
+    'name' => 'Nombre',
+    'options' => 'Opciones'
 ];
