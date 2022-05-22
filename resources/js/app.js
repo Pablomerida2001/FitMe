@@ -30,6 +30,8 @@ Vue.component('add-food', require('./components/foods/AddFood.vue').default);
 Vue.component('workouts', require('./components/workout/Workouts.vue').default);
 Vue.component('exercise', require('./components/workout/Exercise.vue').default);
 Vue.component('add-exercise', require('./components/workout/AddExercise.vue').default);
+Vue.component('create-exercise', require('./components/workout/CreateExercise.vue').default);
+Vue.component('manage-exercises', require('./components/workout/ManageExercises.vue').default);
 
 
 /**

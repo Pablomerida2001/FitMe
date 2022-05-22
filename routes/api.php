@@ -75,5 +75,5 @@ Route::name('exercise.')->middleware('web')->prefix('admin/exercise')->group(fun
 
     Route::delete('deleteExercise', [ExerciseController::class, 'delete']);
 
-    Route::post('editExercise', [ExerciseController::class, 'editExercise']);
+    Route::post('editExercise', [ExerciseController::class, 'modify']);
 });

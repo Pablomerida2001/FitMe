@@ -36,8 +36,6 @@
 </template>
 
 <script>
-    import meal from './Meal.vue';
-
     export default{
         props:[
             'userid',
