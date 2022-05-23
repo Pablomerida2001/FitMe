@@ -42,4 +42,17 @@ class FoodController extends Controller
     public function edit(Request $req){
         Food::find($req->food)->consumedFoods()->updateExistingPivot($req->user, ["quantity" => $req->quantity, "meal" => $req->meal,  "date" => $req->date]);
     }
+
+    public function create(Request $req){
+        $food = new Food(['id' => null, 'name' => $req->name, 'calories' => $req->calories, 'carbohydrates' => $req->carbs, 'fats' => $req->fats, 'protein' => $req->protein]);
+        $food->save();
+    }
+
+    public function delete(Request $req){
+        Food::find($req->food)->delete();
+    }
+
+    public function modify(Request $req){
+        Food::find($req->food)->update(['name' => $req->name, 'calories' => $req->calories, 'carbohydrates' => $req->carbs, 'fats' => $req->fats, 'protein' => $req->protein]);
+    }
 }

@@ -10,6 +10,7 @@ class Food extends Model
     use HasFactory;
     protected $table = "foods";
     public $timestamps = false;
+    protected $fillable = ['id', 'name', 'calories', 'fats', 'carbohydrates', 'protein'];
 
     public function recipes(){
         return $this->belongsToMany('App\Models\Recipe', 'recipes_foods', 'foodId', 'recipeId')->withPivot('quantity');

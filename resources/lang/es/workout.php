@@ -12,4 +12,10 @@ return [
     'exercise' => 'Ejercicio',
     'add' => 'Añadir',
     'emptyWorkout' => 'No hay ningun entrenamiento registrado hoy.',
+    'manage' => 'Administrar Ejercicios',
+    'name' => 'Nombre',
+    'description' => 'Descripción',
+    'options' => 'Opciones',
+    'edit' => 'Editar',
+    'manage' => 'Administrar Ejercicios',
 ];

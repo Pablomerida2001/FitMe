@@ -36,6 +36,16 @@ Route::name('food.')->middleware('web')->prefix('foods')->group(function() {
     Route::post('editConsumedFood', [FoodController::class, 'edit']);
 });
 
+//add middleware to check role
+Route::name('food.')->middleware('web')->prefix('admin/foods')->group(function() {
+
+    Route::post('createFood', [FoodController::class, 'create']);
+
+    Route::delete('deleteFood', [FoodController::class, 'delete']);
+
+    Route::post('modifyFood', [FoodController::class, 'modify']);
+});
+
 Route::name('exercise.')->middleware('web')->prefix('exercise')->group(function() {
 
     Route::get('getAllExercises', [ExerciseController::class, 'getAll']);
@@ -57,5 +67,13 @@ Route::name('exercise.')->middleware('web')->prefix('exercise')->group(function(
     Route::delete('deleteSet', [SetController::class, 'deleteSet']);
 
     Route::post('addSet', [SetController::class, 'addSet']);
+});
 
+Route::name('exercise.')->middleware('web')->prefix('admin/exercise')->group(function() {
+
+    Route::post('createExercise', [ExerciseController::class, 'create']);
+
+    Route::delete('deleteExercise', [ExerciseController::class, 'delete']);
+
+    Route::post('editExercise', [ExerciseController::class, 'modify']);
 });

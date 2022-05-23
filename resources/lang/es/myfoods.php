@@ -29,5 +29,9 @@ return [
     'calories' => 'Calorias',
     'carbs' => 'Carbohidratos',
     'fats' => 'Grasas',
-    'protein' => 'Proteinas'
+    'protein' => 'Proteinas',
+    'manage' => 'Administrar Comidas',
+    'name' => 'Nombre',
+    'options' => 'Opciones',
+    'edit' => 'Editar'
 ];
