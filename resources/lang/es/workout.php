@@ -16,5 +16,6 @@ return [
     'name' => 'Nombre',
     'description' => 'Descripción',
     'options' => 'Opciones',
-    'edit' => 'Editar'
+    'edit' => 'Editar',
+    'manage' => 'Administrar Ejercicios',
 ];
