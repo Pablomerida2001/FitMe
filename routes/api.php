@@ -3,6 +3,7 @@
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\SetController;
+use App\Http\Controllers\UserWeightController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -76,4 +77,12 @@ Route::name('exercise.')->middleware('web')->prefix('admin/exercise')->group(fun
     Route::delete('deleteExercise', [ExerciseController::class, 'delete']);
 
     Route::post('editExercise', [ExerciseController::class, 'modify']);
+});
+
+Route::name('profile.')->middleware('web')->prefix('profile')->group(function() {
+
+    Route::get('getWeight', [UserWeightController::class, 'get']);
+
+    Route::post('addWeight', [UserWeightController::class, 'save']);
+
 });
