@@ -32,5 +32,6 @@ return [
     'protein' => 'Proteins',
     'manage' => 'Manage Foods',
     'name' => 'Name',
-    'options' => 'Options'
+    'options' => 'Options',
+    'edit' => 'Edit'
 ];

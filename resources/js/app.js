@@ -27,6 +27,7 @@ Vue.component('consumed-foods', require('./components/foods/ConsumedFoods.vue').
 Vue.component('meals', require('./components/foods/Meal.vue').default);
 Vue.component('manage-foods', require('./components/foods/ManageFoods.vue').default);
 Vue.component('add-food', require('./components/foods/AddFood.vue').default);
+Vue.component('create-food', require('./components/foods/CreateFood.vue').default);
 Vue.component('workouts', require('./components/workout/Workouts.vue').default);
 Vue.component('exercise', require('./components/workout/Exercise.vue').default);
 Vue.component('add-exercise', require('./components/workout/AddExercise.vue').default);

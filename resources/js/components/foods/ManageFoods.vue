@@ -1,5 +1,6 @@
 <template>
     <div>
+        <button class="btn btn-primary addBtn" @click="add">{{translations["add"]}}</button>        
         <span class="span-container">
             <table class="admin-table">
                 <th>{{translations['name']}}</th>
@@ -26,11 +27,13 @@
                             {{food.protein}}
                         </td>
                         <td>
+                            <button class="btn btn-primary addBtn" @click="editFood(food)">{{translations["edit"]}}</button>                            
                             <button class="admin-table-btn" @click="deleteFood(food)"><i class="bi bi-trash"></i></button>
                         </td>
                     </tr>
                 </template>
             </table>
+            <create-food v-show="showModal" @eventname="close" :userid="userid" :translations="translations" :edit="edit" :food="food"></create-food>
         </span>
     </div>
 </template>
@@ -45,6 +48,9 @@
         data: function(){
             return{
                 foods: [],
+                food: {},
+                edit: false,
+                showModal: false,
             }
         },
         watch: {
@@ -60,7 +66,6 @@
                 //request to the API
                 axios.get('api/foods/getAllFoods', {}).then((response)=>{
                     this.foods = response.data;
-                    console.log(this.foods);
                 }).catch();
             },
 
@@ -72,9 +77,24 @@
                 this.loadFoods();
             },
 
-            updateFood: function(food){
+            add(){
+                this.name = '';
+                this.description = '';
+                this.edit = false;
+                this.showModal = true;
+            },
 
-            }
+            editFood(food){
+                this.food = food;
+                this.edit = true;
+                this.showModal = true;
+            },
+
+            close: function(){
+                this.showModal = false;
+                this.edit = false;
+                this.loadFoods();
+            },
         }
     }
 </script>
