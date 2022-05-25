@@ -4,5 +4,8 @@ return [
     'weight' => 'Weight',
     'date' => 'Date',
     'addWeight' => 'Add Weight',
-    'add' => 'Add'
+    'add' => 'Add',
+    'updateGoal' => 'Update Goal',
+    'calories' => 'Calories',
+    'save' => 'Save',
 ];

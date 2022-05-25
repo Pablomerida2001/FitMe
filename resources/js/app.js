@@ -29,6 +29,7 @@ Vue.component('manage-foods', require('./components/foods/ManageFoods.vue').defa
 Vue.component('add-food', require('./components/foods/AddFood.vue').default);
 Vue.component('profile', require('./components/profile/Profile.vue').default);
 Vue.component('add-weight', require('./components/profile/AddWeight.vue').default);
+Vue.component('update-calories', require('./components/profile/UpdateCalories.vue').default);
 Vue.component('create-food', require('./components/foods/CreateFood.vue').default);
 Vue.component('workouts', require('./components/workout/Workouts.vue').default);
 Vue.component('exercise', require('./components/workout/Exercise.vue').default);

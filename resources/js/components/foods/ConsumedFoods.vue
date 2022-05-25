@@ -47,6 +47,16 @@
 
         mounted(){
             this.loadFoods();
+
+            axios.get('api/profile/getCalories', {
+                params:{
+                    user: this.userid,
+                }
+            }).then((response)=>{
+                this.goal = response.data;
+            }).catch(e=>{
+                console.log(e.response)
+            }); 
         },
 
         methods:{

@@ -1,59 +1,49 @@
 <template>
   <div class="modal-overlay">
-    <div class="modal">
+    <div class="modal-small">
         <a class="close" @click="close">X</a>
         <h6>{{translations["add new"]}}</h6>
 
-        <label class="quantityLabel" for="quantity">{{translations["weight"]}}</label>
-        <input v-model="weight" class="input" id="quantity" type="number"/>
+        <label class="quantityLabel" for="calories">{{translations["calories"]}}</label>
+        <input v-model="calories" class="input" id="calories" type="number"/>
 
-        <label class="label" for="datePicker">{{translations["date"]}}</label>
-        <VueDatePicker v-model="date" format="DD-MM-YYYY" class="input" id="datePicker"/>
-        <button @click="add" class="save-btn">{{translations["add"]}}</button>
+        <button @click="add" class="save-btn">{{translations["save"]}}</button>
     </div>
   </div>
 </template>
 
 <script>
-    import { VueDatePicker } from '@mathieustan/vue-datepicker';
-    import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
-    import {mapGetters} from 'vuex'
 
     export default{
         props:[
-            'initialDate',
             'userid',
             'translations',
-            'currentWeight',
+            'currentCalories',
         ],
 
         watch: {
-            initialDate(newDate, oldDate) {
-                this.date = this.initialDate;
-            },
-
-            currentWeight(){
-                this.weight = this.currentWeight;
+            currentCalories(){
+                this.calories = this.currentCalories;
             }
         },
 
         data: function(){
             return{
-                weight: 0,
-                date: this.initialDate,
+                calories: 0,
             }
         },
 
         mounted() {
-            this.weight = this.currentWeight;
+            this.calories = this.currentCalories;
         },
 
         methods:{
             add: function(){
-                axios.post('api/profile/addWeight', {
+                axios.post('api/profile/updateCalories', {
                     user: String(this.userid),
-                    weight: this.weight,
-                    date: this.date,
+                    calories: this.calories,
+                }).catch(e=>{
+                    console.log(e.response)
                 });
 
                 this.$emit('eventname');
@@ -78,10 +68,10 @@
         background-color: #000000da;
     }
 
-    .modal {
+    .modal-small {
         text-align: center;
         background-color: white;
-        height: 650px;
+        height: 500px;
         width: 550px;
         margin: auto;
         padding: 60px 0;

@@ -9,7 +9,14 @@
             <a class="link weight-link" @click="add">{{translations['addWeight']}}</a>
             <canvas id="weightChart" width="900" height="200"></canvas>
         </div>
-        <add-weight v-show="showModal" :weight="currentWeight" :initialDate="date" @eventname="close" :userid="user.id" :translations="translations"></add-weight>
+        <hr>
+        <div>
+            <h4>Calorias diarias: {{calories}} kcal</h4>
+            <a class="link weight-link" @click="updateCalories">{{translations['updateGoal']}}</a>
+            <canvas id="caloriesChart" width="900" height="200"></canvas>
+        </div>
+        <add-weight v-show="showModal" :currentWeight="currentWeight" :initialDate="date" @eventname="close" :userid="user.id" :translations="translations"></add-weight>
+        <update-calories v-show="showModal2" :currentCalories="calories" @eventname="close" :userid="user.id" :translations="translations"></update-calories>
     </div>
 </template>
 
@@ -25,7 +32,9 @@
                 weight: [],
                 currentWeight: 0,
                 showModal: false,
+                showModal2: false,
                 myChart: undefined,
+                calories: 0,
             }
         },
         mounted(){
@@ -33,6 +42,7 @@
         },
         methods:{
             load: function(){
+
                 axios.get('api/profile/getWeight', {
                     params:{
                         user: this.user.id,
@@ -43,6 +53,16 @@
 
                     this.drawChart();
                 }).catch();
+
+                axios.get('api/profile/getCalories', {
+                    params:{
+                        user: this.user.id,
+                    }
+                }).then((response)=>{
+                    this.calories = response.data;
+                }).catch(e=>{
+                    console.log(e.response)
+                });           
             },
 
             drawChart(){
@@ -72,8 +92,13 @@
                 this.showModal = true;
             },
 
+            updateCalories(){
+                this.showModal2 = true;
+            },
+
             close: function(){
                 this.showModal = false;
+                this.showModal2 = false;
                 this.load();
             },
         }

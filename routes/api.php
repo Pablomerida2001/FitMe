@@ -4,6 +4,7 @@ use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\SetController;
 use App\Http\Controllers\UserWeightController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -84,5 +85,9 @@ Route::name('profile.')->middleware('web')->prefix('profile')->group(function() 
     Route::get('getWeight', [UserWeightController::class, 'get']);
 
     Route::post('addWeight', [UserWeightController::class, 'save']);
+
+    Route::post('updateCalories', [UserController::class, 'updateCalories']);
+
+    Route::get('getCalories', [UserController::class, 'getCalories']);
 
 });
