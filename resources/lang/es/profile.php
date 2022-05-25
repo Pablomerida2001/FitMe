@@ -8,4 +8,5 @@ return [
     'updateGoal' => 'Actualizar objetivo',
     'calories' => 'Calorias',
     'save' => 'Guardar',
+    'dailyCal' => 'Calorias diarias'
 ];

@@ -11,7 +11,7 @@
         </div>
         <hr>
         <div>
-            <h4>Calorias diarias: {{calories}} kcal</h4>
+            <h4>{{translations['dailyCal']}}: {{calories}} kcal</h4>
             <a class="link weight-link" @click="updateCalories">{{translations['updateGoal']}}</a>
             <canvas id="caloriesChart" width="900" height="200"></canvas>
         </div>

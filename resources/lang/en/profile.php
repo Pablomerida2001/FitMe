@@ -8,4 +8,5 @@ return [
     'updateGoal' => 'Update Goal',
     'calories' => 'Calories',
     'save' => 'Save',
+    'dailyCal' => 'Daily Calories'
 ];

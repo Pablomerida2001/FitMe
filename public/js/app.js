@@ -34540,7 +34540,12 @@ var render = function () {
       _vm._v(" "),
       _c("div", [
         _c("h4", [
-          _vm._v("Calorias diarias: " + _vm._s(_vm.calories) + " kcal"),
+          _vm._v(
+            _vm._s(_vm.translations["dailyCal"]) +
+              ": " +
+              _vm._s(_vm.calories) +
+              " kcal"
+          ),
         ]),
         _vm._v(" "),
         _c(
