@@ -3,18 +3,18 @@
         <button class="btn btn-primary addBtn" @click="add">{{translations["add"]}}</button>        
         <span class="span-container">
             <table class="admin-table">
-                <th>{{translations['name']}}</th>
-                <th>{{translations['description']}}</th>
-                <th>{{translations['options']}}</th>
+                <th class="border">{{translations['name']}}</th>
+                <th class="border">{{translations['description']}}</th>
+                <th class="border">{{translations['options']}}</th>
                 <template v-for="exercise in exercises">
                     <tr>
-                        <td>
+                        <td class="border">
                             {{exercise.name}}
                         </td>
-                        <td>
+                        <td class="border">
                             {{exercise.description}}
                         </td>
-                        <td>
+                        <td class="border">
                             <button class="btn btn-primary addBtn" @click="editExercise(exercise)">{{translations["edit"]}}</button>        
                             <button class="admin-table-btn" @click="deleteExercise(exercise)"><i class="bi bi-trash"></i></button>
                         </td>
@@ -103,10 +103,6 @@
 
     .admin-table{
         margin: 3% auto auto auto;
-    }
-
-     th, td {
-        border: 1px solid black;
     }
 
     .admin-table-btn{

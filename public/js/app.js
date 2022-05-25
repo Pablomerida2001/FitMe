@@ -13221,7 +13221,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.vd-picker__controls{\n    height: unset !important;\n}\n.span-container{\n    display: flex;\n    width: 90%;\n}\n.admin-table{\n    margin: 3% auto auto auto;\n}\nth, td {\n    border: 1px solid black;\n}\n.admin-table-btn{\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    display: inline-block;\n    font-weight: 400;\n    line-height: 1.6;\n    border: 1px solid transparent;\n    padding: 0.375rem 0.75rem;\n    font-size: 0.9rem;\n    border-radius: 0.25rem;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.vd-picker__controls{\n    height: unset !important;\n}\n.span-container{\n    display: flex;\n    width: 90%;\n}\n.admin-table{\n    margin: 3% auto auto auto;\n}\n.border {\n    border: 1px solid black;\n}\n.admin-table-btn{\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    display: inline-block;\n    font-weight: 400;\n    line-height: 1.6;\n    border: 1px solid transparent;\n    padding: 0.375rem 0.75rem;\n    font-size: 0.9rem;\n    border-radius: 0.25rem;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13413,7 +13413,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.vd-picker__controls{\n    height: unset !important;\n}\n.span-container{\n    display: flex;\n    width: 90%;\n}\n.admin-table{\n    margin: 3% auto auto auto;\n}\nth, td {\n    border: 1px solid black;\n}\n.admin-table-btn{\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    display: inline-block;\n    font-weight: 400;\n    line-height: 1.6;\n    border: 1px solid transparent;\n    padding: 0.375rem 0.75rem;\n    font-size: 0.9rem;\n    border-radius: 0.25rem;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.vd-picker__controls{\n    height: unset !important;\n}\n.span-container{\n    display: flex;\n    width: 90%;\n}\n.admin-table{\n    margin: 3% auto auto auto;\n}\n.admin-table-btn{\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    display: inline-block;\n    font-weight: 400;\n    line-height: 1.6;\n    border: 1px solid transparent;\n    padding: 0.375rem 0.75rem;\n    font-size: 0.9rem;\n    border-radius: 0.25rem;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -34171,22 +34171,34 @@ var render = function () {
           "table",
           { staticClass: "admin-table" },
           [
-            _c("th", [_vm._v(_vm._s(_vm.translations["name"]))]),
+            _c("th", { staticClass: "border" }, [
+              _vm._v(_vm._s(_vm.translations["name"])),
+            ]),
             _vm._v(" "),
-            _c("th", [_vm._v(_vm._s(_vm.translations["calories"]))]),
+            _c("th", { staticClass: "border" }, [
+              _vm._v(_vm._s(_vm.translations["calories"])),
+            ]),
             _vm._v(" "),
-            _c("th", [_vm._v(_vm._s(_vm.translations["carbs"]))]),
+            _c("th", { staticClass: "border" }, [
+              _vm._v(_vm._s(_vm.translations["carbs"])),
+            ]),
             _vm._v(" "),
-            _c("th", [_vm._v(_vm._s(_vm.translations["fats"]))]),
+            _c("th", { staticClass: "border" }, [
+              _vm._v(_vm._s(_vm.translations["fats"])),
+            ]),
             _vm._v(" "),
-            _c("th", [_vm._v(_vm._s(_vm.translations["protein"]))]),
+            _c("th", { staticClass: "border" }, [
+              _vm._v(_vm._s(_vm.translations["protein"])),
+            ]),
             _vm._v(" "),
-            _c("th", [_vm._v(_vm._s(_vm.translations["options"]))]),
+            _c("th", { staticClass: "border" }, [
+              _vm._v(_vm._s(_vm.translations["options"])),
+            ]),
             _vm._v(" "),
             _vm._l(_vm.foods, function (food) {
               return [
                 _c("tr", [
-                  _c("td", [
+                  _c("td", { staticClass: "border" }, [
                     _vm._v(
                       "\n                        " +
                         _vm._s(food.name) +
@@ -34194,7 +34206,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticClass: "border" }, [
                     _vm._v(
                       "\n                        " +
                         _vm._s(food.calories) +
@@ -34202,7 +34214,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticClass: "border" }, [
                     _vm._v(
                       "\n                        " +
                         _vm._s(food.carbohydrates) +
@@ -34210,7 +34222,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticClass: "border" }, [
                     _vm._v(
                       "\n                        " +
                         _vm._s(food.fats) +
@@ -34218,7 +34230,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticClass: "border" }, [
                     _vm._v(
                       "\n                        " +
                         _vm._s(food.protein) +
@@ -34226,7 +34238,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticClass: "border" }, [
                     _c(
                       "button",
                       {
@@ -35077,16 +35089,22 @@ var render = function () {
           "table",
           { staticClass: "admin-table" },
           [
-            _c("th", [_vm._v(_vm._s(_vm.translations["name"]))]),
+            _c("th", { staticClass: "border" }, [
+              _vm._v(_vm._s(_vm.translations["name"])),
+            ]),
             _vm._v(" "),
-            _c("th", [_vm._v(_vm._s(_vm.translations["description"]))]),
+            _c("th", { staticClass: "border" }, [
+              _vm._v(_vm._s(_vm.translations["description"])),
+            ]),
             _vm._v(" "),
-            _c("th", [_vm._v(_vm._s(_vm.translations["options"]))]),
+            _c("th", { staticClass: "border" }, [
+              _vm._v(_vm._s(_vm.translations["options"])),
+            ]),
             _vm._v(" "),
             _vm._l(_vm.exercises, function (exercise) {
               return [
                 _c("tr", [
-                  _c("td", [
+                  _c("td", { staticClass: "border" }, [
                     _vm._v(
                       "\n                        " +
                         _vm._s(exercise.name) +
@@ -35094,7 +35112,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticClass: "border" }, [
                     _vm._v(
                       "\n                        " +
                         _vm._s(exercise.description) +
@@ -35102,7 +35120,7 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _c("td", [
+                  _c("td", { staticClass: "border" }, [
                     _c(
                       "button",
                       {

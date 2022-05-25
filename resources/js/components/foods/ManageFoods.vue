@@ -3,30 +3,30 @@
         <button class="btn btn-primary addBtn" @click="add">{{translations["add"]}}</button>        
         <span class="span-container">
             <table class="admin-table">
-                <th>{{translations['name']}}</th>
-                <th>{{translations['calories']}}</th>
-                <th>{{translations['carbs']}}</th>
-                <th>{{translations['fats']}}</th>
-                <th>{{translations['protein']}}</th>
-                <th>{{translations['options']}}</th>
+                <th class="border">{{translations['name']}}</th>
+                <th class="border">{{translations['calories']}}</th>
+                <th class="border">{{translations['carbs']}}</th>
+                <th class="border">{{translations['fats']}}</th>
+                <th class="border">{{translations['protein']}}</th>
+                <th class="border">{{translations['options']}}</th>
                 <template v-for="food in foods">
                     <tr>
-                        <td>
+                        <td class="border">
                             {{food.name}}
                         </td>
-                        <td>
+                        <td class="border">
                             {{food.calories}}
                         </td>
-                        <td>
+                        <td class="border">
                             {{food.carbohydrates}}
                         </td>
-                        <td>
+                        <td class="border">
                             {{food.fats}}
                         </td>
-                        <td>
+                        <td class="border">
                             {{food.protein}}
                         </td>
-                        <td>
+                        <td class="border">
                             <button class="btn btn-primary addBtn" @click="editFood(food)">{{translations["edit"]}}</button>                            
                             <button class="admin-table-btn" @click="deleteFood(food)"><i class="bi bi-trash"></i></button>
                         </td>
@@ -112,7 +112,7 @@
         margin: 3% auto auto auto;
     }
 
-     th, td {
+    .border {
         border: 1px solid black;
     }
 
