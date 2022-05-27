@@ -30,6 +30,10 @@ Route::get('/profile', function(){
     return view('profile');
 })->middleware(['auth', 'checkLocale'])->name('profile');
 
+Route::get('/recipes', function(){
+    return view('recipes');
+})->middleware(['auth', 'checkLocale'])->name('recipes');
+
 Route::get('set-locale/{locale}', function ($locale) {
     App::setLocale($locale);
     session()->put('locale', $locale);

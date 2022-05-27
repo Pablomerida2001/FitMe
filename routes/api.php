@@ -5,6 +5,7 @@ use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\SetController;
 use App\Http\Controllers\UserWeightController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RecipeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -90,4 +91,18 @@ Route::name('profile.')->middleware('web')->prefix('profile')->group(function() 
 
     Route::get('getCalories', [UserController::class, 'getCalories']);
 
+});
+
+Route::name('recipe.')->middleware('web')->prefix('recipe')->group(function() {
+
+    Route::get('getAllRecipes', [RecipeController::class, 'getAll']);
+
+    Route::get('searchRecipe', [RecipeController::class, 'search']);
+
+    Route::post('createRecipe', [RecipeController::class, 'create']);
+
+    Route::get('getRecipeFoods', [RecipeController::class, 'getFoods']);
+
+    Route::post('addRecipeFood', [RecipeController::class, 'addFood']);
+ 
 });
