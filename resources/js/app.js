@@ -37,7 +37,8 @@ Vue.component('add-exercise', require('./components/workout/AddExercise.vue').de
 Vue.component('create-exercise', require('./components/workout/CreateExercise.vue').default);
 Vue.component('manage-exercises', require('./components/workout/ManageExercises.vue').default);
 Vue.component('recipes', require('./components/Recipes/Recipes.vue').default);
-
+Vue.component('recipe-card', require('./components/Recipes/RecipeCard.vue').default);
+Vue.component('recipe', require('./components/Recipes/Recipe.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

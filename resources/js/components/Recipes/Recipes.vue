@@ -1,6 +1,10 @@
 <template>
     <div>
         <h3>{{translations['tittle']}}</h3>
+
+        <div v-for="recipe in recipes">
+            <recipe-card :recipe="recipe" :translations="translations" :userid="userid"></recipe-card>
+        </div>
     </div>
 </template>
 
@@ -14,8 +18,7 @@
 
         data: function(){
             return{
-                date: new Date().toISOString().slice(0, 10),
-                exercises: [],
+                recipes: [],
                 showModal: false,
             }
         },
@@ -31,7 +34,15 @@
 
         methods:{
             load: function(){
-                
+                //request to the API
+                axios.get('api/recipe/getAllRecipes', {
+                    params: {
+                        user: String(this.userid),
+                    }
+                }).then((response)=>{
+                    this.recipes = response.data;
+                }).catch();
+
             },
 
             add: function(){
