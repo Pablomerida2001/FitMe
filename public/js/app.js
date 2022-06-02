@@ -34299,11 +34299,11 @@ var render = function () {
           _vm._v(_vm._s(_vm.recipe.name)),
         ]),
         _vm._v(" "),
-        _c("h3", [_vm._v("Descripción")]),
+        _c("h3", [_vm._v(_vm._s(_vm.translations["description"]))]),
         _vm._v(" "),
         _c("p", [_vm._v(_vm._s(_vm.recipe.description))]),
         _vm._v(" "),
-        _c("h3", [_vm._v("Ingredientes")]),
+        _c("h3", [_vm._v(_vm._s(_vm.translations["ingredients"]))]),
         _vm._v(" "),
         _vm._l(_vm.foods, function (food) {
           return _c("div", [
@@ -34319,7 +34319,7 @@ var render = function () {
           ])
         }),
         _vm._v(" "),
-        _c("h3", [_vm._v("Información nutricional")]),
+        _c("h3", [_vm._v(_vm._s(_vm.translations["nutrition"]))]),
         _vm._v(" "),
         _c("a", [
           _vm._v(

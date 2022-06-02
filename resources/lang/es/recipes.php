@@ -2,10 +2,12 @@
 
 return [
     'tittle' => 'Recetas',
-    'calories' => 'Calorias',
+    'calories' => 'Calorías',
     'protein' => 'Proteinas',
     'carbs' => 'Carbohidratos',
     'fat'=> 'Grasas',
-    'totalCal' => 'Calorias totales',
-
+    'totalCal' => 'Calorías totales',
+    'description' => 'Descripción',
+    'ingredients' => 'Ingredientes',
+    'nutrition' => 'Información nutricional'
 ];

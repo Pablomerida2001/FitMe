@@ -2,13 +2,13 @@
     <div class="recipe">
         <div class="recipe-info">
             <h1 class="recipe-tittle" @click="close">{{recipe.name}}</h1>
-            <h3>Descripción</h3>
+            <h3>{{translations['description']}}</h3>
             <p>{{recipe.description}}</p>
-            <h3>Ingredientes</h3>
+            <h3>{{translations['ingredients']}}</h3>
             <div v-for="food in foods">
                 <h5>- {{food.name}}, {{food.pivot.quantity}}grs.</h5>
             </div>
-            <h3>Información nutricional</h3>
+            <h3>{{translations['nutrition']}}</h3>
             <a>{{translations["totalCal"]}}: {{calories.toFixed(0)}}Kcal | {{translations["protein"]}}: {{protein.toFixed(2)}}gr | {{translations["carbs"]}}: {{carbs.toFixed(2)}}gr | {{translations["fat"]}}: {{fats.toFixed(2)}}gr </a>
         </div>
     </div> 

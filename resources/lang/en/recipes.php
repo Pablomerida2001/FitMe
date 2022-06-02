@@ -7,4 +7,7 @@ return [
     'carbs' => 'Carbohydrates',
     'fat'=> 'Fats',
     'totalCal' => 'Total calories',
+    'description' => 'Description',
+    'ingredients' => 'Ingredients',
+    'nutrition' => 'Nutritional Facts'
 ];
