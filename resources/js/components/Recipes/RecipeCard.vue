@@ -3,7 +3,7 @@
         <h4 class="link" @click="showRecipe">{{recipe.name}}</h4>
         <p>{{recipe.description | truncate(220, '...')}}</p>
         <a>{{translations["totalCal"]}}: {{calories.toFixed(0)}}Kcal | {{translations["protein"]}}: {{protein.toFixed(2)}}gr | {{translations["carbs"]}}: {{carbs.toFixed(2)}}gr | {{translations["fat"]}}: {{fats.toFixed(2)}}gr </a>
-        <recipe :userid="userid" :translations="translations" :recipe="recipe" :calories="calories" :protein="protein" :carbs="carbs" :fats="fats"></recipe>
+        <recipe v-show="showRecipeInfo" @close="close" :userid="userid" :translations="translations" :recipe="recipe" :calories="calories" :protein="protein" :carbs="carbs" :fats="fats" :foods="foods"></recipe>
     </div>
 </template>
 
@@ -22,7 +22,8 @@
                 calories: 0,
                 protein: 0,
                 carbs: 0,
-                fats: 0
+                fats: 0,
+                showRecipeInfo: false,
             }
         },
         watch: {
@@ -64,7 +65,11 @@
             },
 
             showRecipe(){
-                //do something to redirect to recipe view
+                this.showRecipeInfo = true;
+            },
+
+            close(){
+                this.showRecipeInfo = false;
             }
         }
     }

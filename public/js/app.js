@@ -6612,26 +6612,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['userid', 'translations', 'recipe', 'foods', 'calories', 'protein', 'carbs', 'fats'],
   data: function data() {
     return {};
   },
-  watch: {},
-  filters: {
-    truncate: function truncate(text, length, suffix) {
-      if (text.length > length) {
-        return text.substring(0, length) + suffix;
-      } else {
-        return text;
-      }
-    }
-  },
   mounted: function mounted() {
     this.load();
   },
   methods: {
-    load: function load() {}
+    load: function load() {},
+    close: function close() {
+      this.$emit('close');
+    }
   }
 });
 
@@ -6665,7 +6666,8 @@ __webpack_require__.r(__webpack_exports__);
       calories: 0,
       protein: 0,
       carbs: 0,
-      fats: 0
+      fats: 0,
+      showRecipeInfo: false
     };
   },
   watch: {},
@@ -6705,7 +6707,11 @@ __webpack_require__.r(__webpack_exports__);
         _this2.fats += food.fats * (food.pivot.quantity / 100);
       });
     },
-    showRecipe: function showRecipe() {//do something to redirect to recipe view
+    showRecipe: function showRecipe() {
+      this.showRecipeInfo = true;
+    },
+    close: function close() {
+      this.showRecipeInfo = false;
     }
   }
 });
@@ -13330,7 +13336,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.recipe-container{\n     width: 80%;\n     margin: 0 auto;\n     background-color: #f1f1f1;\n     border: 1px solid grey;\n     margin-bottom: 15px;\n     padding: 20px\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.recipe{\n     position: absolute; \n     top: 8%; \n     left: 0%;\n     z-index: 10;\n     height: 92%;\n     width: 100%;\n     background-color: white;\n}\n.recipe-info{\n     margin: 0 auto;\n     width: 80%;\n     height: 100%;\n     background-color: #f1f1f1;\n     border: 1px solid grey;\n     margin-bottom: 15px;\n     padding: 20px;\n     display: flex;\n     flex-direction: column;\n}\n.recipe-tittle{\n     margin: 0 auto;\n     font-style: bold;\n     margin-bottom: 3%;\n}\n.recipe-info h3{\n     margin-top: 3%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -34284,26 +34290,60 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
-    _c("h4", { staticClass: "link" }, [_vm._v(_vm._s(_vm.recipe.name))]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v(_vm._s(_vm._f("truncate")(_vm.recipe.description, 220, "..."))),
-    ]),
-    _vm._v(" "),
-    _c("a", [
-      _vm._v(
-        "Total Calories: " +
-          _vm._s(_vm.calories.toFixed(0)) +
-          "Kcal | Protein: " +
-          _vm._s(_vm.protein.toFixed(2)) +
-          "gr | Carbohydrates: " +
-          _vm._s(_vm.carbs.toFixed(2)) +
-          "gr | Fat: " +
-          _vm._s(_vm.fats.toFixed(2)) +
-          "gr "
-      ),
-    ]),
+  return _c("div", { staticClass: "recipe" }, [
+    _c(
+      "div",
+      { staticClass: "recipe-info" },
+      [
+        _c("h1", { staticClass: "recipe-tittle", on: { click: _vm.close } }, [
+          _vm._v(_vm._s(_vm.recipe.name)),
+        ]),
+        _vm._v(" "),
+        _c("h3", [_vm._v("Descripción")]),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.recipe.description))]),
+        _vm._v(" "),
+        _c("h3", [_vm._v("Ingredientes")]),
+        _vm._v(" "),
+        _vm._l(_vm.foods, function (food) {
+          return _c("div", [
+            _c("h5", [
+              _vm._v(
+                "- " +
+                  _vm._s(food.name) +
+                  ", " +
+                  _vm._s(food.pivot.quantity) +
+                  "grs."
+              ),
+            ]),
+          ])
+        }),
+        _vm._v(" "),
+        _c("h3", [_vm._v("Información nutricional")]),
+        _vm._v(" "),
+        _c("a", [
+          _vm._v(
+            _vm._s(_vm.translations["totalCal"]) +
+              ": " +
+              _vm._s(_vm.calories.toFixed(0)) +
+              "Kcal | " +
+              _vm._s(_vm.translations["protein"]) +
+              ": " +
+              _vm._s(_vm.protein.toFixed(2)) +
+              "gr | " +
+              _vm._s(_vm.translations["carbs"]) +
+              ": " +
+              _vm._s(_vm.carbs.toFixed(2)) +
+              "gr | " +
+              _vm._s(_vm.translations["fat"]) +
+              ": " +
+              _vm._s(_vm.fats.toFixed(2)) +
+              "gr "
+          ),
+        ]),
+      ],
+      2
+    ),
   ])
 }
 var staticRenderFns = []
@@ -34363,6 +34403,14 @@ var render = function () {
       ]),
       _vm._v(" "),
       _c("recipe", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.showRecipeInfo,
+            expression: "showRecipeInfo",
+          },
+        ],
         attrs: {
           userid: _vm.userid,
           translations: _vm.translations,
@@ -34371,7 +34419,9 @@ var render = function () {
           protein: _vm.protein,
           carbs: _vm.carbs,
           fats: _vm.fats,
+          foods: _vm.foods,
         },
+        on: { close: _vm.close },
       }),
     ],
     1
