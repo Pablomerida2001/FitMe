@@ -9,5 +9,6 @@ return [
     'totalCal' => 'Calorías totales',
     'description' => 'Descripción',
     'ingredients' => 'Ingredientes',
-    'nutrition' => 'Información nutricional'
+    'nutrition' => 'Información nutricional',
+    'add' => 'Add'
 ];

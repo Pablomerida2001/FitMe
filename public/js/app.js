@@ -6739,6 +6739,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['userid', 'translations'],
   data: function data() {
@@ -7420,6 +7421,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['user', 'translations'],
   data: function data() {
@@ -7430,7 +7433,8 @@ __webpack_require__.r(__webpack_exports__);
       showModal: false,
       showModal2: false,
       myChart: undefined,
-      calories: 0
+      calories: 0,
+      recipes: []
     };
   },
   mounted: function mounted() {
@@ -7456,6 +7460,15 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         _this.calories = response.data;
+      })["catch"](function (e) {
+        console.log(e.response);
+      });
+      axios.get('api/recipe/getUserRecipes', {
+        params: {
+          user: this.user.id
+        }
+      }).then(function (response) {
+        _this.recipes = response.data;
       })["catch"](function (e) {
         console.log(e.response);
       });
@@ -34452,8 +34465,15 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "recipes-container" },
     [
       _c("h3", [_vm._v(_vm._s(_vm.translations["tittle"]))]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary addBtn", on: { click: _vm.add } },
+        [_vm._v(_vm._s(_vm.translations["add"]))]
+      ),
       _vm._v(" "),
       _vm._l(_vm.recipes, function (recipe) {
         return _c(
@@ -35373,11 +35393,13 @@ var render = function () {
           },
           [_vm._v(_vm._s(_vm.translations["updateGoal"]))]
         ),
-        _vm._v(" "),
-        _c("canvas", {
-          attrs: { id: "caloriesChart", width: "900", height: "200" },
-        }),
       ]),
+      _vm._v(" "),
+      _vm._l(_vm.recipes, function (recipe) {
+        return _c("div", [
+          _vm._v("\n        " + _vm._s(recipe.name) + "\n    "),
+        ])
+      }),
       _vm._v(" "),
       _c("add-weight", {
         directives: [
@@ -35414,7 +35436,7 @@ var render = function () {
         on: { eventname: _vm.close },
       }),
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []

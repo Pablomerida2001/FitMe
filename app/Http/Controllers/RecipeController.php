@@ -11,6 +11,10 @@ class RecipeController extends Controller{
         return Recipe::all()->whereIn('owner', [null, $req->user]);
     }
 
+    public function getByUser(Request $req){
+        return Recipe::all()->whereIn('owner', [$req->user]);
+    }
+
     public function search(Request $request) {
             $query = $request->query('query');
             

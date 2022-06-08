@@ -1,7 +1,8 @@
 <template>
-    <div>
+    <div class="recipes-container">
         <h3>{{translations['tittle']}}</h3>
-
+        <button class="btn btn-primary addBtn" @click="add">{{translations["add"]}}</button>        
+        
         <div v-for="recipe in recipes">
             <recipe-card :recipe="recipe" :translations="translations" :userid="userid"></recipe-card>
         </div>

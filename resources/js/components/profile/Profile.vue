@@ -13,7 +13,9 @@
         <div>
             <h4>{{translations['dailyCal']}}: {{calories}} kcal</h4>
             <a class="link weight-link" @click="updateCalories">{{translations['updateGoal']}}</a>
-            <canvas id="caloriesChart" width="900" height="200"></canvas>
+        </div>
+        <div v-for="recipe in recipes">
+            {{recipe.name}}
         </div>
         <add-weight v-show="showModal" :currentWeight="currentWeight" :initialDate="date" @eventname="close" :userid="user.id" :translations="translations"></add-weight>
         <update-calories v-show="showModal2" :currentCalories="calories" @eventname="close" :userid="user.id" :translations="translations"></update-calories>
@@ -35,6 +37,7 @@
                 showModal2: false,
                 myChart: undefined,
                 calories: 0,
+                recipes: []
             }
         },
         mounted(){
@@ -62,7 +65,17 @@
                     this.calories = response.data;
                 }).catch(e=>{
                     console.log(e.response)
-                });           
+                });         
+                
+                 axios.get('api/recipe/getUserRecipes', {
+                    params:{
+                        user: this.user.id,
+                    }
+                }).then((response)=>{
+                    this.recipes = response.data;
+                }).catch(e=>{
+                    console.log(e.response)
+                });        
             },
 
             drawChart(){

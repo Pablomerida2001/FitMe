@@ -97,6 +97,8 @@ Route::name('recipe.')->middleware('web')->prefix('recipe')->group(function() {
 
     Route::get('getAllRecipes', [RecipeController::class, 'getAll']);
 
+    Route::get('getUserRecipes', [RecipeController::class, 'getByUser']);
+
     Route::get('searchRecipe', [RecipeController::class, 'search']);
 
     Route::post('createRecipe', [RecipeController::class, 'create']);
