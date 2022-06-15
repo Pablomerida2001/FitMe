@@ -4,8 +4,9 @@
         <button class="btn btn-primary addBtn" @click="add">{{translations["add"]}}</button>        
         
         <div v-for="recipe in recipes">
-            <recipe-card :recipe="recipe" :translations="translations" :userid="userid"></recipe-card>
+            <recipe-card :recipe="recipe" :translations="translations" :userid="userid" @update="load"></recipe-card>
         </div>
+        <add-recipe v-show="showModal" @eventname="closeModal" :userid="userid" :translations="translations"></add-recipe>
     </div>
 </template>
 
@@ -50,7 +51,7 @@
                 this.showModal = true;
             },
 
-            close: function(){
+            closeModal: function(){
                 this.showModal = false;
                 this.load();
             },

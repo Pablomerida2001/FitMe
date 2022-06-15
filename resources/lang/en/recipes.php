@@ -10,5 +10,9 @@ return [
     'description' => 'Description',
     'ingredients' => 'Ingredients',
     'nutrition' => 'Nutritional Facts',
-    'add' => 'Add'
+    'add' => 'Add',
+    'name' => 'Name',
+    'save' => 'Save',
+    'input' => 'Input the quantity',
+    'cancel' => 'Cancel'
 ];

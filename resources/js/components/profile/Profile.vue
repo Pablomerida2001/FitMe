@@ -5,15 +5,18 @@
             <p>{{user.email}}</p>
         </div>
         <div>
-            <h4>{{currentWeight}}kg</h4>
+            <h3>Peso actual</h3>
+            <h5>{{currentWeight}}kg</h5>
             <a class="link weight-link" @click="add">{{translations['addWeight']}}</a>
             <canvas id="weightChart" width="900" height="200"></canvas>
         </div>
         <hr>
         <div>
-            <h4>{{translations['dailyCal']}}: {{calories}} kcal</h4>
+            <h3>Objetivo de calorias</h3>
+            <h5>{{translations['dailyCal']}}: {{calories}} kcal</h5>
             <a class="link weight-link" @click="updateCalories">{{translations['updateGoal']}}</a>
         </div>
+        <h3>Mis recetas</h3>
         <div v-for="recipe in recipes">
             {{recipe.name}}
         </div>
@@ -137,5 +140,9 @@
 
     .weight-link{
         display: block;
+    }
+
+    .profile-container h3:not(:first-child) {
+        margin-top: 3%;
     }
 </style>

@@ -29,7 +29,7 @@ class ExerciseController extends Controller{
     public function addToWorkout(Request $req){
         Exercise::find($req->exercise)->workout()->attach($req->user, ["date" => $req->date]);
 
-        $id = User::find($req->user)->workout()->wherePivot('date', '=', $req->date)->latest('id')->get()->last()->pivot->id;
+        $id = User::find($req->user)->workout()->wherePivot('date', '=', $req->date)->latest('id')->get()->first()->pivot->id;
 
         for($i = 0; $i < $req->sets; $i++){
             $set = new Set(['reps' => 0, 'weight' => 0, 'workoutId' => $id]);

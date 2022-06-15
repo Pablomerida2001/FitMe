@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <button class="collapsible">{{Exercise.name}} <button class="delete-btn top-btn" @click="deleteExercise()"><i class="bi bi-trash"></i></button> <p class="text-btn">{{sets.length}} {{translations['sets']}}</p></button>
+        <button class="collapsible" v-bind:id="Exercise.pivot.id">{{Exercise.name}} <button class="delete-btn top-btn" @click="deleteExercise()"><i class="bi bi-trash"></i></button> <p class="text-btn">{{sets.length}} {{translations['sets']}}</p></button>
         <div class="content">
             <div class="set-content" v-for="(set, index) in sets">
                 <label for="repsInput">{{translations["reps"]}}</label>
@@ -40,21 +40,18 @@
         mounted(){
             this.load();
 
-            var coll = document.getElementsByClassName("collapsible");
-            var i;
+            var coll = document.getElementById(this.Exercise.pivot.id);
 
-            for (i = 0; i < coll.length; i++) {
-                coll[i].addEventListener("click", function() {
-                    this.classList.toggle("active");
-                    var content = this.nextElementSibling;
-                    
-                    if (content.style.maxHeight){
-                        content.style.maxHeight = null;
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    } 
-                });
-            }
+            coll.addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                
+                if (content.style.maxHeight){
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } 
+            });
         },
 
         methods:{

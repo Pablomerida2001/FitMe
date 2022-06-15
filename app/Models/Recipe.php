@@ -11,6 +11,7 @@ class Recipe extends Model
     protected $table = "recipes";
     public $timestamps = false;
     protected $primaryKey = 'id';
+    protected $fillable = ['id', 'name', 'owner', 'description'];
 
     public function foods(){
         return $this->belongsToMany('App\Models\Food', 'recipes_foods', 'recipeId', 'foodId')->withPivot('quantity');

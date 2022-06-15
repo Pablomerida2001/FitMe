@@ -1,4 +1,3 @@
-
 <template>
   <div class="modal-overlay">
     <div class="modal">
@@ -18,27 +17,31 @@
             <hr class="Separator">
         </span>
 
-        <div class="ingredient-list" v-for="ingredient in ingredients">
-            <h5>{{ingredient.food.name}} - {{ingredient.quantity}}gr.</h5>
+        <div class="ingredient-list" v-for="(ingredient, index) in ingredients">
+            <div class="ingredient-info">
+                <a></a>
+                <h5 @click="editFood(index, ingredient)" style="cursor: pointer">{{ingredient.food.name}} - {{ingredient.quantity}}gr.</h5>
+                <button @click="removeIngredient(ingredient, index)" class="delete-recipe-btn" style="top: -7px;"><i class="bi bi-trash"></i></button>
+            </div>
             <p>{{translations["calories"]}}: {{(ingredient.food.calories * (ingredient.quantity / 100)).toFixed(0)}} - {{translations["carbs"]}}: {{(ingredient.food.carbohydrates * (ingredient.quantity / 100)).toFixed(0)}} - {{translations["fat"]}}: {{(ingredient.food.fats * (ingredient.quantity / 100)).toFixed(0)}} - {{translations["protein"]}}: {{(ingredient.food.protein * (ingredient.quantity / 100)).toFixed(0)}}</p>
             <hr class="foodSeparator">
         </div>
 
-        <button @click="add" class="save-btn">{{translations["add"]}}</button>
+        <button @click="save" class="save-btn">{{translations["save"]}}</button>
     </div>
     </div>
   </div>
 </template>
 
 <script>
-    import { VueDatePicker } from '@mathieustan/vue-datepicker';
-    import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
-    import {mapGetters} from 'vuex'
-
     export default{
         props:[
             'userid',
-            'translations'
+            'translations',
+            'recipeIngredients',
+            'recipeName', 
+            'recipeDescription',
+            'id'
         ],
 
         watch: {
@@ -46,6 +49,12 @@
                 handler: _.debounce(function () {
                     this.searchExercise(query)
                 }, 100)
+            },
+
+            recipeIngredients() {
+                this.ingredients = this.recipeIngredients;
+                this.name = this.recipeName;
+                this.description = this.recipeDescription;
             }
         },
 
@@ -57,38 +66,25 @@
             initialState(){
                 return{
                     foods: [],
-                    ingredients: [],
-                    name:'',
-                    description:'',
                     query: '',
                     search: false,
+                    ingredients: [],
+                    name: '',
+                    description: ''
                 }
             },
 
-            add: function(){
-                var recipeId;
-
-                axios.post('api/recipe/createRecipe', {
-                    owner: String(this.userid),
+            save: function(){                
+                axios.post('api/recipe/editRecipe', {
+                    recipe: this.id,
                     name: this.name,
                     description: this.description,
-                }).then((res) => {
-                    recipeId = res.data;
-
-                    this.ingredients.forEach(ingredient =>{
-                        axios.post('api/recipe/addRecipeFood', {
-                            recipe: recipeId,
-                            food: ingredient.food.id,
-                            quantity: ingredient.quantity,
-                        });
-                    });
-
-                    Object.assign(this.$data, this.initialState());
+                    ingredients: this.ingredients
+                }).then(() => {
                     this.$emit('eventname');
                 }).catch(err => {
-                    console.log(err)
+                    console.log(err.response)
                 });;
-
             },
 
             searchExercise(query) {
@@ -124,6 +120,39 @@
 
             close: function(){
                 this.$emit('eventname');
+            },
+
+            editFood(index, food){
+                Swal.fire({
+                    title: this.translations['input'],
+                    input: 'number',
+                    inputAttributes: {
+                        autocapitalize: 'off'
+                    },
+                    showCancelButton: true,
+                    cancelButtonText: this.translations['cancel'],
+                    confirmButtonText: this.translations['save'],
+                    showLoaderOnConfirm: true,
+                    preConfirm: (num) => {
+                        this.ingredients[index] = {"food": food.food, "quantity": num };
+                        this.$forceUpdate();
+                    }
+                });
+            },
+
+            removeIngredient(ingredient, index){
+                axios.delete('api/recipe/deleteRecipeFood', {
+                    data:{
+                        recipe: this.id,
+                        food: ingredient.food.id,
+                        quantity: ingredient.quantity
+                    } 
+                }).then(() =>{
+                    this.ingredients.splice(index, 1);
+                    this.$forceUpdate();
+                }).catch(err => {
+                    console.log(err.response)
+                });;
             }
         }
     }
@@ -139,6 +168,7 @@
         display: flex;
         justify-content: center;
         background-color: #000000da;
+        z-index: 999;
     }
 
     .modal {
@@ -245,5 +275,11 @@
 
     .ingredient-list{
         margin-top: 20px;
+    }
+
+    .ingredient-info{
+        display: flex;
+        justify-content: space-around;
+        align-content: center;
     }
 </style>

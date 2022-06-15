@@ -106,5 +106,10 @@ Route::name('recipe.')->middleware('web')->prefix('recipe')->group(function() {
     Route::get('getRecipeFoods', [RecipeController::class, 'getFoods']);
 
     Route::post('addRecipeFood', [RecipeController::class, 'addFood']);
- 
+
+    Route::delete('deleteRecipeFood', [RecipeController::class, 'removeFood']);
+
+    Route::delete('deleteRecipe', [RecipeController::class, 'delete']);
+
+    Route::post('editRecipe', [RecipeController::class, 'edit']);
 });
