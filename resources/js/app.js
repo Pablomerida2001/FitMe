@@ -41,6 +41,7 @@ Vue.component('recipe-card', require('./components/Recipes/RecipeCard.vue').defa
 Vue.component('recipe', require('./components/Recipes/Recipe.vue').default);
 Vue.component('add-recipe', require('./components/Recipes/AddRecipe.vue').default);
 Vue.component('edit-recipe', require('./components/Recipes/EditRecipe.vue').default);
+Vue.component('home', require('./components/home/Home.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

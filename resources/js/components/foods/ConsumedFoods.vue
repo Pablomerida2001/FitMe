@@ -2,7 +2,7 @@
     <div>
         <span class="span-container">
             <VueDatePicker v-model="date" format="DD-MM-YYYY" />
-            <h4>{{translations["total"]}}: {{totalCalories}}/{{goal}}kcal</h4>
+            <h4>{{translations["total"]}}: {{totalCalories.toFixed(0)}}/{{goal}}kcal</h4>
         </span>
         <div v-for="meal in meals">
             <meals :mealName="meal[0]" :foods="meal" :date="date" :userid="userid" :translations="translations" @update="loadFoods"></meals>

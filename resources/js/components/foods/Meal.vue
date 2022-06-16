@@ -3,7 +3,7 @@
     <div>
         <table>
             <th id="firstColumn">{{mealName}}</th>
-            <th id="secondColumn">{{calories}}&nbspKcal</th>
+            <th id="secondColumn">{{calories.toFixed(0)}}&nbspKcal</th>
             <th id="thirdColumn"></th>
             <template v-for="(food, index) in foods" v-if="index > 0">
                 <tr>
@@ -13,7 +13,7 @@
                 </tr>
                 <tr class="row-border-bottom">
                     <td>{{food.pivot.quantity}}gr</td>
-                    <td>{{food.calories * (food.pivot.quantity / 100)}}&nbspKcal</td>
+                    <td>{{(food.calories * (food.pivot.quantity / 100)).toFixed(0)}}&nbspKcal</td>
                 </tr>
                 <tr style="visibility: hidden"><td>.</td></tr>
             </template>

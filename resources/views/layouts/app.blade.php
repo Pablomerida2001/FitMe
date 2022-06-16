@@ -27,16 +27,18 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar">
-            <div class="container">
-                <a class="tittle" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <div class="navLinks">
-                    @yield('header')
-                </div>
+        <nav class="navbar" id="navbar">
+            <i class="bi bi-list nav-icon" id="nav-icon"></i>
 
-                <div class="userLinks">
+            <a class="tittle" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+
+            <div class="navLinks" id="navLinks">
+                @yield('header')
+            </div>
+            
+            <div class="userLinks">
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
@@ -48,7 +50,7 @@
                         @endif
 
                     @else
-                        <a class="toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a class="toggle lang-selector" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ str_replace('_', '-', app()->getLocale()) }}
                         </a>
 
@@ -78,8 +80,6 @@
                             </form>
                         </div>
                     @endguest
-                </div>
-            </div>
         </nav>
 
         <main>
@@ -91,20 +91,66 @@
     .navbar{
         position: relative;
         display: flex;
-        flex-wrap: wrap;
         align-items: center;
-        justify-content: space-between;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
+        flex-wrap: wrap;
+        padding-right: 8%;
+        padding-left: 8%;
+        justify-content: space-between;
         box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%) !important;
         --bs-bg-opacity: 1;
         background-color: #0070BF !important;
     }
 
+    .nav-icon{
+        display: none;
+        color: white;
+        font-size: 25px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 800px) {
+        .navbar{
+            max-height: 67.2px;
+            transition: max-height 1s ease-out;
+            overflow: hidden;
+        }
+
+        .navLinks{
+            display: grid;
+            width: 100%;
+            order: 4;
+        }
+
+        .userLinks{
+            flex: 1;    
+            justify-content: flex-end;
+            display: flex !important;
+        }
+
+        .nav-icon{
+            display: inline;
+            flex: 1;
+        }
+
+        .open-menu{
+           
+        }
+
+        .nav-open{
+            max-height: 1000px;
+            transition: max-height 1s ease-in;
+        }
+    }
+
+    @media (max-width: 650px) {
+        .lang-selector{
+            display: none
+        }
+    }
+
     .navLinks {
-        position: absolute;
         left: 20%;
     }
 
@@ -190,4 +236,12 @@
     }
 
 </style>
+<script>
+    window.onload = ()=>{
+        document.getElementById('nav-icon').addEventListener('click', function(){
+            document.getElementById('navLinks').classList.toggle('open-menu');
+            document.getElementById('navbar').classList.toggle('nav-open');
+        });
+    }
+</script>
 </html>

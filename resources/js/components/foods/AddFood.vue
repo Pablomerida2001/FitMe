@@ -58,7 +58,7 @@
         data: function(){
             return{
                 meal: this.mealName,
-                meals: [this.translations["breakfast"], this.translations["Lunch"], this.translations["Dinner"], this.translations["Snacks"]],
+                meals: [this.translations["breakfast"], this.translations["lunch"], this.translations["dinner"], this.translations["snacks"]],
                 quantity: 0,
                 foods: [],
                 selectedFood: [],
