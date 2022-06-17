@@ -7008,6 +7008,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['userid', 'translations', 'recipe'],
   data: function data() {
@@ -7073,9 +7076,21 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     showRecipe: function showRecipe() {
+      var items = document.getElementsByClassName("recipe-card-info");
+
+      for (var i = 0; i < items.length; i++) {
+        items[i].style.display = "none";
+      }
+
       this.showRecipeInfo = true;
     },
     close: function close() {
+      var items = document.getElementsByClassName("recipe-card-info");
+
+      for (var i = 0; i < items.length; i++) {
+        items[i].style.display = "block";
+      }
+
       this.showRecipeInfo = false;
     },
     deleteRecipe: function deleteRecipe() {
@@ -7634,6 +7649,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['mealName', 'foods', 'date', 'userid', 'translations'],
@@ -7704,6 +7722,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       });
       this.$emit('update');
+    },
+    edit: function edit(food) {
+      var _this = this;
+
+      Swal.fire({
+        title: this.translations['input'],
+        input: 'number',
+        inputAttributes: {
+          value: food.pivot.quantity,
+          placeholder: food.pivot.quantity,
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        cancelButtonText: this.translations['cancel'],
+        confirmButtonText: this.translations['save'],
+        showLoaderOnConfirm: true,
+        preConfirm: function preConfirm(num) {
+          if (num > 0) {
+            food.pivot.quantity = num;
+            console.log(food);
+            axios.post('api/foods/editConsumedFood', {
+              food: food.id,
+              user: String(_this.userid),
+              meal: food.pivot.meal,
+              date: _this.date,
+              quantity: num
+            }).then(function () {
+              _this.$emit('update');
+            })["catch"](function (e) {
+              console.log(e.response);
+            });
+          }
+        }
+      });
     }
   }
 });
@@ -8285,6 +8337,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['Exercise', 'date', 'userid', 'translations'],
   data: function data() {
@@ -8307,7 +8369,7 @@ __webpack_require__.r(__webpack_exports__);
       if (content.style.maxHeight) {
         content.style.maxHeight = null;
       } else {
-        content.style.maxHeight = content.scrollHeight + "px";
+        content.style.maxHeight = "1000px";
       }
     });
   },
@@ -8321,16 +8383,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         _this.sets = response.data;
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
-
-        for (i = 0; i < coll.length; i++) {
-          var content = coll[i].nextElementSibling;
-
-          if (content.style.maxHeight) {
-            content.style.maxHeight = content.scrollHeight + "px";
-          }
-        }
       })["catch"]();
     },
     deleteExercise: function deleteExercise() {
@@ -13897,7 +13949,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.recipe{\n     position: absolute; \n     top: 8%; \n     left: 0%;\n     z-index: 10;\n     height: 100%;\n     width: 100%;\n     background-color: white;\n}\n.recipe-info{\n     margin: 0 auto;\n     width: 80%;\n     height: 100%;\n     background-color: #f1f1f1;\n     border: 1px solid grey;\n     margin-bottom: 15px;\n     padding: 20px;\n     display: flex;\n     flex-direction: column;\n}\n.recipe-tittle{\n     margin: 0 auto;\n     font-style: bold;\n     margin-bottom: 3%;\n}\n.recipe-info h3{\n     margin-top: 3%;\n}\n.first-row{\n     display: flex;\n}\n.edit-recipe-btn{\n     position: relative;\n     height: 50%;\n     color: #fff;\n     background-color: blue;\n     border-color: #dc3545;\n     display: inline-block;\n     font-weight: 400;\n     line-height: 1.6;\n     border: 1px solid transparent;\n     padding: 0.375rem 0.75rem;\n     font-size: 0.9rem;\n     border-radius: 0.25rem;\n}\n.arrow-icon{\n     font-size: 1.5rem;\n     cursor: pointer;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.recipe{\n     position: absolute; \n     top: 8%; \n     left: 0%;\n     z-index: 10;\n     min-height: 100%;\n     width: 100%;\n     background-color: white;\n}\n.recipe-info{\n     margin: 0 auto;\n     width: 80%;\n     height: 100%;\n     background-color: #f1f1f1;\n     border: 1px solid grey;\n     margin-bottom: 15px;\n     padding: 20px;\n     display: flex;\n     flex-direction: column;\n}\n.recipe-tittle{\n     margin: 0 auto;\n     font-style: bold;\n     margin-bottom: 3%;\n}\n.recipe-info h3{\n     margin-top: 3%;\n}\n.first-row{\n     display: flex;\n}\n.edit-recipe-btn{\n     position: relative;\n     height: 50%;\n     color: #fff;\n     background-color: blue;\n     border-color: #dc3545;\n     display: inline-block;\n     font-weight: 400;\n     line-height: 1.6;\n     border: 1px solid transparent;\n     padding: 0.375rem 0.75rem;\n     font-size: 0.9rem;\n     border-radius: 0.25rem;\n}\n.arrow-icon{\n     font-size: 1.5rem;\n     cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14065,7 +14117,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ntable{\n    width: 90%;\n    margin-top:5%\n}\n#firstColumn{\n    width: 75%;\n    background-color: grey;\n    color: white;\n    font-weight: bold\n}\n#secondColumn{\n    width: 15%;\n    background-color: grey;\n    color: white;\n    font-weight: bold\n}\n#thirdColumn{\n    width:10%;\n    background-color: grey;\n    color: white;\n    font-weight: bold\n}\n.row-border-bottom {\n    border-bottom: 1px solid black;\n}\n.link{\n    color: blue;\n    font-weight: normal;\n    margin-top: 20px;\n}\n.table-btn{\n    position: relative;\n    top: 10px;\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    display: inline-block;\n    font-weight: 400;\n    line-height: 1.6;\n    border: 1px solid transparent;\n    padding: 0.375rem 0.75rem;\n    font-size: 0.9rem;\n    border-radius: 0.25rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ntable{\n    width: 90%;\n    margin-top:5%\n}\n#firstColumn{\n    width: 75%;\n    background-color: grey;\n    color: white;\n    font-weight: bold\n}\n#secondColumn{\n    width: 15%;\n    background-color: grey;\n    color: white;\n    font-weight: bold\n}\n#thirdColumn{\n    width:10%;\n    background-color: grey;\n    color: white;\n    font-weight: bold\n}\n.row-border-bottom {\n    border-bottom: 1px solid black;\n}\n.link{\n    color: blue;\n    font-weight: normal;\n    margin-top: 20px;\n}\n.table-btn{\n    position: relative;\n    top: 10px;\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    display: inline-block;\n    font-weight: 400;\n    line-height: 1.6;\n    border: 1px solid transparent;\n    padding: 0.375rem 0.75rem;\n    font-size: 0.9rem;\n    border-radius: 0.25rem;\n}\n.edit-btn{\n    background-color: blue;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14233,7 +14285,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.collapsible {\n    background-color: #a6a2a2;\n    color: white;\n    cursor: pointer;\n    padding: 18px;\n    width: 100%;\n    border: none;\n    text-align: left;\n    outline: none;\n    font-size: 15px;\n    margin-top: 20px\n}\n.active, .collapsible:hover {\n    background-color: #919090;\n}\n.collapsible:after {\n    content: '\\002B';\n    color: white;\n    font-weight: bold;\n    float: right;\n    margin-left: 5px;\n}\n.active:after {\n    content: \"\\2212\";\n}\n.content {\n    padding: 0 18px;\n    max-height: 0;\n    overflow: hidden;\n    transition: max-height 0.2s ease-out;\n    background-color: #f1f1f1;\n    display: flex;\n    flex-direction: column;\n}\n.text-btn{\n    display: inline;\n    float: right;\n    right: 15%;\n    position: relative;\n    margin: 0;\n}\n.set-content{\n    display: block;\n    padding: 20px;\n    margin: 0 auto;\n}\n.delete-btn{\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    display: inline-block;\n    font-weight: 400;\n    line-height: 1.6;\n    border: 1px solid transparent;\n    padding: 0.375rem 0.75rem;\n    font-size: 0.9rem;\n    border-radius: 0.25rem;\n    margin-left: 20px\n}\n.top-btn{\n    float: right;\n    margin: 0;\n    right: 27%;\n    position: absolute;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.collapsible {\n    background-color: #a6a2a2;\n    color: white;\n    cursor: pointer;\n    padding: 18px;\n    width: 100%;\n    border: none;\n    text-align: left;\n    outline: none;\n    font-size: 15px;\n    margin-top: 20px;\n    display: flex;\n    justify-content: space-between;\n}\n.active, .collapsible:hover {\n    background-color: #919090;\n}\n.collapsible:after {\n    content: '\\002B';\n    color: white;\n    font-weight: bold;\n    float: right;\n    margin-left: 5px;\n}\n.active:after {\n    content: \"\\2212\";\n}\n.content {\n    padding: 0 18px;\n    max-height: 0;\n    overflow: hidden;\n    transition: max-height 0.8s ease-out;\n    background-color: #f1f1f1;\n    display: flex;\n    flex-direction: column;\n}\n.text-btn{\n    display: inline;\n    margin: 0;\n}\n.set-content{\n    display: block;\n    padding: 20px;\n    margin: 0 auto;\n}\n.set-content-container{\n    display: inline;\n}\n.set-buttons{\n    display: inline;\n}\n.delete-btn{\n    color: #fff;\n    background-color: #dc3545;\n    border-color: #dc3545;\n    display: inline-block;\n    font-weight: 400;\n    line-height: 1.6;\n    border: 1px solid transparent;\n    padding: 0.375rem 0.75rem;\n    font-size: 0.9rem;\n    border-radius: 0.25rem;\n}\n.top-btn{\n    float: right;\n    margin: 0;\n    right: 27%;\n    position: absolute;\n}\n@media (max-width: 1000px) {\n.set-content{\n        display: flex;\n        flex-direction: row;\n        flex-wrap: wrap;\n}\n.set-buttons{\n        width: 100%;\n}\n}\n@media (max-width: 1000px) {\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -35819,59 +35871,63 @@ var render = function () {
     "div",
     { staticClass: "recipe-container" },
     [
-      _c("div", { staticClass: "first-row" }, [
-        _c("h4", { staticClass: "link", on: { click: _vm.showRecipe } }, [
-          _vm._v(_vm._s(_vm.recipe.name)),
+      _c("div", { staticClass: "recipe-card-info" }, [
+        _c("div", { staticClass: "first-row" }, [
+          _c("h4", { staticClass: "link", on: { click: _vm.showRecipe } }, [
+            _vm._v(_vm._s(_vm.recipe.name)),
+          ]),
+          _vm._v(" "),
+          _vm.userid == _vm.recipe.owner ||
+          (_vm.recipe.owner == null && _vm.userid == -1)
+            ? _c(
+                "button",
+                {
+                  staticClass: "edit-recipe-btn edit-card",
+                  on: { click: _vm.edit },
+                },
+                [_c("i", { staticClass: "bi bi-pencil" })]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.userid == _vm.recipe.owner ||
+          (_vm.recipe.owner == null && _vm.userid == -1)
+            ? _c(
+                "button",
+                {
+                  staticClass: "delete-recipe-btn",
+                  on: { click: _vm.deleteRecipe },
+                },
+                [_c("i", { staticClass: "bi bi-trash" })]
+              )
+            : _vm._e(),
         ]),
         _vm._v(" "),
-        _vm.userid == _vm.recipe.owner ||
-        (_vm.recipe.owner == null && _vm.userid == -1)
-          ? _c(
-              "button",
-              {
-                staticClass: "edit-recipe-btn edit-card",
-                on: { click: _vm.edit },
-              },
-              [_c("i", { staticClass: "bi bi-pencil" })]
-            )
-          : _vm._e(),
+        _c("p", [
+          _vm._v(
+            _vm._s(_vm._f("truncate")(_vm.recipe.description, 220, "..."))
+          ),
+        ]),
         _vm._v(" "),
-        _vm.userid == _vm.recipe.owner ||
-        (_vm.recipe.owner == null && _vm.userid == -1)
-          ? _c(
-              "button",
-              {
-                staticClass: "delete-recipe-btn",
-                on: { click: _vm.deleteRecipe },
-              },
-              [_c("i", { staticClass: "bi bi-trash" })]
-            )
-          : _vm._e(),
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _vm._v(_vm._s(_vm._f("truncate")(_vm.recipe.description, 220, "..."))),
-      ]),
-      _vm._v(" "),
-      _c("a", [
-        _vm._v(
-          _vm._s(_vm.translations["totalCal"]) +
-            ": " +
-            _vm._s(_vm.calories.toFixed(0)) +
-            "Kcal | " +
-            _vm._s(_vm.translations["protein"]) +
-            ": " +
-            _vm._s(_vm.protein.toFixed(2)) +
-            "gr | " +
-            _vm._s(_vm.translations["carbs"]) +
-            ": " +
-            _vm._s(_vm.carbs.toFixed(2)) +
-            "gr | " +
-            _vm._s(_vm.translations["fat"]) +
-            ": " +
-            _vm._s(_vm.fats.toFixed(2)) +
-            "gr "
-        ),
+        _c("a", [
+          _vm._v(
+            _vm._s(_vm.translations["totalCal"]) +
+              ": " +
+              _vm._s(_vm.calories.toFixed(0)) +
+              "Kcal | " +
+              _vm._s(_vm.translations["protein"]) +
+              ": " +
+              _vm._s(_vm.protein.toFixed(2)) +
+              "gr | " +
+              _vm._s(_vm.translations["carbs"]) +
+              ": " +
+              _vm._s(_vm.carbs.toFixed(2)) +
+              "gr | " +
+              _vm._s(_vm.translations["fat"]) +
+              ": " +
+              _vm._s(_vm.fats.toFixed(2)) +
+              "gr "
+          ),
+        ]),
       ]),
       _vm._v(" "),
       _c("recipe", {
@@ -36673,6 +36729,19 @@ var render = function () {
                     _c(
                       "button",
                       {
+                        staticClass: "table-btn edit-btn",
+                        on: {
+                          click: function ($event) {
+                            return _vm.edit(food)
+                          },
+                        },
+                      },
+                      [_c("i", { staticClass: "bi bi-pencil" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
                         staticClass: "table-btn",
                         on: {
                           click: function ($event) {
@@ -37377,11 +37446,14 @@ var render = function () {
       "button",
       { staticClass: "collapsible", attrs: { id: _vm.Exercise.pivot.id } },
       [
-        _vm._v(_vm._s(_vm.Exercise.name) + " "),
+        _c("h4", { staticStyle: { "min-width": "50%" } }, [
+          _vm._v(_vm._s(_vm.Exercise.name) + " "),
+        ]),
+        _vm._v(" "),
         _c(
           "button",
           {
-            staticClass: "delete-btn top-btn",
+            staticClass: "delete-btn",
             on: {
               click: function ($event) {
                 return _vm.deleteExercise()
@@ -37405,83 +37477,89 @@ var render = function () {
       [
         _vm._l(_vm.sets, function (set, index) {
           return _c("div", { staticClass: "set-content" }, [
-            _c("label", { attrs: { for: "repsInput" } }, [
-              _vm._v(_vm._s(_vm.translations["reps"])),
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: set.reps,
-                  expression: "set.reps",
-                },
-              ],
-              staticStyle: { "margin-right": "50px" },
-              attrs: { id: "repsInput", type: "number" },
-              domProps: { value: set.reps },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(set, "reps", $event.target.value)
-                },
-              },
-            }),
-            _vm._v(" "),
-            _c("label", { attrs: { for: "weightInput" } }, [
-              _vm._v(_vm._s(_vm.translations["weight"])),
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: set.weight,
-                  expression: "set.weight",
-                },
-              ],
-              staticStyle: { "margin-right": "50px" },
-              attrs: { id: "weightInput", type: "number" },
-              domProps: { value: set.weight },
-              on: {
-                input: function ($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(set, "weight", $event.target.value)
-                },
-              },
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary addBtn",
+            _c("div", { staticClass: "set-content-container" }, [
+              _c("label", { attrs: { for: "repsInput" } }, [
+                _vm._v(_vm._s(_vm.translations["reps"])),
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: set.reps,
+                    expression: "set.reps",
+                  },
+                ],
+                staticStyle: { "margin-right": "50px" },
+                attrs: { id: "repsInput", type: "number" },
+                domProps: { value: set.reps },
                 on: {
-                  click: function ($event) {
-                    return _vm.save(index)
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(set, "reps", $event.target.value)
                   },
                 },
-              },
-              [_vm._v(_vm._s(_vm.translations["save"]))]
-            ),
+              }),
+            ]),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "delete-btn",
+            _c("div", { staticClass: "set-content-container" }, [
+              _c("label", { attrs: { for: "weightInput" } }, [
+                _vm._v(_vm._s(_vm.translations["weight"])),
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: set.weight,
+                    expression: "set.weight",
+                  },
+                ],
+                staticStyle: { "margin-right": "50px" },
+                attrs: { id: "weightInput", type: "number" },
+                domProps: { value: set.weight },
                 on: {
-                  click: function ($event) {
-                    return _vm.deleteSet(set)
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(set, "weight", $event.target.value)
                   },
                 },
-              },
-              [_c("i", { staticClass: "bi bi-trash" })]
-            ),
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "set-buttons" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary addBtn",
+                  on: {
+                    click: function ($event) {
+                      return _vm.save(index)
+                    },
+                  },
+                },
+                [_vm._v(_vm._s(_vm.translations["save"]))]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "delete-btn",
+                  on: {
+                    click: function ($event) {
+                      return _vm.deleteSet(set)
+                    },
+                  },
+                },
+                [_c("i", { staticClass: "bi bi-trash" })]
+              ),
+            ]),
           ])
         }),
         _vm._v(" "),

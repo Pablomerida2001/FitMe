@@ -33,5 +33,7 @@ return [
     'manage' => 'Manage Foods',
     'name' => 'Name',
     'options' => 'Options',
-    'edit' => 'Edit'
+    'edit' => 'Edit',
+    'input' => 'Input the quantity',
+    'cancel' => 'Cancel'
 ];

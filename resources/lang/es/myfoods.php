@@ -33,5 +33,7 @@ return [
     'manage' => 'Administrar Comidas',
     'name' => 'Nombre',
     'options' => 'Opciones',
-    'edit' => 'Editar'
+    'edit' => 'Editar',
+    'input' => 'Introduce la cantidad',
+    'cancel' => 'Cancelar'
 ];

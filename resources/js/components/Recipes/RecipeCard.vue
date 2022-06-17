@@ -1,12 +1,15 @@
 <template>
     <div class="recipe-container">
-        <div class="first-row">
-            <h4 class="link" @click="showRecipe">{{recipe.name}}</h4>
-            <button v-if="userid == recipe.owner || (recipe.owner == null && userid == -1)" class="edit-recipe-btn edit-card" @click="edit"><i class="bi bi-pencil"></i></button>
-            <button class="delete-recipe-btn" v-if="userid == recipe.owner || (recipe.owner == null && userid == -1)" @click="deleteRecipe"><i class="bi bi-trash"></i></button>
+        <div class="recipe-card-info">
+            <div class="first-row">
+                <h4 class="link" @click="showRecipe">{{recipe.name}}</h4>
+                <button v-if="userid == recipe.owner || (recipe.owner == null && userid == -1)" class="edit-recipe-btn edit-card" @click="edit"><i class="bi bi-pencil"></i></button>
+                <button class="delete-recipe-btn" v-if="userid == recipe.owner || (recipe.owner == null && userid == -1)" @click="deleteRecipe"><i class="bi bi-trash"></i></button>
+            </div>
+            <p>{{recipe.description | truncate(220, '...')}}</p>
+            <a>{{translations["totalCal"]}}: {{calories.toFixed(0)}}Kcal | {{translations["protein"]}}: {{protein.toFixed(2)}}gr | {{translations["carbs"]}}: {{carbs.toFixed(2)}}gr | {{translations["fat"]}}: {{fats.toFixed(2)}}gr </a>
         </div>
-        <p>{{recipe.description | truncate(220, '...')}}</p>
-        <a>{{translations["totalCal"]}}: {{calories.toFixed(0)}}Kcal | {{translations["protein"]}}: {{protein.toFixed(2)}}gr | {{translations["carbs"]}}: {{carbs.toFixed(2)}}gr | {{translations["fat"]}}: {{fats.toFixed(2)}}gr </a>
+        
         <recipe v-show="showRecipeInfo" @close="close" @update="update" :userid="userid" :translations="translations" :recipe="recipe" :calories="calories" :protein="protein" :carbs="carbs" :fats="fats" :foods="foods"></recipe>
         <edit-recipe v-show="showModal" @eventname="closeModal" :userid="userid" :translations="translations" :recipeName="recipe.name" :recipeDescription="recipe.description" :recipeIngredients="ingredients" :id="recipe.id"></edit-recipe>
     </div>
@@ -83,10 +86,18 @@
             },
 
             showRecipe(){
+                var items = document.getElementsByClassName("recipe-card-info");
+                for(var i = 0; i < items.length; i++){
+                    items[i].style.display = "none";
+                }
                 this.showRecipeInfo = true;
             },
 
             close(){
+                var items = document.getElementsByClassName("recipe-card-info");
+                for(var i = 0; i < items.length; i++){
+                    items[i].style.display = "block";
+                }
                 this.showRecipeInfo = false;
             },
 

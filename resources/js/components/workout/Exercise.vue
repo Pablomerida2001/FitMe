@@ -1,15 +1,25 @@
 
 <template>
     <div>
-        <button class="collapsible" v-bind:id="Exercise.pivot.id">{{Exercise.name}} <button class="delete-btn top-btn" @click="deleteExercise()"><i class="bi bi-trash"></i></button> <p class="text-btn">{{sets.length}} {{translations['sets']}}</p></button>
+        <button class="collapsible" v-bind:id="Exercise.pivot.id">
+            <h4 style="min-width: 50%">{{Exercise.name}} </h4>
+            <button class="delete-btn" @click="deleteExercise()"><i class="bi bi-trash"></i></button> 
+            <p class="text-btn">{{sets.length}} {{translations['sets']}}</p>
+        </button>
         <div class="content">
             <div class="set-content" v-for="(set, index) in sets">
-                <label for="repsInput">{{translations["reps"]}}</label>
-                <input v-model="set.reps" id="repsInput" style="margin-right: 50px" type="number"/>
-                <label for="weightInput">{{translations["weight"]}}</label>
-                <input v-model="set.weight" id="weightInput" style="margin-right: 50px" type="number"/>
-                <button class="btn btn-primary addBtn" @click="save(index)">{{translations["save"]}}</button>
-                <button class="delete-btn" @click="deleteSet(set)"><i class="bi bi-trash"></i></button>
+                <div class="set-content-container">
+                    <label for="repsInput">{{translations["reps"]}}</label>
+                    <input v-model="set.reps" id="repsInput" style="margin-right: 50px" type="number"/>
+                </div>
+                <div class="set-content-container">
+                    <label for="weightInput">{{translations["weight"]}}</label>
+                    <input v-model="set.weight" id="weightInput" style="margin-right: 50px" type="number"/>
+                </div>
+                <div class="set-buttons">
+                    <button class="btn btn-primary addBtn" @click="save(index)">{{translations["save"]}}</button>
+                    <button class="delete-btn" @click="deleteSet(set)"><i class="bi bi-trash"></i></button>
+                </div>
             </div>
             <button class="btn btn-primary" @click="addSet">{{translations['add']}}</button>
         </div>
@@ -49,7 +59,7 @@
                 if (content.style.maxHeight){
                     content.style.maxHeight = null;
                 } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
+                    content.style.maxHeight = "1000px";
                 } 
             });
         },
@@ -62,17 +72,6 @@
                     }
                 }).then((response)=>{
                     this.sets = response.data;
-
-                    var coll = document.getElementsByClassName("collapsible");
-                    var i;
-
-                    for (i = 0; i < coll.length; i++) {
-                        var content = coll[i].nextElementSibling;
-                        
-                        if (content.style.maxHeight){
-                            content.style.maxHeight = content.scrollHeight + "px";
-                        }
-                    }
                 }).catch();                
             },
 
@@ -109,8 +108,8 @@
                 });
 
                 this.$emit('update');
-            }
-        }
+            },
+        },
     }
 </script>
 
@@ -125,7 +124,9 @@
         text-align: left;
         outline: none;
         font-size: 15px;
-        margin-top: 20px
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
     }
 
     .active, .collapsible:hover {
@@ -148,7 +149,7 @@
         padding: 0 18px;
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.2s ease-out;
+        transition: max-height 0.8s ease-out;
         background-color: #f1f1f1;
         display: flex;
         flex-direction: column;
@@ -156,9 +157,6 @@
 
     .text-btn{
         display: inline;
-        float: right;
-        right: 15%;
-        position: relative;
         margin: 0;
     }
 
@@ -166,6 +164,14 @@
         display: block;
         padding: 20px;
         margin: 0 auto;
+    }
+
+    .set-content-container{
+        display: inline;
+    }
+
+    .set-buttons{
+        display: inline;
     }
 
     .delete-btn{
@@ -179,7 +185,6 @@
         padding: 0.375rem 0.75rem;
         font-size: 0.9rem;
         border-radius: 0.25rem;
-        margin-left: 20px
     }
 
     .top-btn{
@@ -187,5 +192,21 @@
         margin: 0;
         right: 27%;
         position: absolute;
+    }
+
+    @media (max-width: 1000px) {
+        .set-content{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .set-buttons{
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 1000px) {
+
     }
 </style>

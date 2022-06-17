@@ -75,7 +75,7 @@
         top: 8%; 
         left: 0%;
         z-index: 10;
-        height: 100%;
+        min-height: 100%;
         width: 100%;
         background-color: white;
     }

@@ -17,6 +17,6 @@ return [
     'recipes' => 'Recetas',
     'registerWorkout' => 'Registrar nuevo entrenamiento',
     'browseRecipes' => 'Explorar recetas',
-    'recipesText' => 'Crea y explora recetas personalizadas.'
-
+    'recipesText' => 'Crea y explora recetas personalizadas.',
+    'food' => 'Comidas'
 ];

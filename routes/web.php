@@ -49,11 +49,11 @@ Route::get('/Workouts', function(){
 
 Route::get('/manageFoods', function(){
     return view('manageFoods');
-})->middleware(['auth', 'checkLocale'])->name('manageFoods');//add later a middleware to check the users role
+})->middleware(['auth', 'checkLocale', 'admin'])->name('manageFoods');
 
 Route::get('/manageExercises', function(){
     return view('manageExercises');
-})->middleware(['auth', 'checkLocale'])->name('manageExercises');//add later a middleware to check the users role
+})->middleware(['auth', 'checkLocale', 'admin'])->name('manageExercises');
 
 require __DIR__.'/auth.php';
 

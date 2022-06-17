@@ -12,5 +12,11 @@ return [
     'todayCal' => 'Today calories',
     'addFood' => 'Add foods',
     'consumedCalories' => 'Calories consumed',
-    'remainingCalories' => 'Remaining calories'
+    'remainingCalories' => 'Remaining calories',
+    'workout' => 'Ejercicios',
+    'recipes' => 'Recetas',
+    'registerWorkout' => 'Registrar nuevo entrenamiento',
+    'browseRecipes' => 'Explorar recetas',
+    'recipesText' => 'Crea y explora recetas personalizadas.',
+    'food' => 'Foods'
 ];

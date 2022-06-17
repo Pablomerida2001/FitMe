@@ -9,7 +9,10 @@
                 <tr>
                     <td>{{food.name}}</td>
                     <td></td>
-                    <td><button class="table-btn" @click="deleteFood(food)"><i class="bi bi-trash"></i></button></td>
+                    <td>
+                        <button class="table-btn edit-btn" @click="edit(food)"><i class="bi bi-pencil"></i></button>
+                        <button class="table-btn" @click="deleteFood(food)"><i class="bi bi-trash"></i></button>
+                    </td>
                 </tr>
                 <tr class="row-border-bottom">
                     <td>{{food.pivot.quantity}}gr</td>
@@ -86,6 +89,41 @@
                 }});
 
                 this.$emit('update');
+            },
+
+            edit(food){
+                Swal.fire({
+                    title: this.translations['input'],
+                    input: 'number',
+                    inputAttributes: {
+                        value: food.pivot.quantity,
+                        placeholder: food.pivot.quantity,
+                        autocapitalize: 'off'
+                    },
+                    showCancelButton: true,
+                    cancelButtonText: this.translations['cancel'],
+                    confirmButtonText: this.translations['save'],
+                    showLoaderOnConfirm: true,
+                    preConfirm: (num) => {
+                        if (num > 0){
+                            food.pivot.quantity = num;
+
+                            console.log(food);
+
+                            axios.post('api/foods/editConsumedFood', {
+                                food: food.id,
+                                user: String(this.userid),
+                                meal: food.pivot.meal,
+                                date: this.date,
+                                quantity: num,
+                            }).then(()=>{
+                                this.$emit('update');
+                            }).catch(e=>{
+                                console.log(e.response)
+                            }); 
+                        }
+                    }
+                });
             }
         }
     }
@@ -141,5 +179,9 @@
         padding: 0.375rem 0.75rem;
         font-size: 0.9rem;
         border-radius: 0.25rem;
+    }
+
+    .edit-btn{
+        background-color: blue;
     }
 </style>
