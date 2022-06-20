@@ -53,7 +53,9 @@
                     user: String(this.userid),
                     weight: this.weight,
                     date: this.date,
-                });
+                }).catch(e=>{
+                    console.log(e.response)
+                }); ;
 
                 this.$emit('eventname');
             },

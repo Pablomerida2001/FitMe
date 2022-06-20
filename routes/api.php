@@ -39,7 +39,6 @@ Route::name('food.')->middleware('web')->prefix('foods')->group(function() {
     Route::post('editConsumedFood', [FoodController::class, 'edit']);
 });
 
-//add middleware to check role
 Route::name('food.')->middleware('web')->prefix('admin/foods')->group(function() {
 
     Route::post('createFood', [FoodController::class, 'create']);

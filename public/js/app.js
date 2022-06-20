@@ -6660,7 +6660,10 @@ __webpack_require__.r(__webpack_exports__);
         user: String(this.userid),
         weight: this.weight,
         date: this.date
+      })["catch"](function (e) {
+        console.log(e.response);
       });
+      ;
       this.$emit('eventname');
     },
     close: function close() {
@@ -6751,7 +6754,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.currentWeight = _this.weight[0].weight;
 
         _this.drawChart();
-      })["catch"]();
+      })["catch"](function (e) {
+        console.log(e.response);
+      });
       axios.get('api/profile/getCalories', {
         params: {
           user: this.user.id

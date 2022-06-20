@@ -72,7 +72,9 @@
                     this.currentWeight = this.weight[0].weight;
 
                     this.drawChart();
-                }).catch();
+                }).catch(e=>{
+                    console.log(e.response)
+                }); 
 
                 axios.get('api/profile/getCalories', {
                     params:{
