@@ -13,13 +13,13 @@ class CreateWeightProgressTable extends Migration
      */
     public function up()
     {
-        Schema::create('weightProgress', function (Blueprint $table) {
+        Schema::create('weight_progress', function (Blueprint $table) {
             $table->unsignedBigInteger('user');
             $table->double('weight');
             $table->date('date');
         });
 
-        Schema::table('weightProgress', function (Blueprint $table){
+        Schema::table('weight_progress', function (Blueprint $table){
             $table->foreign('user')->references('id')->on('users')->onDelete('cascade');
         });
     }
@@ -31,6 +31,6 @@ class CreateWeightProgressTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('weightProgress');
+        Schema::dropIfExists('weight_progress');
     }
 }

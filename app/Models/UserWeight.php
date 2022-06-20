@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserWeight extends Model
 {
     use HasFactory;
-    protected $table = "weightprogress";
+    protected $table = "weight_progress";
     public $timestamps = false;
 
     protected $fillable = ['user', 'weight', 'date'];
