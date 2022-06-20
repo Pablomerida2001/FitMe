@@ -33,7 +33,6 @@
 <script>
     import { VueDatePicker } from '@mathieustan/vue-datepicker';
     import '@mathieustan/vue-datepicker/dist/vue-datepicker.min.css';
-    import {mapGetters} from 'vuex'
 
     export default{
         props:[

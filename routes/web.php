@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'checkLocale'])->name('dashboard');
 
 Route::get('/myFoods', function(){
-    return view('foods/MyFoods');
+    return view('foods/myFoods');
 })->middleware(['auth', 'checkLocale'])->name('myFoods');
 
 Route::get('/profile', function(){
