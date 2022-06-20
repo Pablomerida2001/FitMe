@@ -75,7 +75,7 @@
             },
 
             save: function(){                
-                axios.post('api/recipe/editRecipe', {
+                axios.post('../../api/recipe/editRecipe', {
                     recipe: this.id,
                     name: this.name,
                     description: this.description,
@@ -88,7 +88,7 @@
             },
 
             searchExercise(query) {
-                axios.get(`/api/foods/searchFoods`, {
+                axios.get(`../..//api/foods/searchFoods`, {
                     params: {
                         query: this.query
                     }

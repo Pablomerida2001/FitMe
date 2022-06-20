@@ -68,7 +68,7 @@
             add: function(){
                 var recipeId;
 
-                axios.post('api/recipe/createRecipe', {
+                axios.post('../../api/recipe/createRecipe', {
                     owner: String(this.userid),
                     name: this.name,
                     description: this.description,
@@ -76,7 +76,7 @@
                     recipeId = res.data;
 
                     this.ingredients.forEach(ingredient =>{
-                        axios.post('api/recipe/addRecipeFood', {
+                        axios.post('../../api/recipe/addRecipeFood', {
                             recipe: recipeId,
                             food: ingredient.food.id,
                             quantity: ingredient.quantity,
@@ -92,7 +92,7 @@
             },
 
             searchExercise(query) {
-                axios.get(`/api/foods/searchFoods`, {
+                axios.get(`../../api/foods/searchFoods`, {
                     params: {
                         query: this.query
                     }

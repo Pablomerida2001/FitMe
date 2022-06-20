@@ -4,7 +4,7 @@
         <button class="btn btn-primary addBtn" @click="add">{{translations["add"]}}</button>        
         
         <div v-for="recipe in recipes">
-            <recipe-card :recipe="recipe" :translations="translations" :userid="userid" @update="load"></recipe-card>
+            <recipe-card :recipe="recipe" :translations="translations" :userid="userid" @update="load" :id="id"></recipe-card>
         </div>
         <add-recipe v-show="showModal" @eventname="closeModal" :userid="userid" :translations="translations"></add-recipe>
     </div>
@@ -15,7 +15,8 @@
     export default{
         props:[
             'userid',
-            'translations'
+            'translations',
+            'id'
         ],
 
         data: function(){
@@ -32,12 +33,13 @@
 
         mounted(){
             this.load();
+            console.log(this.id)
         },
 
         methods:{
             load: function(){
                 //request to the API
-                axios.get('api/recipe/getAllRecipes', {
+                axios.get('../../api/recipe/getAllRecipes', {
                     params: {
                         user: String(this.userid),
                     }

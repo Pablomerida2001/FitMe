@@ -6668,7 +6668,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var recipeId;
-      axios.post('api/recipe/createRecipe', {
+      axios.post('../../api/recipe/createRecipe', {
         owner: String(this.userid),
         name: this.name,
         description: this.description
@@ -6676,7 +6676,7 @@ __webpack_require__.r(__webpack_exports__);
         recipeId = res.data;
 
         _this.ingredients.forEach(function (ingredient) {
-          axios.post('api/recipe/addRecipeFood', {
+          axios.post('../../api/recipe/addRecipeFood', {
             recipe: recipeId,
             food: ingredient.food.id,
             quantity: ingredient.quantity
@@ -6694,7 +6694,7 @@ __webpack_require__.r(__webpack_exports__);
     searchExercise: function searchExercise(query) {
       var _this2 = this;
 
-      axios.get("/api/foods/searchFoods", {
+      axios.get("../../api/foods/searchFoods", {
         params: {
           query: this.query
         }
@@ -6813,7 +6813,7 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var _this = this;
 
-      axios.post('api/recipe/editRecipe', {
+      axios.post('../../api/recipe/editRecipe', {
         recipe: this.id,
         name: this.name,
         description: this.description,
@@ -6828,7 +6828,7 @@ __webpack_require__.r(__webpack_exports__);
     searchExercise: function searchExercise(query) {
       var _this2 = this;
 
-      axios.get("/api/foods/searchFoods", {
+      axios.get("../..//api/foods/searchFoods", {
         params: {
           query: this.query
         }
@@ -7012,7 +7012,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['userid', 'translations', 'recipe'],
+  props: ['userid', 'translations', 'recipe', 'id'],
   data: function data() {
     return {
       foods: [],
@@ -7041,7 +7041,7 @@ __webpack_require__.r(__webpack_exports__);
     load: function load() {
       var _this = this;
 
-      axios.get('api/recipe/getRecipeFoods', {
+      axios.get('../../api/recipe/getRecipeFoods', {
         params: {
           recipe: this.recipe.id
         }
@@ -7060,6 +7060,7 @@ __webpack_require__.r(__webpack_exports__);
           "quantity": food.pivot.quantity
         });
       });
+      if (this.id == this.recipe.id) this.showRecipe();
     },
     calculate: function calculate() {
       var _this2 = this;
@@ -7094,7 +7095,7 @@ __webpack_require__.r(__webpack_exports__);
       this.showRecipeInfo = false;
     },
     deleteRecipe: function deleteRecipe() {
-      axios["delete"]('api/recipe/deleteRecipe', {
+      axios["delete"]('../../api/recipe/deleteRecipe', {
         params: {
           recipe: this.recipe.id
         }
@@ -7146,7 +7147,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['userid', 'translations'],
+  props: ['userid', 'translations', 'id'],
   data: function data() {
     return {
       recipes: [],
@@ -7157,13 +7158,14 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   mounted: function mounted() {
     this.load();
+    console.log(this.id);
   },
   methods: {
     load: function load() {
       var _this = this;
 
       //request to the API
-      axios.get('api/recipe/getAllRecipes', {
+      axios.get('../../api/recipe/getAllRecipes', {
         params: {
           user: String(this.userid)
         }
@@ -7976,6 +7978,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['user', 'translations'],
   data: function data() {
@@ -7992,6 +7997,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.load();
+  },
+  filters: {
+    truncate: function truncate(text, length, suffix) {
+      if (text.length > length) {
+        return text.substring(0, length) + suffix;
+      } else {
+        return text;
+      }
+    }
   },
   methods: {
     load: function load() {
@@ -8059,6 +8073,9 @@ __webpack_require__.r(__webpack_exports__);
       this.showModal = false;
       this.showModal2 = false;
       this.load();
+    },
+    redirect: function redirect(route) {
+      window.location.href = route;
     }
   }
 });
@@ -14189,7 +14206,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.profile-container{\n    width: 80%;\n    margin: 0 auto;\n    min-height: 600px;\n    background-color: #f1f1f1;\n    border: 1px solid grey;\n}\n.user-info{\n    width: 100%;\n    height: 100px;\n    background-color: #a6a2a2;\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n}\n.weight-link{\n    display: block;\n}\n.profile-container h3:not(:first-child) {\n    margin-top: 3%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.profile-container{\n    width: 80%;\n    margin: 0 auto;\n    min-height: 600px;\n    background-color: #f1f1f1;\n    border: 1px solid grey;\n}\n.user-info{\n    width: 100%;\n    height: 100px;\n    background-color: #a6a2a2;\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n}\n.weight-link{\n    display: block;\n}\n.profile-container h3:not(:first-child) {\n    margin-top: 3%;\n}\n.profile-recipe-container{\n    padding: 20px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36019,6 +36036,7 @@ var render = function () {
                 recipe: recipe,
                 translations: _vm.translations,
                 userid: _vm.userid,
+                id: _vm.id,
               },
               on: { update: _vm.load },
             }),
@@ -37062,7 +37080,26 @@ var render = function () {
       _vm._v(" "),
       _vm._l(_vm.recipes, function (recipe) {
         return _c("div", [
-          _vm._v("\n        " + _vm._s(recipe.name) + "\n    "),
+          _c("div", { staticClass: "profile-recipe-container" }, [
+            _c(
+              "h4",
+              {
+                staticClass: "link",
+                on: {
+                  click: function ($event) {
+                    return _vm.redirect("../recipes/" + recipe.id + "/")
+                  },
+                },
+              },
+              [_vm._v(_vm._s(recipe.name))]
+            ),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                _vm._s(_vm._f("truncate")(recipe.description, 200, "..."))
+              ),
+            ]),
+          ]),
         ])
       }),
       _vm._v(" "),

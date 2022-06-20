@@ -18,7 +18,10 @@
         </div>
         <h3>Mis recetas</h3>
         <div v-for="recipe in recipes">
-            {{recipe.name}}
+            <div class="profile-recipe-container">
+                <h4 class="link" @click="redirect(`../recipes/${recipe.id}/`)">{{recipe.name}}</h4>
+                <p>{{recipe.description | truncate(200, '...')}}</p>
+            </div>
         </div>
         <add-weight v-show="showModal" :currentWeight="currentWeight" :initialDate="date" @eventname="close" :userid="user.id" :translations="translations"></add-weight>
         <update-calories v-show="showModal2" :currentCalories="calories" @eventname="close" :userid="user.id" :translations="translations"></update-calories>
@@ -46,6 +49,17 @@
         mounted(){
             this.load();            
         },
+
+        filters:{
+            truncate: function (text, length, suffix) {
+                if (text.length > length) {
+                    return text.substring(0, length) + suffix;
+                } else {
+                    return text;
+                }
+            },
+        },
+
         methods:{
             load: function(){
 
@@ -117,6 +131,10 @@
                 this.showModal2 = false;
                 this.load();
             },
+
+            redirect(route){
+                window.location.href = route;
+            }
         }
     }
 </script>
@@ -144,5 +162,9 @@
 
     .profile-container h3:not(:first-child) {
         margin-top: 3%;
+    }
+
+    .profile-recipe-container{
+        padding: 20px;
     }
 </style>

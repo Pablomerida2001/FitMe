@@ -21,7 +21,8 @@
         props:[
             'userid',
             'translations',
-            'recipe'
+            'recipe',
+            'id'
         ],
 
         data: function(){
@@ -53,7 +54,7 @@
 
         methods:{
             load: function(){
-                axios.get('api/recipe/getRecipeFoods', {
+                axios.get('../../api/recipe/getRecipeFoods', {
                     params: {
                         recipe: this.recipe.id,
                     }
@@ -69,6 +70,8 @@
                 this.foods.forEach(food =>{
                     this.ingredients.push({"food": food, "quantity": food.pivot.quantity });
                 });
+
+                if(this.id == this.recipe.id) this.showRecipe();
             },
 
             calculate(){
@@ -102,7 +105,7 @@
             },
 
             deleteRecipe(){
-                axios.delete('api/recipe/deleteRecipe', {params: {
+                axios.delete('../../api/recipe/deleteRecipe', {params: {
                     recipe: this.recipe.id,
                 }}).catch(e=>{
                     console.log(e.response)

@@ -28,7 +28,9 @@
 <body>
     <div id="app">
         <nav class="navbar" id="navbar">
-            <i class="bi bi-list nav-icon" id="nav-icon"></i>
+            @auth
+                <i class="bi bi-list nav-icon" id="nav-icon"></i>
+            @endauth
 
             <a class="tittle" href="{{ url('/') }}">
                 <svg
@@ -161,10 +163,6 @@
             flex: 1;
         }
 
-        .open-menu{
-           
-        }
-
         .nav-open{
             max-height: 1000px;
             transition: max-height 1s ease-in;
@@ -239,6 +237,24 @@
     .login-container{
         width: 45%;
         flex: 0 0 auto;
+    }
+
+    @media (max-width: 1200px) {
+        .login-container{
+            width: 65%;
+        }
+    }
+
+    @media (max-width: 950px) {
+        .login-container{
+            width: 75%;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .login-container{
+            width: 90%;
+        }
     }
 
     .login-tittle{

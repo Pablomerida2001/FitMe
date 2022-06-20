@@ -30,8 +30,8 @@ Route::get('/profile', function(){
     return view('profile');
 })->middleware(['auth', 'checkLocale'])->name('profile');
 
-Route::get('/recipes', function(){
-    return view('recipes');
+Route::get('/recipes/{id?}/', function($id = -1){
+    return view('recipes', ["id" => $id]);
 })->middleware(['auth', 'checkLocale'])->name('recipes');
 
 Route::get('set-locale/{locale}', function ($locale) {
