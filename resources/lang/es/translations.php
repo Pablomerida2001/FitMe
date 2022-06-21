@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     "profile" => "Perfil",
     "logout" => "Cerrar sesión",
     "about" => "Acerca de",

@@ -17,6 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
+        app()->setLocale("es");
         return view('auth.login');
     }
 

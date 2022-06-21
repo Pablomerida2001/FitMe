@@ -95,6 +95,8 @@
                 }).catch(e=>{
                     console.log(e.response)
                 });        
+
+                this.$forceUpdate();
             },
 
             drawChart(){

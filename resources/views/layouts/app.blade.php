@@ -70,6 +70,19 @@
             <div class="userLinks">
                     <!-- Authentication Links -->
                     @guest
+                        <a class="toggle lang-selector" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ str_replace('_', '-', app()->getLocale()) }} 
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('locale.setting', 'en') }}">
+                                <span class="fi fi-gb"></span>  EN
+                            </a>
+                            <a class="dropdown-item" href="{{ route('locale.setting', 'es') }}">
+                                <span class="fi fi-es"></span>  ES
+                            </a>
+                        </div>
+
                         @if (Route::has('login'))
                             <a href="{{ route('login') }}">{{ __('translations.login') }}</a>
                         @endif

@@ -6775,6 +6775,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         console.log(e.response);
       });
+      this.$forceUpdate();
     },
     drawChart: function drawChart() {
       var ctx = document.getElementById('weightChart').getContext('2d');

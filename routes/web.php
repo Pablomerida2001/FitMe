@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Mockery\Undefined;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,9 +38,11 @@ Route::get('/recipes/{id?}/', function($id = -1){
 Route::get('set-locale/{locale}', function ($locale) {
     App::setLocale($locale);
     session()->put('locale', $locale);
-    $user = App\Models\User::find(Auth::user()->id);
-    $user->lang = $locale;
-    $user->save();
+    if(Auth::user() != null){
+        $user = App\Models\User::find(Auth::user()->id);
+        $user->lang = $locale;
+        $user->save();
+    }
     return redirect()->back();
 })->middleware('checkLocale')->name('locale.setting');
 
