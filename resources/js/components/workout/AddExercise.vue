@@ -66,9 +66,9 @@
                     user: String(this.userid),
                     sets: this.sets,
                     date: this.date,
+                }).then(()=>{
+                    this.$emit('eventname'); 
                 });
-
-                this.$emit('eventname');
             },
 
             searchExercise(query) {

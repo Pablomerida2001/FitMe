@@ -83,7 +83,9 @@
                         protein: this.proteins,
                     }).catch(err => {
                         console.log(err.response)
-                    });;
+                    })..then(()=>{
+                        this.$emit('eventname');
+                    });
                 }else{
                     axios.post('api/admin/foods/createFood', {
                         name: this.name,
@@ -93,10 +95,10 @@
                         protein: this.proteins,
                     }).catch(err => {
                         console.log(err.response)
-                    });;
+                    }).then(()=>{
+                        this.$emit('eventname');
+                    });
                 }
-
-                this.$emit('eventname');
             },
 
             close: function(){

@@ -75,9 +75,9 @@
                     quantity: this.quantity,
                     meal: this.meals.indexOf(this.meal) + 1,
                     date: this.date,
+                }).then(()=>{
+                    this.$emit('eventname');
                 });
-
-                this.$emit('eventname');
             },
 
             searchFoods(query) {

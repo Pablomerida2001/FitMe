@@ -54,10 +54,10 @@
                     weight: this.weight,
                     date: this.date,
                 }).catch(e=>{
-                    console.log(e.response)
-                }); ;
-
-                this.$emit('eventname');
+                    console.log(e.response);
+                }).then(()=>{
+                    this.$emit('eventname');
+                });
             },
 
             close: function(){

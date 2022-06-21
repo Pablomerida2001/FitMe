@@ -63,17 +63,19 @@
                         description: this.description,
                     }).catch(err => {
                         console.log(err.response)
-                    });;
+                    }).then(()=>{
+                        this.$emit('eventname');
+                    });
                 }else{
                     axios.post('api/admin/exercise/createExercise', {
                         name: this.name,
                         description: this.description,
                     }).catch(err => {
                         console.log(err.response)
-                    });;
+                    }).then(()=>{
+                        this.$emit('eventname');
+                    });
                 }
-
-                this.$emit('eventname');
             },
 
             close: function(){

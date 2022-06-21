@@ -44,9 +44,9 @@
                     calories: this.calories,
                 }).catch(e=>{
                     console.log(e.response)
+                }).then(()=>{
+                    this.$emit('eventname');
                 });
-
-                this.$emit('eventname');
             },
 
             close: function(){
