@@ -83,7 +83,7 @@
                         protein: this.proteins,
                     }).catch(err => {
                         console.log(err.response)
-                    })..then(()=>{
+                    }).then(()=>{
                         this.$emit('eventname');
                     });
                 }else{

@@ -6130,9 +6130,110 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/foods/CreateFood.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\programas dam\\xampp\\htdocs\\proyecto\\resources\\js\\components\\foods\\CreateFood.vue: Unexpected token (86:19)\n\n\u001b[0m \u001b[90m 84 |\u001b[39m                 })\u001b[33m.\u001b[39m\u001b[36mcatch\u001b[39m(err \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 85 |\u001b[39m                     console\u001b[33m.\u001b[39mlog(err\u001b[33m.\u001b[39mresponse)\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 86 |\u001b[39m                 })\u001b[33m.\u001b[39m\u001b[33m.\u001b[39mthen(()\u001b[33m=>\u001b[39m{\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 87 |\u001b[39m                 \u001b[0m\n\u001b[0m \u001b[90m 88 |\u001b[39m                 })\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 89 |\u001b[39m             }\u001b[36melse\u001b[39m{\u001b[0m\n    at instantiate (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:72:32)\n    at constructor (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:358:12)\n    at Parser.raise (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:3334:19)\n    at Parser.unexpected (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:3372:16)\n    at Parser.parseIdentifierName (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:13970:18)\n    at Parser.parseIdentifier (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:13950:23)\n    at Parser.parseMember (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:12618:28)\n    at Parser.parseSubscript (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:12592:21)\n    at Parser.parseSubscripts (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:12556:19)\n    at Parser.parseExprSubscripts (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:12545:17)\n    at Parser.parseUpdate (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:12518:21)\n    at Parser.parseMaybeUnary (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:12489:23)\n    at Parser.parseMaybeUnaryOrPrivate (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:12283:61)\n    at Parser.parseExprOps (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:12290:23)\n    at Parser.parseMaybeConditional (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:12260:23)\n    at Parser.parseMaybeAssign (D:\\programas dam\\xampp\\htdocs\\proyecto\\node_modules\\@babel\\parser\\lib\\index.js:12213:21)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['userid', 'translations', 'edit', 'food'],
+  data: function data() {
+    return {
+      name: '',
+      calories: 0,
+      carbs: 0,
+      fats: 0,
+      proteins: 0
+    };
+  },
+  watch: {
+    edit: function edit() {
+      this.load();
+    }
+  },
+  mounted: function mounted() {
+    this.load();
+  },
+  methods: {
+    load: function load() {
+      if (this.edit) {
+        this.name = this.food.name;
+        this.calories = this.food.calories;
+        this.carbs = this.food.carbohydrates;
+        this.fats = this.food.fats;
+        this.proteins = this.food.protein;
+      } else {
+        this.name = '';
+        this.calories = 0;
+        this.carbs = 0;
+        this.fats = 0;
+        this.proteins = 0;
+      }
+    },
+    add: function add() {
+      var _this = this;
+
+      if (this.edit) {
+        axios.post('api/admin/foods/modifyFood', {
+          food: this.food.id,
+          name: this.name,
+          calories: this.calories,
+          carbs: this.carbs,
+          fats: this.fats,
+          protein: this.proteins
+        })["catch"](function (err) {
+          console.log(err.response);
+        }).then(function () {
+          _this.$emit('eventname');
+        });
+      } else {
+        axios.post('api/admin/foods/createFood', {
+          name: this.name,
+          calories: this.calories,
+          carbs: this.carbs,
+          fats: this.fats,
+          protein: this.proteins
+        })["catch"](function (err) {
+          console.log(err.response);
+        }).then(function () {
+          _this.$emit('eventname');
+        });
+      }
+    },
+    close: function close() {
+      this.$emit('eventname');
+    }
+  }
+});
 
 /***/ }),
 
