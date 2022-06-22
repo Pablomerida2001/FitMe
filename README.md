@@ -82,6 +82,14 @@ Una vez iniciada sesión se accederá a la página del dashboard en la que se mo
 
 ![image](https://user-images.githubusercontent.com/71279176/175122248-bfa4af21-7aed-4920-9ccb-91e422eb279e.png)
 
+<h3>Admin</h3>
+
+![image](https://user-images.githubusercontent.com/71279176/175125069-7b453e13-0f62-4ab2-bde0-28c37675c6bc.png)
+
+![image](https://user-images.githubusercontent.com/71279176/175125101-22b75926-667b-477d-95ec-f61036280076.png)
+
+![image](https://user-images.githubusercontent.com/71279176/175125119-48c48cbd-15bd-4a62-8a80-6bdba1cca32f.png)
+
 
 <h1>Video Explicativo</h1>
 
