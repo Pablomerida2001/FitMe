@@ -5414,11 +5414,11 @@ __webpack_require__.r(__webpack_exports__);
             food: ingredient.food.id,
             quantity: ingredient.quantity
           });
-        }).then(function () {
-          Object.assign(_this.$data, _this.initialState());
-
-          _this.$emit('eventname');
         });
+
+        Object.assign(_this.$data, _this.initialState());
+
+        _this.$emit('eventname');
       })["catch"](function (err) {
         console.log(err);
       });
@@ -5755,7 +5755,8 @@ __webpack_require__.r(__webpack_exports__);
       fats: 0,
       showRecipeInfo: false,
       ingredients: [],
-      showModal: false
+      showModal: false,
+      synth: null
     };
   },
   filters: {
@@ -5769,6 +5770,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.load();
+    this.synth = new Tone.Synth();
+    this.synth.toMaster();
   },
   methods: {
     load: function load() {
@@ -5828,15 +5831,29 @@ __webpack_require__.r(__webpack_exports__);
       this.showRecipeInfo = false;
     },
     deleteRecipe: function deleteRecipe() {
+      var _this3 = this;
+
       axios["delete"]('../../api/recipe/deleteRecipe', {
         params: {
           recipe: this.recipe.id
         }
       })["catch"](function (e) {
         console.log(e.response);
+      }).then(function () {
+        _this3.$emit('update');
       });
-      ;
-      this.$emit('update');
+      this.synth.triggerAttackRelease("C4", "8n");
+      var noise = new Tone.Noise("pink").start(); // make an autofilter to shape the noise
+
+      var autoFilter = new Tone.AutoFilter({
+        frequency: "8n",
+        baseFrequency: 200,
+        octaves: 8
+      }); // connect the noise
+
+      noise.connect(autoFilter); // start the autofilter LFO
+
+      autoFilter.start();
     },
     edit: function edit() {
       this.load();

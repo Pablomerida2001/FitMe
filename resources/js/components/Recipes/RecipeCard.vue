@@ -35,6 +35,7 @@
                 showRecipeInfo: false,
                 ingredients: [],
                 showModal: false,
+                synth: null,
             }
         },
 
@@ -50,6 +51,8 @@
 
         mounted(){
             this.load();
+            this.synth = new Tone.Synth();
+	        this.synth.toMaster();
         },
 
         methods:{
@@ -109,9 +112,22 @@
                     recipe: this.recipe.id,
                 }}).catch(e=>{
                     console.log(e.response)
-                });;
+                }).then(()=>{
+                    this.$emit('update');  
+                });
 
-                this.$emit('update');
+                this.synth.triggerAttackRelease("C4", "8n");
+                const noise = new Tone.Noise("pink").start();
+                // make an autofilter to shape the noise
+                const autoFilter = new Tone.AutoFilter({
+                    frequency: "8n",
+                    baseFrequency: 200,
+                    octaves: 8
+                });
+                // connect the noise
+                noise.connect(autoFilter);
+                // start the autofilter LFO
+                autoFilter.start();
             },
 
             edit(){

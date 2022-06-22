@@ -80,10 +80,10 @@
                             food: ingredient.food.id,
                             quantity: ingredient.quantity,
                         });
-                    }).then(()=>{
-                        Object.assign(this.$data, this.initialState());
-                        this.$emit('eventname'); 
-                    });
+                    })
+                    
+                    Object.assign(this.$data, this.initialState());
+                    this.$emit('eventname'); 
                 }).catch(err => {
                     console.log(err)
                 });;
