@@ -1,16 +1,16 @@
 # FitMe
 
-Una página web que permitira llevar una cuenta de las calorias consumidas diariamente,y además, registrar los entrenamientos, guardar los ejercicios realizados, el peso , número de repeticiones, etc.
+http://fitme.ddns.net/
 
-La aplicación permitira visualizar mediante gráficas el progreso realizado tanto en los entrenamientos, como en el consumo de calorias y en el peso.
+Una página web que permitira llevar una cuenta de las calorias consumidas diariamente,y además, registrar los entrenamientos, guardar los ejercicios realizados, el peso , número de repeticiones, etc.
 
 En la aplicación se incluirán recetas predefinidas que el usuario administrador podra modificar/eliminar o añadir, y además, se permitira que cada usuario pueda crear sus propias recetas para poder guardar sus comidas más fácilmente.
 
 Se utilizara laravel para realizar el backend, en el frontend se utilizara vue.js, html y css, y en la base de datos MySQL.
 
-<h1>Roles</h1>
-
 La página se encontrará disponible tanto en español como en inglés, y el usuario podrá elegir fácilmente entre ambos idiomas.
+
+<h1>Roles</h1>
 
 La web diferenciara entre tres tipos de usuarios y cada uno podra ver lo siguiente:
 <ul>
