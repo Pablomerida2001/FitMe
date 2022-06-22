@@ -45,7 +45,7 @@
             return{
                 calories: 0,
                 showModal: false,
-                meals: [this.translations["breakfast"], this.translations["Lunch"], this.translations["Dinner"], this.translations["Snacks"]],
+                meals: [this.translations["breakfast"], this.translations["lunch"], this.translations["dinner"], this.translations["snacks"]],
             }
         },
 
